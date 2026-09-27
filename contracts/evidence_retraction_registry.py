@@ -1,4 +1,4 @@
-# { "Depends": "py-genlayer:5jycge4q8k23462jtb0b9fyey1s9qz928sz2nbrd9mg4sxqg2qng" }
+# { "Depends": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6" }
 
 """Versioned source notices with bounded dependency invalidation and reassessment."""
 
@@ -7,7 +7,7 @@ import hashlib
 import json
 import re
 
-import genlayer as gl
+from genlayer import *
 
 
 MAX_SOURCES = 12
@@ -135,10 +135,17 @@ def _fetch(url: str) -> dict:
 
 
 def _candidate(raw, snapshot: dict, allowed_urls: list) -> dict:
-    if not isinstance(raw, dict) or set(raw) != {"snapshot_digest", "source_id", "base_version", "finding", "citations"}:
+    expected = {"input_snapshot_digest", "snapshot_digest", "evidence_digest", "source_id", "base_version", "finding", "citations"}
+    if not isinstance(raw, dict) or set(raw) != expected:
         raise ValueError("notice schema")
-    if raw["snapshot_digest"] != snapshot["snapshot_digest"]:
-        raise ValueError("notice snapshot digest")
+    if raw["input_snapshot_digest"] != snapshot["snapshot_digest"]:
+        raise ValueError("notice input snapshot digest")
+    evidence_digest = raw["evidence_digest"]
+    if type(evidence_digest) is not str or not re.fullmatch(r"sha256:[0-9a-f]{64}", evidence_digest):
+        raise ValueError("notice evidence digest")
+    expected_digest = _digest({"input_snapshot_digest": snapshot["snapshot_digest"], "evidence_digest": evidence_digest})
+    if raw["snapshot_digest"] != expected_digest:
+        raise ValueError("notice evidence snapshot digest")
     if raw["source_id"] != snapshot["source"]["source_id"] or type(raw["source_id"]) is not str:
         raise ValueError("source binding")
     if type(raw["base_version"]) is not int or raw["base_version"] != snapshot["source"]["version"]:
@@ -153,7 +160,9 @@ def _candidate(raw, snapshot: dict, allowed_urls: list) -> dict:
     if raw["finding"] != "UNCERTAIN" and not citations:
         raise ValueError("determinate notice requires citation")
     return {
-        "snapshot_digest": snapshot["snapshot_digest"],
+        "input_snapshot_digest": snapshot["snapshot_digest"],
+        "snapshot_digest": expected_digest,
+        "evidence_digest": evidence_digest,
         "source_id": snapshot["source"]["source_id"],
         "base_version": snapshot["source"]["version"],
         "finding": raw["finding"],
@@ -162,15 +171,24 @@ def _candidate(raw, snapshot: dict, allowed_urls: list) -> dict:
 
 
 def _assessment_core(value: dict) -> tuple:
-    return value["source_id"], value["base_version"], value["finding"]
+    return (
+        value["input_snapshot_digest"], value["snapshot_digest"], value["evidence_digest"],
+        value["source_id"], value["base_version"], value["finding"], tuple(value["citations"]),
+    )
 
 
 def _reassessment_candidate(raw, snapshot: dict, allowed_urls: list) -> dict:
-    expected = {"snapshot_digest", "validity", "citations", "supporting_decision_ids"}
+    expected = {"input_snapshot_digest", "snapshot_digest", "evidence_digest", "validity", "citations", "supporting_decision_ids"}
     if not isinstance(raw, dict) or set(raw) != expected:
         raise ValueError("reassessment schema")
-    if raw["snapshot_digest"] != snapshot["snapshot_digest"]:
-        raise ValueError("stale decision snapshot")
+    if raw["input_snapshot_digest"] != snapshot["snapshot_digest"]:
+        raise ValueError("stale decision input snapshot")
+    evidence_digest = raw["evidence_digest"]
+    if type(evidence_digest) is not str or not re.fullmatch(r"sha256:[0-9a-f]{64}", evidence_digest):
+        raise ValueError("reassessment evidence digest")
+    expected_digest = _digest({"input_snapshot_digest": snapshot["snapshot_digest"], "evidence_digest": evidence_digest})
+    if raw["snapshot_digest"] != expected_digest:
+        raise ValueError("reassessment evidence snapshot digest")
     if type(raw["validity"]) is not str or raw["validity"] not in VALIDITY_TYPES:
         raise ValueError("reassessment validity")
     citations = raw["citations"]
@@ -186,23 +204,25 @@ def _reassessment_candidate(raw, snapshot: dict, allowed_urls: list) -> dict:
     if raw["validity"] != "UNCERTAIN" and not citations and not supporting:
         raise ValueError("determinate reassessment requires a source or parent decision")
     return {
-        "snapshot_digest": snapshot["snapshot_digest"],
+        "input_snapshot_digest": snapshot["snapshot_digest"],
+        "snapshot_digest": expected_digest,
+        "evidence_digest": evidence_digest,
         "validity": raw["validity"],
         "citations": citations,
         "supporting_decision_ids": supporting,
     }
 
 
-class EvidenceRetractionRegistry(gl.contract.Contract):
-    sources: gl.storage.TreeMap[str, str]
-    source_order: gl.storage.DynArray[str]
-    decisions: gl.storage.TreeMap[str, str]
-    decision_order: gl.storage.DynArray[str]
-    source_children: gl.storage.TreeMap[str, str]
-    decision_children: gl.storage.TreeMap[str, str]
-    notices: gl.storage.TreeMap[str, str]
-    notice_order: gl.storage.DynArray[str]
-    reassessment_history: gl.storage.DynArray[str]
+class EvidenceRetractionRegistry(gl.Contract):
+    sources: TreeMap[str, str]
+    source_order: DynArray[str]
+    decisions: TreeMap[str, str]
+    decision_order: DynArray[str]
+    source_children: TreeMap[str, str]
+    decision_children: TreeMap[str, str]
+    notices: TreeMap[str, str]
+    notice_order: DynArray[str]
+    reassessment_history: DynArray[str]
 
     def __init__(self):
         pass
@@ -350,12 +370,20 @@ class EvidenceRetractionRegistry(gl.contract.Contract):
             try:
                 old_documents = [_fetch(url) for url in source["current_refs"]]
                 notice_documents = [_fetch(url) for url in snapshot["notice_refs"]]
+                evidence_digest = _digest({
+                    "input_snapshot_digest": snapshot["snapshot_digest"],
+                    "registered_references": old_documents,
+                    "notice_references": notice_documents,
+                })
+                judgment_digest = _digest({"input_snapshot_digest": snapshot["snapshot_digest"], "evidence_digest": evidence_digest})
                 old_available = [item for item in old_documents if item["available"]]
                 new_available = [item for item in notice_documents if item["available"]]
                 allowed = [item["url"] for item in old_available + new_available]
                 if not old_available or not new_available:
                     return {
-                        "snapshot_digest": snapshot["snapshot_digest"],
+                        "input_snapshot_digest": snapshot["snapshot_digest"],
+                        "snapshot_digest": judgment_digest,
+                        "evidence_digest": evidence_digest,
                         "source_id": source["source_id"],
                         "base_version": source["version"],
                         "finding": "UNCERTAIN",
@@ -378,7 +406,9 @@ INPUT_JSON: """ + _canonical(payload)
                 if not isinstance(raw, dict) or set(raw) != {"finding", "citations"}:
                     raise gl.vm.UserError("[LLM_ERROR] notice model output has unknown or missing fields")
                 candidate = {
-                    "snapshot_digest": snapshot["snapshot_digest"],
+                    "input_snapshot_digest": snapshot["snapshot_digest"],
+                    "snapshot_digest": judgment_digest,
+                    "evidence_digest": evidence_digest,
                     "source_id": source["source_id"],
                     "base_version": source["version"],
                     "finding": raw["finding"],
@@ -408,7 +438,7 @@ INPUT_JSON: """ + _canonical(payload)
             except Exception:
                 return False
 
-        raw = gl.vm.run_nondet(leader_fn, validator_fn)
+        raw = gl.vm.run_nondet_unsafe(leader_fn, validator_fn)
         try:
             return _candidate(raw, snapshot, submitted_urls)
         except Exception as exc:
@@ -436,7 +466,7 @@ INPUT_JSON: """ + _canonical(payload)
         return seen
 
     @gl.public.write
-    def submit_notice(self, source_id: str, base_version: gl.u256, notice_refs_json: str) -> dict:
+    def submit_notice(self, source_id: str, base_version: u256, notice_refs_json: str) -> dict:
         source_id = _source_id(source_id)
         source = self._source(source_id)
         if source["status"] == "RETRACTED":
@@ -455,7 +485,9 @@ INPUT_JSON: """ + _canonical(payload)
             "base_version": source["version"],
             "submitted_by": self._sender(),
             "references": notice_refs,
-            "snapshot_digest": snapshot["snapshot_digest"],
+            "input_snapshot_digest": snapshot["snapshot_digest"],
+            "snapshot_digest": result["snapshot_digest"],
+            "evidence_digest": result["evidence_digest"],
             "finding": result["finding"],
             "citations": result["citations"],
             "affected_decisions": [],
@@ -508,11 +540,15 @@ INPUT_JSON: """ + _canonical(payload)
         def leader_fn():
             try:
                 fetched = [_fetch(url) for url in snapshot["evidence_refs"]]
+                evidence_digest = _digest({"input_snapshot_digest": snapshot["snapshot_digest"], "evidence": fetched})
+                judgment_digest = _digest({"input_snapshot_digest": snapshot["snapshot_digest"], "evidence_digest": evidence_digest})
                 available = [item for item in fetched if item["available"]]
                 allowed = [item["url"] for item in available]
                 if not available and not parent_rows:
                     return {
-                        "snapshot_digest": snapshot["snapshot_digest"],
+                        "input_snapshot_digest": snapshot["snapshot_digest"],
+                        "snapshot_digest": judgment_digest,
+                        "evidence_digest": evidence_digest,
                         "validity": "UNCERTAIN",
                         "citations": [],
                         "supporting_decision_ids": [],
@@ -536,7 +572,12 @@ INPUT_JSON: """ + _canonical(payload)
                     raw = json.loads(raw)
                 if not isinstance(raw, dict) or set(raw) != {"validity", "citations", "supporting_decision_ids"}:
                     raise gl.vm.UserError("[LLM_ERROR] reassessment model output has unknown or missing fields")
-                candidate = {"snapshot_digest": snapshot["snapshot_digest"], **raw}
+                candidate = {
+                    "input_snapshot_digest": snapshot["snapshot_digest"],
+                    "snapshot_digest": judgment_digest,
+                    "evidence_digest": evidence_digest,
+                    **raw,
+                }
                 return _reassessment_candidate(candidate, snapshot, allowed)
             except gl.vm.UserError:
                 raise
@@ -558,14 +599,17 @@ INPUT_JSON: """ + _canonical(payload)
                 leader = _reassessment_candidate(leader_result.calldata, snapshot, snapshot["evidence_refs"])
                 mine = leader_fn()
                 return (
-                    leader["validity"] == mine["validity"]
+                    leader["input_snapshot_digest"] == mine["input_snapshot_digest"]
+                    and leader["snapshot_digest"] == mine["snapshot_digest"]
+                    and leader["evidence_digest"] == mine["evidence_digest"]
+                    and leader["validity"] == mine["validity"]
                     and leader["citations"] == mine["citations"]
                     and leader["supporting_decision_ids"] == mine["supporting_decision_ids"]
                 )
             except Exception:
                 return False
 
-        raw = gl.vm.run_nondet(leader_fn, validator_fn)
+        raw = gl.vm.run_nondet_unsafe(leader_fn, validator_fn)
         try:
             return _reassessment_candidate(raw, snapshot, snapshot["evidence_refs"])
         except Exception as exc:
@@ -575,7 +619,7 @@ INPUT_JSON: """ + _canonical(payload)
     def reassess_decision(
         self,
         decision_id: str,
-        expected_version: gl.u256,
+        expected_version: u256,
         source_ids_json: str,
         decision_ids_json: str,
     ) -> dict:
@@ -604,7 +648,9 @@ INPUT_JSON: """ + _canonical(payload)
         decision["version"] += 1
         decision["status"] = "ACTIVE" if result["validity"] == "SUPPORTED" else "BLOCKED_REASSESSMENT"
         decision["authorization_enabled"] = decision["status"] == "ACTIVE"
-        decision["last_snapshot_digest"] = snapshot["snapshot_digest"]
+        decision["last_input_snapshot_digest"] = snapshot["snapshot_digest"]
+        decision["last_snapshot_digest"] = result["snapshot_digest"]
+        decision["last_evidence_digest"] = result["evidence_digest"]
         decision["last_validity"] = result["validity"]
         decision["last_citations"] = result["citations"]
         decision["last_supporting_decisions"] = result["supporting_decision_ids"]
@@ -612,7 +658,9 @@ INPUT_JSON: """ + _canonical(payload)
         self.reassessment_history.append(_canonical({
             "decision_id": decision_id,
             "version": decision["version"],
-            "snapshot_digest": snapshot["snapshot_digest"],
+            "input_snapshot_digest": snapshot["snapshot_digest"],
+            "snapshot_digest": result["snapshot_digest"],
+            "evidence_digest": result["evidence_digest"],
             "validity": result["validity"],
             "status": decision["status"],
         }))

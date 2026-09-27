@@ -1,3 +1,4 @@
+import hashlib
 import json
 
 import pytest
@@ -92,13 +93,19 @@ def test_material_correction_versions_source_and_stale_notice_cannot_invalidate_
         contract.submit_notice("study", 1, json.dumps([URL_A]))
 
 
+@pytest.mark.parametrize("web_response", [
+    pytest.param({"status": 503, "body": b"service unavailable"}, id="non-200"),
+    pytest.param({"status": 200, "body": b""}, id="empty"),
+    pytest.param({"status": 200, "body": b"x" * 5001}, id="oversized"),
+    pytest.param({"status": 200, "body": b"\xff"}, id="invalid-utf8"),
+])
 def test_unavailable_notice_evidence_stays_uncertain_and_does_not_block(
-    direct_vm, direct_deploy, direct_owner
+    direct_vm, direct_deploy, direct_owner, web_response
 ):
     contract = deploy(direct_vm, direct_deploy, direct_owner)
     contract.register_source("study", URL_A, "Research Institute")
     contract.register_decision(*register("decision", ["study"], []))
-    direct_vm.mock_web(r".*", {"status": 503, "body": "unavailable"})
+    direct_vm.mock_web(r".*", web_response)
     result = contract.submit_notice("study", 1, json.dumps([URL_B]))
     assert result["finding"] == "UNCERTAIN"
     assert result["affected_decisions"] == []
@@ -116,7 +123,9 @@ def test_validator_rejects_changed_notice_finding_stale_snapshot_and_extra_field
     result = contract.submit_notice("study", 1, json.dumps([URL_B]))
     assert direct_vm.run_validator()
     honest = {
+        "input_snapshot_digest": result["input_snapshot_digest"],
         "snapshot_digest": result["snapshot_digest"],
+        "evidence_digest": result["evidence_digest"],
         "source_id": "study",
         "base_version": 1,
         "finding": "NO_MATERIAL_CHANGE",
@@ -131,6 +140,15 @@ def test_validator_rejects_changed_notice_finding_stale_snapshot_and_extra_field
     extra = json.loads(json.dumps(honest))
     extra["leader_reason"] = "untrusted metadata"
     assert direct_vm.run_validator(leader_result=extra) is False
+    forged_evidence = json.loads(json.dumps(honest))
+    forged_evidence["evidence_digest"] = "sha256:" + "0" * 64
+    digest_input = {
+        "input_snapshot_digest": forged_evidence["input_snapshot_digest"],
+        "evidence_digest": forged_evidence["evidence_digest"],
+    }
+    canonical = json.dumps(digest_input, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
+    forged_evidence["snapshot_digest"] = "sha256:" + hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+    assert direct_vm.run_validator(leader_result=forged_evidence) is False
 
 
 def test_malformed_notice_output_fails_closed_without_source_version_change(
