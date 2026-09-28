@@ -23,8 +23,8 @@ The source references are public Crossref/PubMed records, but the authorization 
 
 - Technical readiness: PASS.
 - Distinctiveness: PASS against the named local portfolio comparators; no ecosystem-wide originality claim.
-- Evidence readiness: pending anonymous public URL checks.
-- Provisional verdict: READY WITH CAVEATS.
+- Evidence readiness: PASS; all 12 listed project, source, and publisher URLs returned anonymous HTTP 200.
+- Verdict: READY WITH CAVEATS.
 
 Remaining limits: publisher identity, signatures, redirects, DNS resolution, and freshness are not verified; the live demonstration covered only a retraction and stale replay; direct tests mock external evidence; the contract cannot reverse external actions. The contract does not expose a separate on-chain fetch status or byte count.
 

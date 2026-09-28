@@ -31,12 +31,12 @@ Scope: contract source review against the other nine portfolio contracts, the na
 |---|---|---|
 | Technical readiness | PASS | StudioNet chain 61999 deployment and source match; the retracted source, two blocked dependents, preserved unrelated branch, expected stale-replay rollback, and all public views were read back. |
 | Distinctiveness | PASS | The dependency graph and versioned authorization invalidation differ from the named local comparators; this is a local portfolio comparison, not an ecosystem-wide originality claim. |
-| Evidence readiness | PENDING PUBLIC URL CHECKS | The live finding cites the PubMed notice and the public state is captured. Anonymous GitHub checks will be completed after publication. |
+| Evidence readiness | PASS | All 12 listed project, source, and publisher URLs returned anonymous HTTP 200 after publication. |
 
-**Provisional verdict: READY WITH CAVEATS.** Final evidence readiness is pending the anonymous public URL checks.
+**Verdict: READY WITH CAVEATS.**
 
 ### Remaining blockers and limits
 
 - The live run demonstrated one retraction notice; it did not exercise the other notice findings or live reassessment. See contracts/evidence_retraction_registry.py:469 and contracts/evidence_retraction_registry.py:619.
-- Fetches enforce a 5,000-byte body bound and strict UTF-8, but do not verify publisher identity, signatures, redirects, DNS resolution, or freshness. See contracts/evidence_retraction_registry.py:122 and README.md:39.
+- Fetches enforce a 5,000-byte body bound and strict UTF-8, but do not verify publisher identity, signatures, redirects, DNS resolution, or freshness. See contracts/evidence_retraction_registry.py:122 and README.md:42.
 - All authorization decisions and owners were synthetic fixtures. The registry records workflow state; it does not reverse external rights, decisions, or payments.

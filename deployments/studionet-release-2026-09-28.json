@@ -449,7 +449,6 @@
       "reassessments": []
     }
   },
-  "stale_replay_ready": false,
   "final_readback_validation": "PASS",
   "actual_run_types": {
     "local_checks": [
@@ -543,9 +542,9 @@
     "gates": {
       "technical_readiness": "PASS",
       "distinctiveness": "PASS",
-      "evidence_readiness": "PENDING_ANONYMOUS_PUBLIC_URL_CHECKS"
+      "evidence_readiness": "PASS"
     },
-    "verdict": "PROVISIONAL — READY WITH CAVEATS; finalize evidence gate after anonymous URL checks",
+    "verdict": "READY WITH CAVEATS",
     "one_sentence_contribution": "A judged correction or retraction versions one evidence source and disables only authorizations reachable through explicit dependency edges until their owners reassess.",
     "top_blockers": [
       {
@@ -559,16 +558,92 @@
         "issue": "Publisher identity, signatures, redirects, DNS resolution, and freshness are not verified",
         "references": [
           "contracts/evidence_retraction_registry.py:122",
-          "README.md:39"
+          "README.md:42"
         ]
       },
       {
         "issue": "Authorization decisions and owners are synthetic fixtures and do not model external institutional authority",
         "references": [
-          "SUBMISSION_DRAFT.md:19"
+          "SUBMISSION_DRAFT.md:13"
         ]
       }
     ],
     "no_acceptance_or_points_claim": true
-  }
+  },
+  "evidence_url_checks": [
+    {
+      "url": "https://github.com/JWattjr/evidence-retraction-registry",
+      "http_status": 200,
+      "anonymous": true,
+      "checked_date": "2026-09-28"
+    },
+    {
+      "url": "https://github.com/JWattjr/evidence-retraction-registry/blob/main/README.md",
+      "http_status": 200,
+      "anonymous": true,
+      "checked_date": "2026-09-28"
+    },
+    {
+      "url": "https://github.com/JWattjr/evidence-retraction-registry/blob/c0d00fc83477c6eaa69bcf001c5378212e7ac52a/contracts/evidence_retraction_registry.py",
+      "http_status": 200,
+      "anonymous": true,
+      "checked_date": "2026-09-28"
+    },
+    {
+      "url": "https://github.com/JWattjr/evidence-retraction-registry/blob/main/deployments/studionet-release-2026-09-28.json",
+      "http_status": 200,
+      "anonymous": true,
+      "checked_date": "2026-09-28"
+    },
+    {
+      "url": "https://github.com/JWattjr/evidence-retraction-registry/blob/main/SUBMISSION_DRAFT.md",
+      "http_status": 200,
+      "anonymous": true,
+      "checked_date": "2026-09-28"
+    },
+    {
+      "url": "https://github.com/JWattjr/evidence-retraction-registry/blob/main/docs/DISTINCTIVENESS.md",
+      "http_status": 200,
+      "anonymous": true,
+      "checked_date": "2026-09-28"
+    },
+    {
+      "url": "https://github.com/JWattjr/evidence-retraction-registry/blob/main/docs/TEST_MATRIX.md",
+      "http_status": 200,
+      "anonymous": true,
+      "checked_date": "2026-09-28"
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29940049/",
+      "http_status": 200,
+      "anonymous": true,
+      "checked_date": "2026-09-28"
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29641633/",
+      "http_status": 200,
+      "anonymous": true,
+      "checked_date": "2026-09-28"
+    },
+    {
+      "url": "https://api.crossref.org/v1/works?filter=doi:10.11607/prd.476&rows=1&select=DOI,title,publisher,issued,type",
+      "http_status": 200,
+      "anonymous": true,
+      "checked_date": "2026-09-28"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29940049&rettype=abstract&retmode=text",
+      "http_status": 200,
+      "anonymous": true,
+      "checked_date": "2026-09-28"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=20017220&rettype=abstract&retmode=text",
+      "http_status": 200,
+      "anonymous": true,
+      "checked_date": "2026-09-28"
+    }
+  ],
+  "repository_visibility": "PUBLIC",
+  "initial_publication_commit": "14e862789cc7f2587396634d49d317db5f69df13"
 }
