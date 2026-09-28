@@ -1,0 +1,574 @@
+{
+  "schema_version": "1.0",
+  "release_date": "2026-09-28",
+  "timezone": "Africa/Lagos",
+  "project": {
+    "name": "evidence-retraction-registry",
+    "repository": "https://github.com/JWattjr/evidence-retraction-registry",
+    "source_commit": "c0d00fc83477c6eaa69bcf001c5378212e7ac52a",
+    "source_path": "contracts/evidence_retraction_registry.py",
+    "source_git_blob_sha1": "d789ad8d3342ab399e0101c767caddc9a905b39a",
+    "source_bytes": 34391
+  },
+  "network": {
+    "name": "GenLayer StudioNet",
+    "chain_id": 61999,
+    "rpc": "https://studio.genlayer.com/api",
+    "portal_used": false
+  },
+  "runner": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6",
+  "toolchain": {
+    "GenLayerJS": "1.1.8",
+    "GenLayer CLI": "0.39.2",
+    "Python": "3.14.2",
+    "genlayer-py": "0.19.0rc2",
+    "genlayer-test": "0.30.0rc2",
+    "genvm-linter": "0.11.1rc2"
+  },
+  "contract_constructor_args": [],
+  "contract_address": "0x432960e720542c0EAB68f76a4274fBf972A19a31",
+  "participants": [
+    {
+      "role": "steward",
+      "account_label": "moment-grid-studionet",
+      "address": "0xdB433ff614bDD1ecE21Aa97221C3E0a7ecf79c92"
+    },
+    {
+      "role": "decision_a_owner",
+      "account_label": "portal-five-release",
+      "address": "0x2C8EB5dB1105A85BE66BadafeD88D10cF393CDD8"
+    },
+    {
+      "role": "decision_b_owner",
+      "account_label": "portal-five-release-new",
+      "address": "0x0839A6DDCeC7aA5E6028490266D6D3EFabE316B5"
+    }
+  ],
+  "source_ids": {
+    "retracted_source": "report-a",
+    "unrelated_source": "report-unrelated"
+  },
+  "decisions": [
+    {
+      "id": "decision-a",
+      "owner": "0x2C8EB5dB1105A85BE66BadafeD88D10cF393CDD8",
+      "purpose": "Synthetic authorization to rely on DOI 10.11607/prd.476 for this review scope.",
+      "source_dependencies": [
+        "report-a"
+      ],
+      "decision_dependencies": []
+    },
+    {
+      "id": "decision-b",
+      "owner": "0x0839A6DDCeC7aA5E6028490266D6D3EFabE316B5",
+      "purpose": "Synthetic downstream authorization depending on decision-a for a later evidence review.",
+      "source_dependencies": [],
+      "decision_dependencies": [
+        "decision-a"
+      ]
+    },
+    {
+      "id": "decision-c",
+      "owner": "0xdB433ff614bDD1ecE21Aa97221C3E0a7ecf79c92",
+      "purpose": "Synthetic independent authorization about publication retraction guidance.",
+      "source_dependencies": [
+        "report-unrelated"
+      ],
+      "decision_dependencies": []
+    }
+  ],
+  "evidence_sources": [
+    {
+      "role": "registered baseline reference",
+      "publisher_label": "Crossref DOI metadata for 10.11607/prd.476",
+      "url": "https://api.crossref.org/v1/works?filter=doi:10.11607/prd.476&rows=1&select=DOI,title,publisher,issued,type",
+      "preflight": {
+        "http_status": 200,
+        "raw_bytes": 445,
+        "redirects": 0,
+        "strict_utf8": true
+      },
+      "source_note": "Selected Crossref JSON contains DOI, title, publisher, date, and type; it omits the Crossref link field that points to the later retraction page."
+    },
+    {
+      "role": "new retraction notice",
+      "publisher_label": "International Journal of Periodontics and Restorative Dentistry notice indexed by PubMed",
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29940049&rettype=abstract&retmode=text",
+      "preflight": {
+        "http_status": 200,
+        "raw_bytes": 580,
+        "redirects": 0,
+        "strict_utf8": true
+      },
+      "source_note": "PubMed notice identifies the original DOI and says the publisher retracted the article."
+    },
+    {
+      "role": "unrelated branch reference",
+      "publisher_label": "COPE guidance indexed by PubMed",
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=20017220&rettype=abstract&retmode=text",
+      "preflight": {
+        "http_status": 200,
+        "raw_bytes": 2473,
+        "redirects": 0,
+        "strict_utf8": true
+      },
+      "source_note": "General retraction guidance; not a notice about DOI 10.11607/prd.476."
+    }
+  ],
+  "synthetic_fixture_note": "Source bibliographic records are public real records; all three authorization decisions and their owners are demonstration fixtures, not actual publisher or institutional decisions.",
+  "transactions": [
+    {
+      "operation": "deploy_registry",
+      "hash": "0x41d8631a5662ed0f2652f947f23be7a2c9da634e2424af2d871e8e08e2529082",
+      "actor": "0xdB433ff614bDD1ecE21Aa97221C3E0a7ecf79c92",
+      "submission_status": "SUBMITTED",
+      "expected_failure": false,
+      "acceptance_poll_status": "ACCEPTED",
+      "finality_status": "FINALIZED",
+      "leader_execution": "SUCCESS",
+      "leader_result_code": "return",
+      "consensus_result": "MAJORITY_AGREE",
+      "rounds": 1,
+      "votes_committed": 5,
+      "votes_revealed": 5,
+      "vote_types": {
+        "AGREE": 5
+      }
+    },
+    {
+      "operation": "register_source_report_a",
+      "hash": "0xca2aab364cb4ff1b82de8e96ec3855bc5241373e9348068bacfbe33ca48d79ff",
+      "actor": "0xdB433ff614bDD1ecE21Aa97221C3E0a7ecf79c92",
+      "submission_status": "SUBMITTED",
+      "expected_failure": false,
+      "acceptance_poll_status": "ACCEPTED",
+      "finality_status": "FINALIZED",
+      "leader_execution": "SUCCESS",
+      "leader_result_code": "return",
+      "consensus_result": "MAJORITY_AGREE",
+      "rounds": 1,
+      "votes_committed": 5,
+      "votes_revealed": 5,
+      "vote_types": {
+        "IDLE": 2,
+        "AGREE": 3
+      }
+    },
+    {
+      "operation": "register_source_unrelated",
+      "hash": "0x31842baf5a5bf032a32748e048eb668d786b5f55cdbe095555c81c317469e717",
+      "actor": "0xdB433ff614bDD1ecE21Aa97221C3E0a7ecf79c92",
+      "submission_status": "SUBMITTED",
+      "expected_failure": false,
+      "acceptance_poll_status": "ACCEPTED",
+      "finality_status": "FINALIZED",
+      "leader_execution": "SUCCESS",
+      "leader_result_code": "return",
+      "consensus_result": "MAJORITY_AGREE",
+      "rounds": 1,
+      "votes_committed": 5,
+      "votes_revealed": 5,
+      "vote_types": {
+        "AGREE": 3,
+        "IDLE": 2
+      }
+    },
+    {
+      "operation": "register_decision_a",
+      "hash": "0xcbd4d3ea236418a4480fecc3e62d8652e7bf77a120e409d50b2f96e174a711dc",
+      "actor": "0x2C8EB5dB1105A85BE66BadafeD88D10cF393CDD8",
+      "submission_status": "SUBMITTED",
+      "expected_failure": false,
+      "acceptance_poll_status": "ACCEPTED",
+      "finality_status": "FINALIZED",
+      "leader_execution": "SUCCESS",
+      "leader_result_code": "return",
+      "consensus_result": "MAJORITY_AGREE",
+      "rounds": 1,
+      "votes_committed": 5,
+      "votes_revealed": 5,
+      "vote_types": {
+        "AGREE": 3,
+        "IDLE": 2
+      }
+    },
+    {
+      "operation": "register_decision_b",
+      "hash": "0xec4959aaf9f2bd5b2d07c0beba80348edf370d86abce29e572c77d11d35107f2",
+      "actor": "0x0839A6DDCeC7aA5E6028490266D6D3EFabE316B5",
+      "submission_status": "SUBMITTED",
+      "expected_failure": false,
+      "acceptance_poll_status": "ACCEPTED",
+      "finality_status": "FINALIZED",
+      "leader_execution": "SUCCESS",
+      "leader_result_code": "return",
+      "consensus_result": "MAJORITY_AGREE",
+      "rounds": 1,
+      "votes_committed": 5,
+      "votes_revealed": 5,
+      "vote_types": {
+        "IDLE": 2,
+        "AGREE": 3
+      }
+    },
+    {
+      "operation": "register_decision_c_unrelated",
+      "hash": "0x177305141bed6acb622130d4c34a9ec7386232222d1100b095eb68958e63be21",
+      "actor": "0xdB433ff614bDD1ecE21Aa97221C3E0a7ecf79c92",
+      "submission_status": "SUBMITTED",
+      "expected_failure": false,
+      "acceptance_poll_status": "ACCEPTED",
+      "finality_status": "FINALIZED",
+      "leader_execution": "SUCCESS",
+      "leader_result_code": "return",
+      "consensus_result": "MAJORITY_AGREE",
+      "rounds": 1,
+      "votes_committed": 5,
+      "votes_revealed": 5,
+      "vote_types": {
+        "AGREE": 5
+      }
+    },
+    {
+      "operation": "submit_retraction_notice",
+      "hash": "0x903df09915835536652632d327bde8cb1cd963cf6621fe74d27ecbcb917329a5",
+      "actor": "0xdB433ff614bDD1ecE21Aa97221C3E0a7ecf79c92",
+      "submission_status": "SUBMITTED",
+      "expected_failure": false,
+      "acceptance_poll_status": "ACCEPTED",
+      "finality_status": "FINALIZED",
+      "leader_execution": "SUCCESS",
+      "leader_result_code": "return",
+      "consensus_result": "MAJORITY_AGREE",
+      "rounds": 1,
+      "votes_committed": 5,
+      "votes_revealed": 5,
+      "vote_types": {
+        "IDLE": 2,
+        "AGREE": 3
+      }
+    },
+    {
+      "operation": "replay_retracted_notice_rejected",
+      "hash": "0x33d50ddd035e95b92480cddb6065a8a210eb92c92349ba034f90aace90dedc0c",
+      "actor": "0xdB433ff614bDD1ecE21Aa97221C3E0a7ecf79c92",
+      "submission_status": "SUBMITTED",
+      "expected_failure": true,
+      "expected_failure_label": "EXPECTED_REPLAY_OF_ALREADY_RETRACTED_SOURCE_REJECTED",
+      "acceptance_poll_status": "ACCEPTED",
+      "finality_status": "FINALIZED",
+      "leader_execution": "ERROR",
+      "leader_result_code": "rollback",
+      "consensus_result": "MAJORITY_AGREE",
+      "rounds": 1,
+      "votes_committed": 5,
+      "votes_revealed": 5,
+      "vote_types": {
+        "AGREE": 3,
+        "IDLE": 2
+      }
+    }
+  ],
+  "expected_failure_transactions": [
+    "0x33d50ddd035e95b92480cddb6065a8a210eb92c92349ba034f90aace90dedc0c"
+  ],
+  "onchain_source_matches_git_blob": true,
+  "contract_readback_scope": "The contract exposes get_source, get_decision, get_notice, get_dependents, and get_history views but no get_state method. The final record captures all public views for both sources, all three decisions, the notice, both relevant dependency lists, and history.",
+  "deployed_source_bytes": 34391,
+  "deployed_source_git_blob_sha1": "d789ad8d3342ab399e0101c767caddc9a905b39a",
+  "notice_transaction": "0x903df09915835536652632d327bde8cb1cd963cf6621fe74d27ecbcb917329a5",
+  "notice_after_finalization": {
+    "affected_decisions": [
+      "decision-a",
+      "decision-b"
+    ],
+    "base_version": 1,
+    "citations": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29940049&rettype=abstract&retmode=text"
+    ],
+    "evidence_digest": "sha256:960bda4144d78eef13acb5ffd331a1912e83a60607004447c72ee927c2326da2",
+    "finding": "RETRACTION",
+    "input_snapshot_digest": "sha256:3729d64826df07a6751ada58d3d8b9268ce4f1c41a4a531868eaddb277b2cd0f",
+    "notice_id": "N-000001",
+    "references": [
+      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29940049&rettype=abstract&retmode=text"
+    ],
+    "snapshot_digest": "sha256:1bb89590fc828206a377adbc979b16b783c2b508b5927bae6d9e2881529aaa4b",
+    "source_id": "report-a",
+    "submitted_by": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92"
+  },
+  "demo_result": "PASS",
+  "final_onchain_readback": {
+    "sources": {
+      "retracted": {
+        "current_refs": [],
+        "publisher_label": "Crossref DOI metadata for 10.11607/prd.476",
+        "registered_by": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
+        "source_id": "report-a",
+        "status": "RETRACTED",
+        "version": 2,
+        "versions": [
+          {
+            "references": [
+              "https://api.crossref.org/v1/works?filter=doi:10.11607/prd.476&rows=1&select=DOI,title,publisher,issued,type"
+            ],
+            "status": "ACTIVE",
+            "version": 1
+          },
+          {
+            "notice_id": "N-000001",
+            "references": [],
+            "status": "RETRACTED",
+            "version": 2
+          }
+        ]
+      },
+      "unrelated": {
+        "current_refs": [
+          "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=20017220&rettype=abstract&retmode=text"
+        ],
+        "publisher_label": "COPE guidance indexed by PubMed",
+        "registered_by": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
+        "source_id": "report-unrelated",
+        "status": "ACTIVE",
+        "version": 1,
+        "versions": [
+          {
+            "references": [
+              "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=20017220&rettype=abstract&retmode=text"
+            ],
+            "status": "ACTIVE",
+            "version": 1
+          }
+        ]
+      }
+    },
+    "decisions": {
+      "a": {
+        "authorization_enabled": false,
+        "blocked_by_notice": "N-000001",
+        "blocked_by_source": "report-a",
+        "decision_id": "decision-a",
+        "dependencies": [
+          "S:report-a"
+        ],
+        "last_snapshot_digest": "",
+        "last_validity": "REGISTERED_BY_AUTHORIZED_CALLER",
+        "owner": "0x2c8eb5db1105a85be66badafed88d10cf393cdd8",
+        "parent_versions": [
+          {
+            "parent_key": "S:report-a",
+            "version": 1
+          }
+        ],
+        "purpose": "Synthetic authorization to rely on DOI 10.11607/prd.476 for this review scope.",
+        "sequence": 0,
+        "status": "BLOCKED_REASSESSMENT",
+        "version": 1
+      },
+      "b": {
+        "authorization_enabled": false,
+        "blocked_by_notice": "N-000001",
+        "blocked_by_source": "report-a",
+        "decision_id": "decision-b",
+        "dependencies": [
+          "D:decision-a"
+        ],
+        "last_snapshot_digest": "",
+        "last_validity": "REGISTERED_BY_AUTHORIZED_CALLER",
+        "owner": "0x0839a6ddcec7aa5e6028490266d6d3efabe316b5",
+        "parent_versions": [
+          {
+            "parent_key": "D:decision-a",
+            "version": 1
+          }
+        ],
+        "purpose": "Synthetic downstream authorization depending on decision-a for a later evidence review.",
+        "sequence": 1,
+        "status": "BLOCKED_REASSESSMENT",
+        "version": 1
+      },
+      "c": {
+        "authorization_enabled": true,
+        "decision_id": "decision-c",
+        "dependencies": [
+          "S:report-unrelated"
+        ],
+        "last_snapshot_digest": "",
+        "last_validity": "REGISTERED_BY_AUTHORIZED_CALLER",
+        "owner": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
+        "parent_versions": [
+          {
+            "parent_key": "S:report-unrelated",
+            "version": 1
+          }
+        ],
+        "purpose": "Synthetic independent authorization about publication retraction guidance.",
+        "sequence": 2,
+        "status": "ACTIVE",
+        "version": 1
+      }
+    },
+    "notice": {
+      "affected_decisions": [
+        "decision-a",
+        "decision-b"
+      ],
+      "base_version": 1,
+      "citations": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29940049&rettype=abstract&retmode=text"
+      ],
+      "evidence_digest": "sha256:960bda4144d78eef13acb5ffd331a1912e83a60607004447c72ee927c2326da2",
+      "finding": "RETRACTION",
+      "input_snapshot_digest": "sha256:3729d64826df07a6751ada58d3d8b9268ce4f1c41a4a531868eaddb277b2cd0f",
+      "notice_id": "N-000001",
+      "references": [
+        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29940049&rettype=abstract&retmode=text"
+      ],
+      "snapshot_digest": "sha256:1bb89590fc828206a377adbc979b16b783c2b508b5927bae6d9e2881529aaa4b",
+      "source_id": "report-a",
+      "submitted_by": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92"
+    },
+    "dependents": {
+      "report_a": {
+        "decision_ids": [
+          "decision-a"
+        ],
+        "parent_id": "report-a",
+        "parent_kind": "SOURCE"
+      },
+      "decision_a": {
+        "decision_ids": [
+          "decision-b"
+        ],
+        "parent_id": "decision-a",
+        "parent_kind": "DECISION"
+      }
+    },
+    "history": {
+      "reassessments": []
+    }
+  },
+  "stale_replay_ready": false,
+  "final_readback_validation": "PASS",
+  "actual_run_types": {
+    "local_checks": [
+      {
+        "kind": "direct_mode",
+        "result": "PASS",
+        "count": "10 parameter-expanded tests",
+        "limitation": "Web and model responses are mocked."
+      },
+      {
+        "kind": "genvm_lint",
+        "result": "PASS",
+        "count": "3 checks"
+      },
+      {
+        "kind": "sdk_validation",
+        "result": "PASS",
+        "count": "9 methods: 5 views and 4 writes"
+      },
+      {
+        "kind": "abi_schema_extraction",
+        "result": "PASS"
+      }
+    ],
+    "live_studionet": {
+      "network": "StudioNet",
+      "chain_id": 61999,
+      "submitted_transactions": 8,
+      "finalized_transactions": 8,
+      "successful_leader_executions": 7,
+      "expected_rollback_executions": 1,
+      "exercised": [
+        "deploy",
+        "register two sources",
+        "register three decisions",
+        "judge one retraction notice",
+        "reject stale replay"
+      ],
+      "not_exercised_live": [
+        "material correction",
+        "no material change",
+        "uncertain notice",
+        "decision reassessment"
+      ],
+      "onchain_source_matches_git": true
+    },
+    "external_source_preflight": [
+      {
+        "source": "Crossref DOI metadata",
+        "http_status": 200,
+        "bytes": 445,
+        "redirects": 0,
+        "strict_utf8": true
+      },
+      {
+        "source": "PubMed retraction notice",
+        "http_status": 200,
+        "bytes": 580,
+        "redirects": 0,
+        "strict_utf8": true
+      },
+      {
+        "source": "PubMed COPE guidance",
+        "http_status": 200,
+        "bytes": 2473,
+        "redirects": 0,
+        "strict_utf8": true
+      }
+    ],
+    "not_run": [
+      "Portal review or submission",
+      "ecosystem-wide originality assessment",
+      "external action or payment reversal"
+    ]
+  },
+  "evidence_urls": [
+    "https://github.com/JWattjr/evidence-retraction-registry",
+    "https://github.com/JWattjr/evidence-retraction-registry/blob/main/README.md",
+    "https://github.com/JWattjr/evidence-retraction-registry/blob/c0d00fc83477c6eaa69bcf001c5378212e7ac52a/contracts/evidence_retraction_registry.py",
+    "https://github.com/JWattjr/evidence-retraction-registry/blob/main/deployments/studionet-release-2026-09-28.json",
+    "https://github.com/JWattjr/evidence-retraction-registry/blob/main/SUBMISSION_DRAFT.md",
+    "https://github.com/JWattjr/evidence-retraction-registry/blob/main/docs/DISTINCTIVENESS.md",
+    "https://github.com/JWattjr/evidence-retraction-registry/blob/main/docs/TEST_MATRIX.md",
+    "https://pubmed.ncbi.nlm.nih.gov/29940049/",
+    "https://pubmed.ncbi.nlm.nih.gov/29641633/",
+    "https://api.crossref.org/v1/works?filter=doi:10.11607/prd.476&rows=1&select=DOI,title,publisher,issued,type",
+    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29940049&rettype=abstract&retmode=text",
+    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=20017220&rettype=abstract&retmode=text"
+  ],
+  "self_review": {
+    "gates": {
+      "technical_readiness": "PASS",
+      "distinctiveness": "PASS",
+      "evidence_readiness": "PENDING_ANONYMOUS_PUBLIC_URL_CHECKS"
+    },
+    "verdict": "PROVISIONAL — READY WITH CAVEATS; finalize evidence gate after anonymous URL checks",
+    "one_sentence_contribution": "A judged correction or retraction versions one evidence source and disables only authorizations reachable through explicit dependency edges until their owners reassess.",
+    "top_blockers": [
+      {
+        "issue": "Live coverage includes one retraction and guarded replay, not every notice classification or reassessment",
+        "references": [
+          "contracts/evidence_retraction_registry.py:469",
+          "contracts/evidence_retraction_registry.py:619"
+        ]
+      },
+      {
+        "issue": "Publisher identity, signatures, redirects, DNS resolution, and freshness are not verified",
+        "references": [
+          "contracts/evidence_retraction_registry.py:122",
+          "README.md:39"
+        ]
+      },
+      {
+        "issue": "Authorization decisions and owners are synthetic fixtures and do not model external institutional authority",
+        "references": [
+          "SUBMISSION_DRAFT.md:19"
+        ]
+      }
+    ],
+    "no_acceptance_or_points_claim": true
+  }
+}
