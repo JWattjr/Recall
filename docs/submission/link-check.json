@@ -1,0 +1,51 @@
+{
+  "checked_at": "2026-10-04T20:46:31.715Z",
+  "lengths": {
+    "oneLiner": 158,
+    "description": 938,
+    "expectedOutcome": 473
+  },
+  "links": [
+    {
+      "url": "https://recall-genlayer.vercel.app",
+      "status": 200,
+      "final_url": "https://recall-genlayer.vercel.app/"
+    },
+    {
+      "url": "https://github.com/JWattjr/evidence-retraction-registry",
+      "status": 200,
+      "final_url": "https://github.com/JWattjr/evidence-retraction-registry"
+    },
+    {
+      "url": "https://explorer-studio.genlayer.com/address/0x91C663Df0D7103614485283D3A1E49Cf525f5fda",
+      "status": 200,
+      "final_url": "https://explorer-studio.genlayer.com/address/0x91C663Df0D7103614485283D3A1E49Cf525f5fda"
+    },
+    {
+      "url": "https://github.com/JWattjr/evidence-retraction-registry/blob/main/docs/PROOF_MANIFEST.md",
+      "status": 200,
+      "final_url": "https://github.com/JWattjr/evidence-retraction-registry/blob/main/docs/PROOF_MANIFEST.md"
+    },
+    {
+      "url": "https://github.com/JWattjr/evidence-retraction-registry/blob/main/deployments/recall-v2-release.json",
+      "status": 200,
+      "final_url": "https://github.com/JWattjr/evidence-retraction-registry/blob/main/deployments/recall-v2-release.json"
+    },
+    {
+      "url": "https://github.com/JWattjr/evidence-retraction-registry/blob/main/docs/RELEASE_VERIFICATION.md",
+      "status": 200,
+      "final_url": "https://github.com/JWattjr/evidence-retraction-registry/blob/main/docs/RELEASE_VERIFICATION.md"
+    },
+    {
+      "url": "https://github.com/JWattjr/evidence-retraction-registry/blob/main/docs/TUTORIAL.md",
+      "status": 200,
+      "final_url": "https://github.com/JWattjr/evidence-retraction-registry/blob/main/docs/TUTORIAL.md"
+    },
+    {
+      "url": "https://github.com/JWattjr/evidence-retraction-registry/blob/main/docs/DEMO.md",
+      "status": 200,
+      "final_url": "https://github.com/JWattjr/evidence-retraction-registry/blob/main/docs/DEMO.md"
+    }
+  ],
+  "all_http_200": true
+}

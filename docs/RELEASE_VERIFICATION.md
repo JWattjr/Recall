@@ -34,3 +34,7 @@ Production deployment and browser results are recorded in [shipping verification
 StudioNet is hosted simulation. Production-chain operation, publisher authentication and institutional authority are unverified. NO_MATERIAL_CHANGE and unsupported reassessment remain mocked test coverage rather than separate live demonstrations. New-instance writes used the authorized local operator. The earlier Chrome/Rabby flow and UNCERTAIN MRI attempts remain preserved under deployments/v1 and docs/archive-v1; those receipts belong to the old contract.
 
 No Portal form was submitted. The owner chooses the primary tag from the form, clears reCAPTCHA and submits manually.
+
+Production deployment `dpl_DU7GfNqDnjEDPYPsQivUYe4qWQ7Y` reached READY and the public alias loaded. Browser checks confirmed both recorded cases, the new-address MATERIAL_CORRECTION proof, and a timestamped full Live network read showing the recovered parent and blocked dependents. The deployed /api/case returned HTTP 200 with no record errors. Release source commit: `1b7d16c7922fc0dc436993093e839e990d234449`.
+
+All 8 unique nonempty URLs in portal-fields.json returned HTTP 200. Field lengths: one-liner 158/180, description 938/1000, expected outcome 473/500. [HTTP check record](submission/link-check.json).

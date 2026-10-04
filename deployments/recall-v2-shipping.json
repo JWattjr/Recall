@@ -47,6 +47,23 @@
       "parent_active_v2": true,
       "child_blocked_v1": true,
       "correction_dependents_blocked": true
+    },
+    "live_ui": {
+      "full_case_read": true,
+      "new_contract": true,
+      "both_notices": true,
+      "parent_active_v2": true,
+      "child_blocked_v1": true,
+      "correction_dependents_blocked": true
     }
-  }
+  },
+  "source_commit": "1b7d16c7922fc0dc436993093e839e990d234449",
+  "browser_evidence": [
+    "recall-v2-browser-correction.txt",
+    "recall-v2-browser-live.txt",
+    "recall-v2-browser-workspace.txt"
+  ],
+  "portal_links_check": "../docs/submission/link-check.json",
+  "portal_links_http_200": true,
+  "portal_unique_links": 8
 }
