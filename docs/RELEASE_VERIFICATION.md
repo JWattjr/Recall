@@ -37,4 +37,6 @@ No Portal form was submitted. The owner chooses the primary tag from the form, c
 
 Production deployment `dpl_DU7GfNqDnjEDPYPsQivUYe4qWQ7Y` reached READY and the public alias loaded. Browser checks confirmed both recorded cases, the new-address MATERIAL_CORRECTION proof, and a timestamped full Live network read showing the recovered parent and blocked dependents. The deployed /api/case returned HTTP 200 with no record errors. Release source commit: `1b7d16c7922fc0dc436993093e839e990d234449`.
 
-All 8 unique nonempty URLs in portal-fields.json returned HTTP 200. Field lengths: one-liner 158/180, description 938/1000, expected outcome 473/500. [HTTP check record](submission/link-check.json).
+All 8 unique nonempty URLs in portal-fields.json returned HTTP 200. Field lengths: one-liner 158/180, description 932/1000, expected outcome 473/500. [HTTP check record](submission/link-check.json).
+
+The complete application was published to [JWattjr/Recall](https://github.com/JWattjr/Recall) on October 4. The submission draft now points to that repository and discloses the previously accepted September 28 Evidence Retraction Registry contract, alongside the added application workflows and new-instance proof. The older contract repository remains available; git history and v1 proof are preserved. Only the draft was updated; the owner must clear reCAPTCHA and submit manually.
