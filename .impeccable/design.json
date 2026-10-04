@@ -1,0 +1,363 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-04T01:50:37.577Z",
+  "title": "Design System: Recall",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Archival Paper",
+        "tonalRamp": [
+          "oklch(15% 0.006 105)",
+          "oklch(27% 0.006 105)",
+          "oklch(38% 0.006 105)",
+          "oklch(49% 0.006 105)",
+          "oklch(61% 0.006 105)",
+          "oklch(72% 0.006 105)",
+          "oklch(84% 0.006 105)",
+          "oklch(95% 0.006 105)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "White Surface",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(49% 0 0)",
+          "oklch(61% 0 0)",
+          "oklch(72% 0 0)",
+          "oklch(84% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "ink": {
+        "role": "primary",
+        "displayName": "Forest Ink",
+        "tonalRamp": [
+          "oklch(15% 0.04 160)",
+          "oklch(27% 0.04 160)",
+          "oklch(38% 0.04 160)",
+          "oklch(49% 0.04 160)",
+          "oklch(61% 0.04 160)",
+          "oklch(72% 0.04 160)",
+          "oklch(84% 0.04 160)",
+          "oklch(95% 0.04 160)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Ink",
+        "tonalRamp": [
+          "oklch(15% 0.026 160)",
+          "oklch(27% 0.026 160)",
+          "oklch(38% 0.026 160)",
+          "oklch(49% 0.026 160)",
+          "oklch(61% 0.026 160)",
+          "oklch(72% 0.026 160)",
+          "oklch(84% 0.026 160)",
+          "oklch(95% 0.026 160)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Paper Rule",
+        "tonalRamp": [
+          "oklch(15% 0.012 130)",
+          "oklch(27% 0.012 130)",
+          "oklch(38% 0.012 130)",
+          "oklch(49% 0.012 130)",
+          "oklch(61% 0.012 130)",
+          "oklch(72% 0.012 130)",
+          "oklch(84% 0.012 130)",
+          "oklch(95% 0.012 130)"
+        ]
+      },
+      "forest": {
+        "role": "primary",
+        "displayName": "Forest",
+        "tonalRamp": [
+          "oklch(15% 0.06 155)",
+          "oklch(27% 0.06 155)",
+          "oklch(38% 0.06 155)",
+          "oklch(49% 0.06 155)",
+          "oklch(61% 0.06 155)",
+          "oklch(72% 0.06 155)",
+          "oklch(84% 0.06 155)",
+          "oklch(95% 0.06 155)"
+        ]
+      },
+      "green": {
+        "role": "secondary",
+        "displayName": "Active Green",
+        "tonalRamp": [
+          "oklch(15% 0.07 150)",
+          "oklch(27% 0.07 150)",
+          "oklch(38% 0.07 150)",
+          "oklch(49% 0.07 150)",
+          "oklch(61% 0.07 150)",
+          "oklch(72% 0.07 150)",
+          "oklch(84% 0.07 150)",
+          "oklch(95% 0.07 150)"
+        ]
+      },
+      "green-bg": {
+        "role": "secondary",
+        "displayName": "Active Green Wash",
+        "tonalRamp": [
+          "oklch(15% 0.015 135)",
+          "oklch(27% 0.015 135)",
+          "oklch(38% 0.015 135)",
+          "oklch(49% 0.015 135)",
+          "oklch(61% 0.015 135)",
+          "oklch(72% 0.015 135)",
+          "oklch(84% 0.015 135)",
+          "oklch(95% 0.015 135)"
+        ]
+      },
+      "copper": {
+        "role": "tertiary",
+        "displayName": "Review Copper",
+        "tonalRamp": [
+          "oklch(15% 0.115 40)",
+          "oklch(27% 0.115 40)",
+          "oklch(38% 0.115 40)",
+          "oklch(49% 0.115 40)",
+          "oklch(61% 0.115 40)",
+          "oklch(72% 0.115 40)",
+          "oklch(84% 0.115 40)",
+          "oklch(95% 0.115 40)"
+        ]
+      },
+      "copper-bg": {
+        "role": "tertiary",
+        "displayName": "Review Copper Wash",
+        "tonalRamp": [
+          "oklch(15% 0.018 60)",
+          "oklch(27% 0.018 60)",
+          "oklch(38% 0.018 60)",
+          "oklch(49% 0.018 60)",
+          "oklch(61% 0.018 60)",
+          "oklch(72% 0.018 60)",
+          "oklch(84% 0.018 60)",
+          "oklch(95% 0.018 60)"
+        ]
+      },
+      "focus": {
+        "role": "primary",
+        "displayName": "Focus Green",
+        "tonalRamp": [
+          "oklch(15% 0.1 160)",
+          "oklch(27% 0.1 160)",
+          "oklch(38% 0.1 160)",
+          "oklch(49% 0.1 160)",
+          "oklch(61% 0.1 160)",
+          "oklch(72% 0.1 160)",
+          "oklch(84% 0.1 160)",
+          "oklch(95% 0.1 160)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Page title",
+        "purpose": "Task page heading; 28px on phones."
+      },
+      "editorial": {
+        "displayName": "Editorial case title",
+        "purpose": "Newsreader for case narrative and guide/form headings."
+      },
+      "title": {
+        "displayName": "Section title",
+        "purpose": "Manrope section hierarchy."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Manrope base copy, with explicit prose variants."
+      },
+      "label": {
+        "displayName": "Task label",
+        "purpose": "Manrope form labels and action controls."
+      }
+    },
+    "shadows": [
+      {
+        "name": "segmented-selected",
+        "value": "0 2px 4px #253c3210",
+        "purpose": "Selected mode or view control only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "button-state",
+        "value": "160ms ease",
+        "purpose": "Background, text, and border-color transitions."
+      },
+      {
+        "name": "record-state",
+        "value": "250ms ease",
+        "purpose": "Graph opacity, border-color, and background transitions."
+      },
+      {
+        "name": "edge-state",
+        "value": "300ms ease",
+        "purpose": "Reachable edge stroke changes."
+      },
+      {
+        "name": "loading-spin",
+        "value": "1s linear infinite",
+        "purpose": "Functional loading indicator; disabled with reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone",
+        "value": "700px"
+      },
+      {
+        "name": "single-column-actions",
+        "value": "980px"
+      },
+      {
+        "name": "compact-shell",
+        "value": "1250px"
+      },
+      {
+        "name": "stacked-inspector",
+        "value": "1350px"
+      },
+      {
+        "name": "wide-inspector",
+        "value": "1500px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Explicit registration or reassessment action.",
+      "html": "<button class=\"ds-primary\">Sign source registration <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M5 12h14m-7-7 7 7-7 7\"/></svg></button>",
+      "css": ".ds-primary{font-family:Manrope,sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:7px;font-size:12px;font-weight:600;line-height:1.65;padding:11px 16px;min-height:42px;cursor:pointer;transition:background-color .16s,color .16s,border-color .16s;background:var(--forest,#234e3b);color:var(--surface,#fff);border:1px solid var(--forest,#234e3b)}.ds-primary:hover:not(:disabled){filter:brightness(.97)}.ds-primary:focus-visible{outline:3px solid var(--focus,#1b7558);outline-offset:3px;}.ds-primary:disabled{opacity:.5;cursor:not-allowed}@media(prefers-reduced-motion:reduce){[class^=\"ds-\"],[class^=\"ds-\"] button{transition:none;animation:none}}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Publication preflight and supporting task actions.",
+      "html": "<button class=\"ds-secondary\">Check publication availability</button>",
+      "css": ".ds-secondary{font-family:Manrope,sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:7px;font-size:12px;font-weight:600;line-height:1.65;padding:11px 16px;min-height:42px;cursor:pointer;transition:background-color .16s,color .16s,border-color .16s;background:var(--surface,#fff);color:var(--forest,#234e3b);border:1px solid #cbd7c6}.ds-secondary:hover:not(:disabled){filter:brightness(.97)}.ds-secondary:focus-visible{outline:3px solid var(--focus,#1b7558);outline-offset:3px;}.ds-secondary:disabled{opacity:.5;cursor:not-allowed}@media(prefers-reduced-motion:reduce){[class^=\"ds-\"],[class^=\"ds-\"] button{transition:none;animation:none}}"
+    },
+    {
+      "name": "Text Button",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "Lightweight proof and source-example actions.",
+      "html": "<button class=\"ds-text\">Inspect the proof <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M5 12h14m-7-7 7 7-7 7\"/></svg></button>",
+      "css": ".ds-text{font-family:Manrope,sans-serif;display:inline-flex;align-items:center;gap:7px;padding:4px 0;color:var(--forest,#234e3b);border:0;background:none;font-size:12px;font-weight:600;line-height:1.65;cursor:pointer;transition:color .16s}.ds-text:hover{filter:brightness(.97)}.ds-text:focus-visible{outline:3px solid var(--focus,#1b7558);outline-offset:3px;}@media(prefers-reduced-motion:reduce){[class^=\"ds-\"],[class^=\"ds-\"] button{transition:none;animation:none}}"
+    },
+    {
+      "name": "Publication Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Persistently labeled native text field.",
+      "html": "<label class=\"ds-field-label\" for=\"ds-source-url\">Publication URL</label><input class=\"ds-field\" id=\"ds-source-url\" type=\"url\" placeholder=\"https://…\" />",
+      "css": ".ds-field-label{font-family:Manrope,sans-serif;display:block;font-size:12px;font-weight:600;color:var(--ink,#233d34);margin:0 0 7px}.ds-field{font-family:Manrope,sans-serif;border:1px solid #cbd6c5;color:var(--ink,#233d34);background:#fcfdf9;border-radius:6px;padding:10px 11px;width:100%;min-height:43px;caret-color:var(--forest,#234e3b)}.ds-field::placeholder{color:#6e7c67}.ds-field:focus-visible{outline:3px solid var(--focus,#1b7558);outline-offset:3px;}@media(max-width:700px){.ds-field{font-size:16px}}"
+    },
+    {
+      "name": "Workspace Navigation",
+      "kind": "nav",
+      "description": "Icon-and-label navigation with quiet active state.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Workspace navigation\"><button class=\"ds-nav-active\" aria-current=\"page\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M6 3v12a6 6 0 0 0 6 6M18 3v6a6 6 0 0 1-6 6\"/><circle cx=\"6\" cy=\"3\" r=\"2\"/><circle cx=\"18\" cy=\"3\" r=\"2\"/></svg>Case workspace</button><button>Execution proof</button></nav>",
+      "css": ".ds-nav{display:flex;flex-direction:column;gap:7px;padding:16px;background:#eff2ea}.ds-nav button{font-family:Manrope,sans-serif;display:flex;align-items:center;gap:11px;text-align:left;padding:11px 10px;border:0;border-radius:7px;background:transparent;color:#53695b;font-size:12px;font-weight:600;white-space:nowrap;cursor:pointer;transition:background-color .16s,color .16s}.ds-nav button.ds-nav-active{background:#dde7d9;color:#244a36}.ds-nav button:hover{filter:brightness(.97)}.ds-nav button:focus-visible{outline:3px solid var(--focus,#1b7558);outline-offset:3px;}@media(max-width:700px){.ds-nav{flex-direction:row;overflow-x:auto}.ds-nav button{font-size:11px;padding:9px 10px}}@media(prefers-reduced-motion:reduce){[class^=\"ds-\"],[class^=\"ds-\"] button{transition:none;animation:none}}"
+    },
+    {
+      "name": "Changed State",
+      "kind": "chip",
+      "refersTo": "state-changed",
+      "description": "Explicit registry label for changed evidence or required review.",
+      "html": "<span class=\"ds-state-changed\">Review required</span>",
+      "css": ".ds-state-changed{font-family:Manrope,sans-serif;display:inline-flex;align-items:center;gap:5px;border-radius:4px;font-size:10px;padding:3px 7px;font-weight:600;line-height:1.65;text-transform:capitalize;white-space:nowrap;background:var(--copper-bg,#fcf0e8);color:var(--copper,#9c492e)}"
+    },
+    {
+      "name": "Active State",
+      "kind": "chip",
+      "refersTo": "state-active",
+      "description": "Explicit registry label for active state.",
+      "html": "<span class=\"ds-state-active\">Active</span>",
+      "css": ".ds-state-active{font-family:Manrope,sans-serif;display:inline-flex;align-items:center;gap:5px;border-radius:4px;font-size:10px;padding:3px 7px;font-weight:600;line-height:1.65;text-transform:capitalize;white-space:nowrap;background:var(--green-bg,#edf4eb);color:var(--green,#356348)}"
+    },
+    {
+      "name": "Work Surface",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Ruled white container shared by the canvas and review forms.",
+      "html": "<section class=\"ds-panel\"><header><h2>Evidence & dependencies</h2><p>Select a record to trace its dependents.</p></header><div class=\"ds-panel-body\">Publication references and registry state remain adjacent.</div></section>",
+      "css": ".ds-panel{font-family:Manrope,sans-serif;background:var(--surface,#fff);border:1px solid var(--line,#e1e6dd);border-radius:var(--radius,12px);overflow:hidden;color:var(--ink,#233d34)}.ds-panel header{padding:22px 25px;border-bottom:1px solid var(--line,#e1e6dd)}.ds-panel h2{font-size:16px;font-weight:600;line-height:1.2;margin:0;letter-spacing:-.025em}.ds-panel p{font-size:11px;line-height:1.65;color:var(--muted,#596b62);margin:4px 0 0}.ds-panel-body{padding:24px;font-size:14px;line-height:1.65}"
+    },
+    {
+      "name": "Dependency Record",
+      "kind": "custom",
+      "refersTo": "record",
+      "description": "Selectable changed record with a stronger selected border and text state.",
+      "html": "<button class=\"ds-record\" aria-pressed=\"true\"><span class=\"ds-record-kind\">Evidence source · v2</span><strong>Registered clinical study</strong><span class=\"ds-record-state\"><svg width=\"13\" height=\"13\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m3 3 18 18M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11\"/></svg>Retracted</span></button>",
+      "css": ".ds-record{font-family:Manrope,sans-serif;width:230px;min-height:105px;text-align:left;border:1px solid #ead8c9;background:#fcf4ee;border-radius:10px;padding:13px 15px;color:var(--ink,#233d34);cursor:pointer;transition:opacity .25s,border-color .25s,background-color .25s}.ds-record[aria-pressed=true]{border:2px solid #a46943;padding:12px 14px;background:#fbefe4}.ds-record strong{display:block;margin:10px 0 7px;font-size:13px;line-height:1.35}.ds-record-kind{display:flex;gap:6px;font-size:9px;color:#806855;line-height:1.65}.ds-record-state{display:flex;align-items:center;gap:5px;font-size:10px;line-height:1.65;text-transform:capitalize;color:var(--copper,#9c492e)}.ds-record:hover{filter:brightness(.97)}.ds-record:focus-visible{outline:3px solid var(--focus,#1b7558);outline-offset:3px;}@media(prefers-reduced-motion:reduce){[class^=\"ds-\"],[class^=\"ds-\"] button{transition:none;animation:none}}"
+    },
+    {
+      "name": "Mode Segmented Control",
+      "kind": "nav",
+      "description": "Tinted tray with a white selected task mode.",
+      "html": "<div class=\"ds-segmented\"><button class=\"ds-mode-selected\" aria-pressed=\"true\">Recorded proof</button><button aria-pressed=\"false\">Live network</button><button aria-pressed=\"false\">Local rehearsal</button></div>",
+      "css": ".ds-segmented{display:inline-flex;background:#edf0e8;padding:4px;border-radius:8px;gap:3px}.ds-segmented button{font-family:Manrope,sans-serif;border:0;background:transparent;border-radius:5px;padding:7px 13px;font-size:11px;font-weight:600;line-height:1.65;color:var(--muted,#596b62);white-space:nowrap;cursor:pointer;transition:background-color .16s,color .16s}.ds-segmented button.ds-mode-selected{background:var(--surface,#fff);color:var(--ink,#233d34);box-shadow:0 2px 4px #253c3210}.ds-segmented button:hover{filter:brightness(.97)}.ds-segmented button:focus-visible{outline:3px solid var(--focus,#1b7558);outline-offset:3px;}@media(prefers-reduced-motion:reduce){[class^=\"ds-\"],[class^=\"ds-\"] button{transition:none;animation:none}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Evidence Desk",
+    "overview": "Recall is an evidence desk for focused daytime review. Warm archival paper, forest ink, fine rules, and restrained state colors frame readable source records. Newsreader gives the case title an editorial voice; Manrope keeps controls and records precise.\n\nThe implemented workspace is compact and task-oriented. A left rail frames the dependency canvas and selected-record inspector. Selecting a record emphasizes its reachable branch while keeping unrelated records legible. Provenance and versions stay beside the data they qualify; direct and transitive relationships are named. Forms retain native controls, persistent labels, actionable errors, and explicit wallet-signing actions.",
+    "keyCharacteristics": [
+      "Warm paper and white work surfaces with forest text.",
+      "Copper identifies changed evidence or required review; muted green identifies active registry state.",
+      "Editorial case headings paired with compact task typography.",
+      "Fine borders organize records, forms, and proof without heavy elevation.",
+      "Keyboard focus and a dependency-list alternative support inspection."
+    ],
+    "rules": [
+      {
+        "name": "The State Has Words Rule",
+        "section": "colors",
+        "body": "Pair state color with a readable state label; graph nodes also carry a status icon. Color alone must not carry the finding."
+      },
+      {
+        "name": "The Editorial Assignment Rule",
+        "section": "typography",
+        "body": "Use Newsreader for case narrative and explanatory headings; keep operational labels and records in Manrope."
+      },
+      {
+        "name": "The Paper Boundary Rule",
+        "section": "elevation",
+        "body": "Separate records and work surfaces with tonal contrast and fine rules. Reserve the existing small shadow for the active segmented control."
+      },
+      {
+        "name": "The Visible Focus Rule",
+        "section": "components",
+        "body": "Use an outline of (3px) in the focus color with offset (3px) for buttons, links, inputs, selects, textareas, and disclosure summaries. Selection borders do not replace keyboard focus."
+      }
+    ],
+    "dos": [
+      "**Do** keep provenance, versions, and source links adjacent to the records they qualify.",
+      "**Do** pair state colors with readable text and preserve status icons in graph nodes.",
+      "**Do** use Newsreader for editorial case and guide headings, and Manrope for task controls.",
+      "**Do** preserve the dependency-list alternative and visible keyboard focus.",
+      "**Do** keep unrelated graph records legible while emphasizing reachable relationships.",
+      "**Do** use fine rules and quiet surface tints to organize inspection."
+    ],
+    "donts": [
+      "**Don't** imply scientific certification through status styling; labels describe registry state.",
+      "**Don't** use copper as decoration disconnected from evidence change or review.",
+      "**Don't** hide versions or provenance inside hover-only controls.",
+      "**Don't** promote tiny metadata or the proof disclosure's text-glyph icon into reusable defaults."
+    ]
+  }
+}

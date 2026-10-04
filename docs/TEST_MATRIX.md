@@ -15,10 +15,18 @@ Run `python -m pytest` from the repository root. Tests mock web/model I/O in dir
 | HTTP error, empty body, oversized body, and invalid UTF-8 produce an uncertain notice without blocking decisions | `test_unavailable_notice_evidence_stays_uncertain_and_does_not_block` (four response cases) |
 | Notice validator rejects a forged evidence digest while finding and cited URL remain unchanged | `test_validator_rejects_changed_notice_finding_stale_snapshot_and_extra_fields` |
 
-Local direct mode passed 10 parameter-expanded tests. GenVM lint passed 3 checks, SDK validation reported 9 methods (5 views and 4 writes), and ABI schema extraction succeeded. Direct tests mock web and model responses; they are not live consensus or finality tests.
+Historical 28 September direct mode passed 10 parameter-expanded tests. Those results are preserved below; fresh verification follows.
 
 ## Live StudioNet result
 
 The demonstration ran on chain 61999 from the pinned runner. All 8 submitted transactions finalized: deployment, two source registrations, three decision registrations, one RETRACTION notice, and one expected stale-replay rollback. The source moved from version 1 ACTIVE to version 2 RETRACTED; decision-a and decision-b became BLOCKED_REASSESSMENT with authorization disabled; decision-c and its unrelated source remained ACTIVE. The on-chain source blob matched the Git source. The release file records all public views and transaction details.
 
-Only the RETRACTION notice and the guarded replay were exercised live. Correction, NO_MATERIAL_CHANGE, UNCERTAIN, and reassessment are covered by direct tests but were not live-tested. The current release record is deployments/studionet-release-2026-09-28.json.
+That historical run exercised RETRACTION and guarded replay only. The original record is deployments/studionet-release-2026-09-28.json.
+
+## Fresh 4 October verification
+
+22 direct cases pass: existing propagation, correction, malformed judgments, fetch failures and validator tamper checks, plus tests/test_shipping.py for no-change/uncertainty semantics, SUPPORTED/UNSUPPORTED/UNCERTAIN reassessment, owner/stale checks, missing/invented/duplicate citations and source/decision/notice/version bounds. These use mocked web/model I/O.
+
+13 frontend tests pass: reachability, provisional/finalized/rollback/UNDETERMINED mapping, dependency/URL validation, missing wallet, add/switch, rejected switch, false switch success, signer changes and decoded NOT_FOUND handling. Network tests use a mocked provider.
+
+3 GenVM lint checks, SDK method validation, ABI extraction, strict TypeScript and production build pass. Fresh retraction and successful owner recovery have finalized receipts and state readback. Authentic correction attempts were made but did not establish stored material correction. A credential-backed EIP-1193 helper test submitted a real transaction; browser extension signing remains untested. See RELEASE_VERIFICATION.md and PROOF_MANIFEST.md.

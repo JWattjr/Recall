@@ -1,31 +1,18 @@
-# Submission draft — Evidence Retraction Registry
+# Recall — Portal submission draft
 
-**Status:** StudioNet demonstration completed. This project has not been submitted to the GenLayer Portal.
+**Status:** deployed application and review package; not submitted. Review the verification gaps before claiming readiness for a specific Portal task.
 
-## Contribution
+**Application:** https://recall-genlayer.vercel.app
+**Repository:** https://github.com/JWattjr/evidence-retraction-registry
 
-The registry versions a changed evidence source and synchronously disables authorizations that depend on it, while preserving unrelated branches until affected owners reassess their decisions.
+Recall turns semantic evidence changes into bounded authorization changes. Users register publications and synthetic research grant decisions with explicit dependencies. GenLayer independently judges a correction or retraction; deterministic code versions changed evidence and atomically disables every reachable future authorization. Unrelated branches remain active. Owners explicitly reassess against current evidence, creating new versions; downstream decisions remain blocked until separately reviewed.
 
-## Live evidence
+The Next.js workspace opens on a recorded real-publication retraction, with a diagram, accessible mobile list, selected-record explanations, proof/history, live finalized-state reads and wallet forms. Local rehearsal is labeled and produces no fake hashes. Sources/decisions use a bounded manifest because the contract has no listing views.
 
-On GenLayer StudioNet, chain 61999, the deployed source matched Git. A PubMed-indexed retraction notice was judged RETRACTION. Source report-a advanced from ACTIVE version 1 to RETRACTED version 2; decision-a and downstream decision-b were blocked; independent decision-c stayed active. A stale notice replay finalized as the expected rollback. All five public views were read back. The run finalized eight transactions: seven successful leader executions and one expected rollback.
+On StudioNet 61999 at `0x432960e720542c0EAB68f76a4274fBf972A19a31`, original finalized receipts were revalidated against deployed source and ABI. Fresh grant-branch retraction and owner reassessment succeeded: `grant-policy-review` became ACTIVE v2, SUPPORTED against COPE guidance; `grant-release-review` remained blocked and independent decision-c stayed active. [Proof manifest](docs/PROOF_MANIFEST.md) contains hashes and full records.
 
-The source references are public Crossref/PubMed records, but the authorization decisions and owners are synthetic fixtures. The demo proves the contract transition and dependency propagation for this fixture; it does not validate real institutional authority or reverse any external decision, right, or payment.
+22 mocked contract tests and 13 frontend tests pass; GenVM lint, ABI extraction, strict TypeScript, production build and production dependency audit pass. Recorded exploration, mobile/keyboard controls, preflight, proof/history and live alignment were browser checked. A credential-backed local EIP-1193 harness submitted a real finalized transaction through the app helper; interactive extension-wallet signing was not available in the browser.
 
-## Actual run types
+Authentic published material-correction evidence was fetched off-chain, but two live attempts returned UNCERTAIN leader results and no corresponding notice persisted in finalized reads. Live material-correction propagation is not claimed. StudioNet is hosted simulation; production blockchain operation is untested.
 
-- Direct mode: 10 parameter-expanded tests passed with mocked web and model responses.
-- Static/SDK: 3 GenVM lint checks passed; SDK validation reported 9 methods; ABI schema extraction succeeded.
-- Live: 8 StudioNet transactions finalized, including one expected stale-replay rollback. No separate integration suite or live reassessment was run.
-- Source preflight: Crossref metadata HTTP 200/445 bytes; PubMed notice HTTP 200/580 bytes; unrelated PubMed guidance HTTP 200/2,473 bytes; all had zero redirects and valid UTF-8.
-
-## Self-review
-
-- Technical readiness: PASS.
-- Distinctiveness: PASS against the named local portfolio comparators; no ecosystem-wide originality claim.
-- Evidence readiness: PASS; all 12 listed project, source, and publisher URLs returned anonymous HTTP 200.
-- Verdict: READY WITH CAVEATS.
-
-Remaining limits: publisher identity, signatures, redirects, DNS resolution, and freshness are not verified; the live demonstration covered only a retraction and stale replay; direct tests mock external evidence; the contract cannot reverse external actions. The contract does not expose a separate on-chain fetch status or byte count.
-
-See the release record at deployments/studionet-release-2026-09-28.json, the distinctiveness review at docs/DISTINCTIVENESS.md, and the test matrix at docs/TEST_MATRIX.md.
+The contribution is continuing evidence dependency management rather than a prediction market or charter acceptance judgment. Recall does not certify scientific truth, institutional authority or publisher identity and cannot reverse payments. See [limitations](docs/SECURITY_NOTES.md), [tutorial](docs/TUTORIAL.md), [demo](docs/DEMO.md), and [current public Portal guidance](docs/PORTAL_RULES.md). Acceptance and points depend on current task rules and steward review; no additive award is promised.

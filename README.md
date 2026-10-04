@@ -1,44 +1,81 @@
-# Evidence Retraction Registry
+# Recall
 
-EvidenceRetractionRegistry stores versioned evidence sources, authorization decisions, and explicit dependency edges. A GenLayer judgment evaluates whether a new publication materially corrects or retracts one registered source. An accepted correction or retraction advances that source version and synchronously walks the bounded dependency graph, disabling every affected authorization in the same transaction. Unaffected branches remain usable.
+**Evidence changes. Decisions follow.** Recall asks: “This evidence was corrected or withdrawn. Which decisions now need reviewing?”
 
-Decision owners must reassess a blocked record against current registered sources and active upstream decisions. Reassessment creates a new version. A recovered parent does not silently reactivate any dependent decision; each downstream owner must reassess its own record.
+[Open Recall](https://recall-genlayer.vercel.app) · [Proof](docs/PROOF_MANIFEST.md) · [Demo](docs/DEMO.md) · [Tutorial](docs/TUTORIAL.md) · [Submission draft](SUBMISSION_DRAFT.md)
 
-## StudioNet demonstration
+GenLayer independently reads a registered publication and a notice. A material correction or retraction versions changed evidence and atomically disables every reachable future authorization in a bounded dependency graph. Unrelated branches remain active. Owners explicitly reassess blocked decisions against current evidence; recovering a parent never recovers its children.
 
-- Network: GenLayer StudioNet, chain ID 61999.
-- Contract: 0x432960e720542c0EAB68f76a4274fBf972A19a31.
-- Deployed source: commit c0d00fc83477c6eaa69bcf001c5378212e7ac52a; the on-chain Git blob matches the source file.
-- Result: the notice was classified as RETRACTION. Source report-a advanced from active version 1 to retracted version 2. Decision-a and its dependent decision-b became BLOCKED_REASSESSMENT with authorization disabled. Independent decision-c and its unrelated source remained active. Replaying the notice against the retracted source finalized as the expected rollback.
-- Eight transactions finalized: seven leader executions succeeded and the stale replay produced one expected leader error with rollback.
-- The release record contains all five public views, transaction finality and vote details, source references, and the preflight HTTP status and byte count for each evidence URL.
+The grants and authorizations are synthetic fixtures; Crossref and NCBI publications are authentic public records. Active describes registry state, not scientific truth or publisher certification. Recall cannot reverse completed payments or establish institutional authority.
 
-The source records are public Crossref and PubMed records. The authorization decisions and owners are synthetic demonstration fixtures. The contract does not verify publisher identity, signatures, redirects, DNS resolution, or source freshness, and it cannot reverse external actions or payments. The contract does not expose a separate on-chain fetch status or byte count; the stored finding, citation, and snapshot digest are visible, while URL preflight measurements are recorded in the release file.
+## Try the workspace
 
-See the StudioNet release record at deployments/studionet-release-2026-09-28.json and the submission draft at SUBMISSION_DRAFT.md. This project has not been submitted to the GenLayer Portal.
+No wallet is needed to explore the recorded retraction, inspect citations and digests, or trace direct/transitive dependents. Mobile uses an accessible list. **Live network** reads timestamped finalized state for the explicit case manifest, including the new grant branch: `grant-policy-review` recovered to ACTIVE v2 while `grant-release-review` remains blocked. Failed live reads retain an explicitly labeled snapshot. There is no global source/decision listing view; add known IDs to this browser's bounded manifest.
 
-## Toolchain and local checks
+**Local rehearsal** is scripted and generates no hashes or consensus. **Proof & history** separates historical receipts, dated owner-recovery proof, live state and off-chain availability checks.
 
-The contract pins runner py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6, accepted by the installed GenVM linter. The direct-mode suite passed 10 parameter-expanded tests; GenVM lint passed 3 checks; SDK validation reported 9 methods (5 views and 4 writes); ABI schema extraction succeeded. Direct tests mock web and model responses and do not establish live consensus or finality.
+To write, connect an EIP-1193 wallet on StudioNet 61999. Register a publication source and decisions with a frozen purpose and valid dependencies. The registering wallet becomes decision owner; only that wallet can reassess. The preflighted notice example pairs DOI `10.11607/prd.476` with its published retraction. Register a new copy of that study before submitting: historical sources are already withdrawn. No public server signing endpoint exists.
 
-The local setup uses Python 3.14 and requirements.txt. The checks are genvm-lint lint contracts/evidence_retraction_registry.py, genvm-lint validate contracts/evidence_retraction_registry.py, genvm-lint schema contracts/evidence_retraction_registry.py --output contracts/abi.json, and python -m pytest.
+## Verified deployment
 
-## Lifecycle
+| Item | Value |
+|---|---|
+| Network | GenLayer StudioNet, chain 61999; hosted development simulator |
+| RPC | `https://studio.genlayer.com/api` |
+| Contract | `0x432960e720542c0EAB68f76a4274fBf972A19a31` |
+| Contract source commit | `c0d00fc83477c6eaa69bcf001c5378212e7ac52a` |
+| Runner | `py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6` |
+| Source SHA-256, normalized LF / trimmed end | `4310a5cb4b5dfb4e326a0c41a1c946d905e1d537fedd37b0c60116a8e87168f2` |
 
-1. Anyone may register a source ID, HTTPS URL, and publisher label. The record starts at version 1 with an active reference.
-2. A decision owner records an authorization purpose and dependencies on registered sources and/or earlier active decisions. Dependency edges are explicit. Decision parents must precede their children, which prevents cycles by construction.
-3. Anyone may submit a notice against the source's current version, with up to three new publication references. GenLayer independently fetches the current source references and notice references and classifies the relationship as material correction, retraction, no material change, or uncertain.
-4. A correction or retraction increments the source version. A correction replaces its current references with the notice references; a retraction marks it unusable. A bounded breadth-first traversal follows source-to-decision and decision-to-decision edges and disables every reachable authorization atomically.
-5. The owner of a blocked decision calls reassess_decision with an expected version and a new set of current source and/or active decision dependencies. GenLayer reassesses the frozen purpose. Supported reassessment creates a new active version; unsupported or uncertain reassessment creates a new blocked version. Dependents remain blocked and must be reviewed independently.
+On 4 October 2026 deployed source and ABI matched, and all eight historical receipts were revalidated. Fresh retraction and owner recovery finalized successfully with matching state reads. Two authentic MRI correction attempts finalized with UNCERTAIN leader returns, but no notice persisted in finalized reads. **Material-correction propagation is tested with mocked evidence, not proven live.** See [proof manifest](docs/PROOF_MANIFEST.md) and [verification boundaries](docs/RELEASE_VERIFICATION.md).
 
-## API
+## Reproduce
 
-The contract has no constructor parameters; see examples/constructor.json. Writes are register_source, register_decision, submit_notice, and reassess_decision. Views are get_source, get_decision, get_notice, get_dependents, and get_history. The generated ABI is contracts/abi.json.
+Frontend needs Node.js 20.9+ (release used 24.12.0):
 
-## Bounds and failure behavior
+```powershell
+cd frontend
+npm ci
+npm run dev
+# http://localhost:3000
+npm run typecheck
+npm test
+npm run build
+npm start
+```
 
-The graph is capped at 12 sources, 24 decisions, 16 notices, eight dependency edges per decision, and eight versions per source or decision. Propagation is synchronous and bounded to the full graph, so there is no intermediate state where a known affected authorization remains enabled. An unavailable original or notice reference produces UNCERTAIN; a malformed or disagreeing consensus result reverts the transaction. No external transfer or finalized payment is reversed.
+Read-only exploration needs no environment variables. Next.js 16.3.8, React 19.2.4, genlayer-js 1.1.8 and viem 2.57.2 are pinned. Fonts are self hosted. Vercel deploys `frontend`; configure that root in your own Git integration or run `vercel --prod` there. Forks should create their own project.
 
-References must be HTTPS URLs with public-DNS hostname syntax. Fetched bodies are limited to 5,000 bytes and strict UTF-8. Publisher identity, signatures, redirects, DNS resolution, and freshness are not verified. Retrieved text and publisher labels are untrusted prompt input.
+Contract setup from this repository root:
 
-See the mechanism differentiation, test matrix, security notes, and demo sequence for implementation and test details.
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\genvm-lint.exe check contracts/evidence_retraction_registry.py --json
+.\.venv\Scripts\genvm-lint.exe schema contracts/evidence_retraction_registry.py --output contracts/abi.json
+```
+
+The shipping run used the existing parent-directory environment; exact commands and results are in [release verification](docs/RELEASE_VERIFICATION.md). Direct tests mock web/model I/O. `npm run verify:network` performs read-only checks and overwrites its dated record; preserve existing proof before rerunning. Local operator scripts require the owner's unlocked OS-keychain account, remain outside the application bundle, and save submitted IDs to resume without resubmitting.
+
+## Mechanism
+
+```mermaid
+flowchart LR
+  UI[Evidence workspace] -->|fixed views| RPC[StudioNet RPC]
+  UI --> Wallet[EIP-1193 owner wallet]
+  Wallet -->|signed writes| Registry[Versioned registry]
+  Registry --> Validators[Independent fetch and judgment]
+  Validators --> Publications[Crossref / NCBI]
+  Validators -->|validated schema and citations| Registry
+  Registry --> Walk[Atomic bounded graph traversal]
+  Walk --> Block[Disable reachable authorizations]
+  Registry --> Recovery[Owner reassessment]
+  Recovery --> Version[New parent version; children still blocked]
+```
+
+Bounds: 12 sources, 24 decisions, 16 notices, four source and four decision parents, eight versions per record, three notice references and 5,000-byte strict UTF-8 bodies. Edges refer to earlier active decisions. Read [architecture](docs/ARCHITECTURE.md), [security](docs/SECURITY_NOTES.md), and [tests](docs/TEST_MATRIX.md).
+
+Publisher identity, signatures, resolved DNS destinations, redirects, freshness and institutional authority are not authenticated. Off-chain preflight does not prove validator availability. Explorer routing is unverified, so IDs are copyable. Production-chain operation is untested. Historical release files are preserved; earlier README/submission text is archived under `docs/HISTORICAL_*`.
+
+Recall differs from Bullseye and charter work-acceptance apps through persistent evidence dependencies, transitive invalidation and explicit recovery. No ecosystem-wide originality or Portal award claim is made. The owner must review current authenticated Portal task rules and submit manually.

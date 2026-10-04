@@ -10,3 +10,8 @@ artifacts/
 *.log
 coverage.xml
 .coverage
+node_modules/
+.next/
+.vercel/
+*.tsbuildinfo
+.impeccable/review/
