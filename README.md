@@ -4,6 +4,8 @@
 
 [Open Recall](https://recall-genlayer.vercel.app) · [Proof](docs/PROOF_MANIFEST.md) · [Demo](docs/DEMO.md) · [Tutorial](docs/TUTORIAL.md) · [Submission handoff](docs/OWNER_SUBMISSION.md)
 
+Application repository: [JWattjr/Recall](https://github.com/JWattjr/Recall). Recall builds on the [Evidence Retraction Registry contract accepted September 28, 2026](https://portal.genlayer.foundation/contribution/212407). This repository preserves that history and adds the complete application: recorded cases, live finalized reads, wallet workflows, proof inspection, owner recovery and the verified material-correction case. The earlier accepted contract is disclosed, not claimed as new work.
+
 GenLayer independently reads a registered publication and a notice. A material correction or retraction versions changed evidence and atomically disables every reachable future authorization in a bounded dependency graph. Unrelated branches remain active. Owners explicitly reassess blocked decisions against current evidence; recovering a parent never recovers its children.
 
 The grants and authorizations are synthetic fixtures; Crossref and NCBI publications are authentic public records. Active describes registry state, not scientific truth or publisher certification. Recall cannot reverse completed payments or establish institutional authority.
