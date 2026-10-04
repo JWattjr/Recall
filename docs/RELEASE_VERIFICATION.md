@@ -34,8 +34,8 @@ Browser checks cover recorded exploration, direct/transitive selection, unrelate
 
 ## Boundaries
 
-- Interactive extension-wallet signing was unavailable. The actual app helper was checked with a local credential-backed EIP-1193 provider and a real finalized transaction. Mocked switch/add/reject/account-change tests are separate evidence.
+- Chrome opened a Rabby connection prompt, but browser security policy blocks extension approval URLs. User completion of the wallet prompts is pending, so interactive extension signing is unverified. The actual app helper was checked with a local credential-backed EIP-1193 provider and a real finalized transaction. Mocked switch/add/reject/account-change tests are separate evidence.
 - Live material correction is not proven: two authentic NCBI attempts returned UNCERTAIN leader results and N-000003 was absent in finalized reads. Source and MRI decisions remain active v1. Receipt success does not prove propagation or persistence.
 - NO_MATERIAL_CHANGE, unsupported reassessment and capacity failures are direct-test coverage, not separate live demonstrations.
 - StudioNet is hosted simulation. Production chain, publisher authenticity and institutional authority are unverified; no guaranteed confirmation time exists.
-- Authenticated Portal eligibility needs owner review. Nothing was submitted and no award is promised.
+- Authenticated Projects criteria and current account slot availability were inspected in Chrome. Final form/category review and submission remain the owner's action. Nothing was submitted and no award is promised.

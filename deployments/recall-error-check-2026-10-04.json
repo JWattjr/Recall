@@ -1,0 +1,12 @@
+[
+  {
+    "body": "{\"error\":\"Invalid transaction identifier.\"}",
+    "path": "/api/transaction/not-a-hash",
+    "status": 400
+  },
+  {
+    "body": "{\"error\":\"Invalid bounded manifest.\"}",
+    "path": "/api/case?sources=bad/id",
+    "status": 503
+  }
+]

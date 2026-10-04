@@ -1,0 +1,150 @@
+{
+  "contract_source_sha256": "4310a5cb4b5dfb4e326a0c41a1c946d905e1d537fedd37b0c60116a8e87168f2",
+  "checks": [
+    {
+      "result": "22 passed; external I/O mocked",
+      "command": "python -m pytest -q -p no:cacheprovider --basetemp=.pytest-tmp",
+      "runtime": "existing parent .venv Python 3.14"
+    },
+    {
+      "result": "3 lint checks passed; 9 SDK methods, 5 views and 4 writes",
+      "command": "genvm-lint check contracts/evidence_retraction_registry.py --json"
+    },
+    {
+      "result": "passed",
+      "command": "genvm-lint schema contracts/evidence_retraction_registry.py --output deployments/abi-check-2026-10-04.json"
+    },
+    {
+      "result": "passed strict TypeScript",
+      "command": "npm run typecheck"
+    },
+    {
+      "result": "13 passed; mocked wallet error cases plus graph, finality and state readback",
+      "command": "npm test"
+    },
+    {
+      "result": "passed locally and on Vercel",
+      "command": "npm run build"
+    },
+    {
+      "result": "0 production vulnerabilities",
+      "command": "npm audit --omit=dev"
+    },
+    {
+      "result": "source and ABI match; 8 historical finalized receipts revalidated",
+      "command": "npm run verify:network"
+    },
+    {
+      "result": "5 fresh operations FINALIZED SUCCESS; owner recovery active v2, child remains blocked",
+      "command": "node scripts/live-release.mjs"
+    },
+    {
+      "result": "registrations succeed; notice finalized with UNCERTAIN leader return; N-000003 absent on readback; script post-finality read fails",
+      "command": "node scripts/live-release.mjs --correction"
+    },
+    {
+      "result": "real EIP-1193 helper submission FINALIZED; material correction not proven",
+      "command": "npx tsx scripts/wallet-write-check.ts"
+    },
+    {
+      "result": "READY and public alias verified",
+      "command": "vercel --prod --yes --scope wattxs-projects"
+    },
+    {
+      "result": "passed; contract, ABI, original release unchanged",
+      "command": "git diff --check and historical-file comparison"
+    },
+    {
+      "result": "grant-policy-review ACTIVE v2 SUPPORTED read succeeds",
+      "command": "node read-example.mjs (tutorial equivalent)"
+    },
+    {
+      "command": "Relative Markdown link verification",
+      "result": "all local documentation links resolve"
+    }
+  ],
+  "network": {
+    "production_chain_verified": false,
+    "chain_id": 61999,
+    "name": "StudioNet",
+    "hosted_simulator": true,
+    "rpc": "https://studio.genlayer.com/api"
+  },
+  "release_date": "2026-10-04",
+  "app_code_commit": "cf6cadb0472b6061cbac00f58a5d2c1215f7a965",
+  "schema_version": "1.0",
+  "checked_at": "2026-10-04T10:42:43.0325397Z",
+  "remaining": [
+    "Interactive extension signing pending user Rabby prompts; local helper real transaction separately verified",
+    "Live material-correction propagation not proven",
+    "Owner must review final Portal form and manually submit under current Projects criteria",
+    "Production blockchain operation untested"
+  ],
+  "contract_source_commit": "c0d00fc83477c6eaa69bcf001c5378212e7ac52a",
+  "browser": {
+    "local_retraction_recovery": "parent recovered v2 and child remains blocked",
+    "preflight": "public deployment ready; study 445 bytes and notice 580 bytes",
+    "capture_metadata": "local .impeccable/review/capture-metadata.json; actual public captures 1280 desktop and 626 mobile breakpoint; earlier local 390 test passed",
+    "live_manifest": "4 sources, 7 decisions, 2 notices, no read errors",
+    "dependency_selection": "direct/transitive highlight and unrelated branch passed",
+    "design_review": "ship disposition after fixing mobile highlighting, redundant toggle, and contrast",
+    "keyboard": "Tab moves source ID to publication URL; labeled native controls and visible focus",
+    "missing_record": "Unknown source rejected without saving; subsequent refresh succeeded with 4 sources / 7 decisions",
+    "extension_wallet": "Rabby connection opened; browser security blocks extension approval URLs; awaiting user prompts",
+    "local_registration": "source and decision passed; explicitly scripted",
+    "public_recorded_case": "passed",
+    "proof_history": "citations, digests, versions, dated recovery and historical rollback present",
+    "validation": "HTTP source rejected with actionable HTTPS error",
+    "wallet_missing": "in-app browser actionable EIP-1193 message"
+  },
+  "proof_files": [
+    "studionet-release-2026-09-28.json",
+    "recall-network-verification-2026-10-04.json",
+    "recall-live-release-2026-10-04.json",
+    "recall-correction-preflight-2026-10-04.json",
+    "recall-correction-release-2026-10-04.json",
+    "recall-wallet-transport-2026-10-04.json",
+    "recall-deployed-check-2026-10-04.json",
+    "recall-error-check-2026-10-04.json"
+  ],
+  "runner": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6",
+  "portal_submitted": false,
+  "project": "Recall",
+  "deployment": {
+    "project": "wattxs-projects/recall-genlayer",
+    "url": "https://recall-genlayer.vercel.app",
+    "status": "READY",
+    "id": "dpl_7RkxhwpHvo41NtxiVu6BfPPEkDzT",
+    "immutable_url": "https://recall-genlayer-ja2inovtr-wattxs-projects.vercel.app",
+    "frontend_root": "frontend"
+  },
+  "scenario_outcomes": {
+    "child_after_parent_recovery": "grant-release-review BLOCKED_REASSESSMENT v1",
+    "independent_branch": "decision-c ACTIVE",
+    "historical_retraction": "revalidated",
+    "owner_recovery": "FINALIZED SUCCESS, SUPPORTED, grant-policy-review ACTIVE v2",
+    "bounds": "mocked direct coverage",
+    "unauthorized_reassessment": "mocked direct coverage",
+    "uncertain_notice": "mocked direct semantics; live leader returns UNCERTAIN but persisted notice absent",
+    "fresh_retraction": "FINALIZED SUCCESS with stored N-000002 and two blocked decisions",
+    "material_correction": "NOT PROVEN LIVE; direct-test coverage only",
+    "no_change": "mocked direct coverage",
+    "stale_replay": "FINALIZED rollback",
+    "unsupported_reassessment": "mocked direct coverage"
+  },
+  "contract": "0x432960e720542c0EAB68f76a4274fBf972A19a31",
+  "repository": "https://github.com/JWattjr/evidence-retraction-registry",
+  "portal_rules": {
+    "category": "Projects",
+    "reset": "Monday 00:00 UTC",
+    "criteria": "real trust problem; authoritative/live evidence; complete code and accurate docs; genuine app interaction and transaction lifecycle; meaningful differentiation and continued use",
+    "checked_at": "2026-10-04T10:47:01.0691724Z",
+    "submitted": false,
+    "current_account_slots": "unused weekly Project slots observed; no reservation",
+    "authenticated_session": true,
+    "urls": [
+      "https://portal.genlayer.foundation/builders/contributions",
+      "https://portal.genlayer.foundation/contribution-type/41"
+    ]
+  }
+}
