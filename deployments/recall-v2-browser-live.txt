@@ -1,0 +1,188 @@
+- link "Skip to workspace":
+  - /url: "#main"
+- complementary:
+  - link "Recall home":
+    - /url: /
+    - text: Recall
+    - generic: .
+  - paragraph:
+    - text: Evidence changes.
+    - text: Decisions follow.
+  - navigation "Workspace navigation":
+    - button "Evidence workspace":
+      - text: Evidence workspace
+    - button "Register & connect":
+      - text: Register & connect
+    - button "Submit a notice":
+      - text: Submit a notice
+    - button "Reassess decisions":
+      - text: Reassess decisions
+    - button "Proof & history":
+      - text: Proof & history
+    - button "How Recall works":
+      - text: How Recall works
+  - text: StudioNet
+  - generic: Hosted development · 61999
+  - link "View the implementation":
+    - /url: https://github.com/JWattjr/evidence-retraction-registry
+    - text: View the implementation
+- banner:
+  - text: Research grants
+  - text: Case 001
+  - button "Connect wallet":
+    - text: Connect wallet
+- main:
+  - heading "A trail you can inspect." [level=1]
+  - paragraph: Recorded execution, current state, and your submitted transactions.
+  - button "Download proof manifest":
+  - generic "Data provenance":
+    - button "Recorded case"
+    - button "Live network" [pressed]
+    - button "Local rehearsal"
+  - generic: Full case read 04/10/2026, 21:45:18 WAT
+  - button "Refresh":
+    - text: Refresh
+  - heading "Execution context" [level=2]
+  - term: Network
+  - definition: GenLayer StudioNet · chain 61999 · hosted development
+  - term: Contract
+  - definition:
+    - button "0x91C663Df0D7103614485283D3A1E49Cf525f5fda":
+      - code: "0x91C663Df0D7103614485283D3A1E49Cf525f5fda"
+  - term: Displayed state
+  - definition: Last full case read · 04/10/2026, 21:45:18 WAT
+  - definition: Individual records also refresh after finalized writes and known-ID reads. Their newer values are merged into this case.
+  - term: Discovery boundary
+  - definition: An explicit manifest of the original case and fresh grant fixtures, plus IDs registered or added in this browser. Source and decision records outside the manifest are not globally listed. Sequential notice IDs are scanned up to the contract limit.
+  - heading "Stored notice finding" [level=2]
+  - article:
+    - heading "RETRACTION" [level=3]
+    - generic: N-000001 · source report-a · base version 1
+    - paragraph: "Affected decisions: decision-a, decision-b"
+    - heading "Citations" [level=4]
+    - link "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29940049&rettype=abstract&retmode=text":
+      - /url: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29940049&rettype=abstract&retmode=text
+      - text: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29940049&rettype=abstract&retmode=text
+    - heading "Fetched evidence digest" [level=4]
+    - button "sha256:230ea6e3de7258a26f1043f89b9a64e8fd2d0d2c9252b9dc0936c91579014dc9":
+      - code: sha256:230ea6e3de7258a26f1043f89b9a64e8fd2d0d2c9252b9dc0936c91579014dc9
+    - heading "Judgment snapshot digest" [level=4]
+    - button "sha256:702176b97ae29831a2f07ff3d3143c12c68e30d3f160224109ef35129bf731ed":
+      - code: sha256:702176b97ae29831a2f07ff3d3143c12c68e30d3f160224109ef35129bf731ed
+    - heading "Frozen input digest" [level=4]
+    - button "sha256:246d37dabea0844c6061efb5a6d04117ad51d27e9f10ae5ef51878c18620960c":
+      - code: sha256:246d37dabea0844c6061efb5a6d04117ad51d27e9f10ae5ef51878c18620960c
+  - article:
+    - heading "MATERIAL CORRECTION" [level=3]
+    - generic: N-000002 · source correction-study · base version 1
+    - paragraph: "Affected decisions: correction-parent, correction-child"
+    - heading "Citations" [level=4]
+    - link "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29294252&rettype=abstract&retmode=text":
+      - /url: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29294252&rettype=abstract&retmode=text
+      - text: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29294252&rettype=abstract&retmode=text
+    - heading "Fetched evidence digest" [level=4]
+    - button "sha256:2478ce45d44e36536b91122598bc7145709d2007e30921527a78651685ba73f7":
+      - code: sha256:2478ce45d44e36536b91122598bc7145709d2007e30921527a78651685ba73f7
+    - heading "Judgment snapshot digest" [level=4]
+    - button "sha256:b0eaa2b8295c1af39048068bb819fdb24f7b42ca78a13e579cfaf0ecdd8882b9":
+      - code: sha256:b0eaa2b8295c1af39048068bb819fdb24f7b42ca78a13e579cfaf0ecdd8882b9
+    - heading "Frozen input digest" [level=4]
+    - button "sha256:489c88622c8d720221239901516759204c3a69034ff495a29c9816582d509f92":
+      - code: sha256:489c88622c8d720221239901516759204c3a69034ff495a29c9816582d509f92
+  - heading "Source version history" [level=2]
+  - generic "report-a · version 2 · retracted"
+  - generic "report-unrelated · version 1 · active"
+  - generic "correction-study · version 2 · corrected"
+  - heading "Reassessment history" [level=2]
+  - generic "decision-a · v2 · SUPPORTED"
+  - generic "decision-b · v1 · REGISTERED_BY_AUTHORIZED_CALLER"
+  - generic "decision-c · v1 · REGISTERED_BY_AUTHORIZED_CALLER"
+  - generic "correction-parent · v1 · REGISTERED_BY_AUTHORIZED_CALLER"
+  - generic "correction-child · v1 · REGISTERED_BY_AUTHORIZED_CALLER"
+  - generic: "{ \"decision_id\": \"decision-a\", \"evidence_digest\": \"sha256:6b48ca0d4937aa84f499ea333f9babc1db85f51e912b44728c99c21ace5ceb85\", \"input_snapshot_digest\": \"sha256:8cc7412989c31f82262c99e6875a3ce30a717fa8dca8ad58f51bfc8cf22aec55\", \"snapshot_digest\": \"sha256:bf8e0daf9265ade013391005728e4bd7cf4ffacf0b640a35b0a0390388c0362d\", \"status\": \"ACTIVE\", \"validity\": \"SUPPORTED\", \"version\": 2 }"
+  - heading "Recorded finalized transactions" [level=2]
+  - article:
+    - heading "Owner recovery · verified 4 October 2026" [level=3]
+    - paragraph: "Recorded release proof: decision-a recovered to active v2; decision-b stayed blocked at v1. This snapshot is separate from live reads."
+    - paragraph: "Checked 04/10/2026, 19:42:47 WAT. Frozen purpose and new supporting citations:"
+    - generic: "{ \"authorization_enabled\": true, \"blocked_by_notice\": \"N-000001\", \"blocked_by_source\": \"report-a\", \"decision_id\": \"decision-a\", \"dependencies\": [ \"S:report-unrelated\" ], \"last_citations\": [ \"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=20017220&rettype=abstract&retmode=text\" ], \"last_evidence_digest\": \"sha256:6b48ca0d4937aa84f499ea333f9babc1db85f51e912b44728c99c21ace5ceb85\", \"last_input_snapshot_digest\": \"sha256:8cc7412989c31f82262c99e6875a3ce30a717fa8dca8ad58f51bfc8cf22aec55\", \"last_snapshot_digest\": \"sha256:bf8e0daf9265ade013391005728e4bd7cf4ffacf0b640a35b0a0390388c0362d\", \"last_supporting_decisions\": [], \"last_validity\": \"SUPPORTED\", \"owner\": \"0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92\", \"parent_versions\": [ { \"parent_key\": \"S:report-unrelated\", \"version\": 1 } ], \"purpose\": \"Synthetic research grant authorization to use COPE retraction guidelines for reviewing published evidence and deciding when evidence should be retracted.\", \"sequence\": 0, \"status\": \"ACTIVE\", \"version\": 2 }"
+    - generic "deploy · FINALIZED · SUCCESS"
+    - generic "register source · FINALIZED · SUCCESS"
+    - generic "register source · FINALIZED · SUCCESS"
+    - generic "register decision · FINALIZED · SUCCESS"
+    - generic "register decision · FINALIZED · SUCCESS"
+    - generic "register decision · FINALIZED · SUCCESS"
+    - generic "submit notice · FINALIZED · SUCCESS"
+    - generic "reassess decision · FINALIZED · SUCCESS"
+    - generic "register source · FINALIZED · SUCCESS"
+    - generic "register decision · FINALIZED · SUCCESS"
+    - generic "register decision · FINALIZED · SUCCESS"
+    - generic "submit notice · FINALIZED · SUCCESS"
+    - heading "Material correction · finalized proof" [level=4]
+    - paragraph: "MATERIAL_CORRECTION: source v2; parent and child blocked; independent branch active."
+    - button "0x59fd7d86db99f5410c0df682d9167213e6fe34d64d54fa344f2add62b09d014f":
+      - code: "0x59fd7d86db99f5410c0df682d9167213e6fe34d64d54fa344f2add62b09d014f"
+    - paragraph: This new instance was proved with the authorized local operator. The earlier five-write Chrome/Rabby flow is preserved under v1; its receipts belong to the old contract.
+    - link "Archived v1 browser-wallet proof":
+      - /url: https://github.com/JWattjr/evidence-retraction-registry/blob/main/deployments/v1/recall-browser-wallet-2026-10-04.json
+      - text: Archived v1 browser-wallet proof
+    - link "Fresh release record":
+      - /url: https://github.com/JWattjr/evidence-retraction-registry/blob/main/deployments/recall-v2-release.json
+      - text: Fresh release record
+  - paragraph: Finalized release evidence, 4 October 2026. These values are recorded snapshots, rather than fresh receipt reads. Copy an ID to inspect it with the GenLayer CLI.
+  - generic "+ deploy Finalized success":
+    - text: +
+    - generic: deploy
+    - generic: Finalized success
+  - generic "+ register source:report-a Finalized success":
+    - text: +
+    - generic: register source:report-a
+    - generic: Finalized success
+  - generic "+ register source:report-unrelated Finalized success":
+    - text: +
+    - generic: register source:report-unrelated
+    - generic: Finalized success
+  - generic "+ register decision:decision-a Finalized success":
+    - text: +
+    - generic: register decision:decision-a
+    - generic: Finalized success
+  - generic "+ register decision:decision-b Finalized success":
+    - text: +
+    - generic: register decision:decision-b
+    - generic: Finalized success
+  - generic "+ register decision:decision-c Finalized success":
+    - text: +
+    - generic: register decision:decision-c
+    - generic: Finalized success
+  - generic "+ submit notice:report-a Finalized success":
+    - text: +
+    - generic: submit notice:report-a
+    - generic: Finalized success
+  - generic "+ reassess decision:decision-a Finalized success":
+    - text: +
+    - generic: reassess decision:decision-a
+    - generic: Finalized success
+  - generic "+ register source:correction-study Finalized success":
+    - text: +
+    - generic: register source:correction-study
+    - generic: Finalized success
+  - generic "+ register decision:correction-parent Finalized success":
+    - text: +
+    - generic: register decision:correction-parent
+    - generic: Finalized success
+  - generic "+ register decision:correction-child Finalized success":
+    - text: +
+    - generic: register decision:correction-child
+    - generic: Finalized success
+  - generic "+ submit notice:correction-study Finalized success":
+    - text: +
+    - generic: submit notice:correction-study
+    - generic: Finalized success
+  - paragraph:
+    - link "Dated network revalidation":
+      - /url: https://github.com/JWattjr/evidence-retraction-registry/blob/main/deployments/recall-v2-network-verification.json
+      - text: Dated network revalidation
+  - paragraph: 0 transaction(s) tracked by this browser. Inspect live execution status above before treating them as proof.
+  - generic: Recall · evidence-dependent authorizations
+  - generic: GenLayer StudioNet · synthetic decisions, published evidence
+- alert

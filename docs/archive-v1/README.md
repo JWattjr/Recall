@@ -10,7 +10,7 @@ The grants and authorizations are synthetic fixtures; Crossref and NCBI publicat
 
 ## Try the workspace
 
-No wallet is needed to explore either recorded retraction or material correction, inspect citations and digests, or trace direct/transitive dependents. Mobile uses an accessible list. **Live network** reads timestamped finalized state for the explicit case manifest, for both cases: `decision-a` recovered to ACTIVE v2 while `decision-b`, `correction-parent` and `correction-child` remain blocked. Failed live reads retain an explicitly labeled snapshot. There is no global source/decision listing view; add known IDs to this browser's bounded manifest.
+No wallet is needed to explore the recorded retraction, inspect citations and digests, or trace direct/transitive dependents. Mobile uses an accessible list. **Live network** reads timestamped finalized state for the explicit case manifest, including the new grant branch: `grant-policy-review` recovered to ACTIVE v2 while `grant-release-review` remains blocked. Failed live reads retain an explicitly labeled snapshot. There is no global source/decision listing view; add known IDs to this browser's bounded manifest.
 
 **Local rehearsal** is scripted and generates no hashes or consensus. **Proof & history** separates historical receipts, dated owner-recovery proof, live state and off-chain availability checks.
 
@@ -22,12 +22,12 @@ To write, connect an EIP-1193 wallet on StudioNet 61999. Register a publication 
 |---|---|
 | Network | GenLayer StudioNet, chain 61999; hosted development simulator |
 | RPC | `https://studio.genlayer.com/api` |
-| Contract | `0x91C663Df0D7103614485283D3A1E49Cf525f5fda` |
-| Contract source | [Source](contracts/evidence_retraction_registry.py), matched by SHA-256 |
+| Contract | `0x432960e720542c0EAB68f76a4274fBf972A19a31` |
+| Contract source commit | `c0d00fc83477c6eaa69bcf001c5378212e7ac52a` |
 | Runner | `py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6` |
-| Source SHA-256, normalized LF / trimmed end | `218f011d2e26bc6d35033f9781b406e39ab8598af0f91fa118c85b5a930c5804` |
+| Source SHA-256, normalized LF / trimmed end | `4310a5cb4b5dfb4e326a0c41a1c946d905e1d537fedd37b0c60116a8e87168f2` |
 
-On 4 October 2026 the new instance finalized 12 successful writes, including deployment. A real retraction and an explicit percentage correction each produced source v2 and blocked direct/transitive dependents while preserving an independent branch. Owner reassessment restored decision-a to ACTIVE v2 / SUPPORTED; decision-b stayed blocked. Every transition matched finalized state reads. See [proof manifest](docs/PROOF_MANIFEST.md) and [verification](docs/RELEASE_VERIFICATION.md).
+On 4 October 2026 deployed source and ABI matched, and all eight historical receipts were revalidated. Fresh retraction and owner recovery finalized successfully with matching state reads. Two authentic MRI correction attempts finalized with UNCERTAIN leader returns, but no notice persisted in finalized reads. **Material-correction propagation is tested with mocked evidence, not proven live.** See [proof manifest](docs/PROOF_MANIFEST.md) and [verification boundaries](docs/RELEASE_VERIFICATION.md).
 
 ## Reproduce
 
@@ -56,7 +56,7 @@ python -m venv .venv
 .\.venv\Scripts\genvm-lint.exe schema contracts/evidence_retraction_registry.py --output contracts/abi.json
 ```
 
-The shipping run used the existing parent-directory environment; exact commands and results are in [release verification](docs/RELEASE_VERIFICATION.md). Direct tests mock web/model I/O. `npm run verify:network` performs read-only checks and rechecks all 12 new receipts and both final cases, writing deployments/recall-v2-network-verification.json. Local operator scripts require the owner's unlocked OS-keychain account, remain outside the application bundle, and save submitted IDs to resume without resubmitting.
+The shipping run used the existing parent-directory environment; exact commands and results are in [release verification](docs/RELEASE_VERIFICATION.md). Direct tests mock web/model I/O. `npm run verify:network` performs read-only checks and overwrites its dated record; preserve existing proof before rerunning. Local operator scripts require the owner's unlocked OS-keychain account, remain outside the application bundle, and save submitted IDs to resume without resubmitting.
 
 ## Mechanism
 
@@ -76,6 +76,6 @@ flowchart LR
 
 Bounds: 12 sources, 24 decisions, 16 notices, four source and four decision parents, eight versions per record, three notice references and 5,000-byte strict UTF-8 bodies. Edges refer to earlier active decisions. Read [architecture](docs/ARCHITECTURE.md), [security](docs/SECURITY_NOTES.md), and [tests](docs/TEST_MATRIX.md).
 
-Publisher identity, signatures, resolved DNS destinations, redirects, freshness and institutional authority are not authenticated. Off-chain preflight does not prove validator availability. Explorer routing is unverified, so IDs are copyable. Production-chain operation is untested. V1 proofs remain under `deployments/v1/`; v1 submission documents remain under `docs/archive-v1/`, alongside `docs/HISTORICAL_*`.
+Publisher identity, signatures, resolved DNS destinations, redirects, freshness and institutional authority are not authenticated. Off-chain preflight does not prove validator availability. Explorer routing is unverified, so IDs are copyable. Production-chain operation is untested. Historical release files are preserved; earlier README/submission text is archived under `docs/HISTORICAL_*`.
 
 Recall differs from Bullseye and charter work-acceptance apps through persistent evidence dependencies, transitive invalidation and explicit recovery. No ecosystem-wide originality or Portal award claim is made. The owner must review current authenticated Portal task rules and submit manually.

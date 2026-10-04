@@ -6,23 +6,19 @@ export const RPC = "https://studio.genlayer.com/api";
 export const REPOSITORY =
   "https://github.com/JWattjr/evidence-retraction-registry";
 export const SOURCE_COMMIT = historical.project.source_commit;
-export const CODE_SHA256 =
-  "4310a5cb4b5dfb4e326a0c41a1c946d905e1d537fedd37b0c60116a8e87168f2";
+export const CODE_SHA256 = historical.source_sha256;
 export const caseManifest = {
   sourceIds: [
     "report-a",
     "report-unrelated",
-    "grant-study-20261004",
-    "mri-study-20261004",
+    "correction-study",
   ],
   decisionIds: [
     "decision-a",
     "decision-b",
     "decision-c",
-    "grant-policy-review",
-    "grant-release-review",
-    "mri-grant-review",
-    "mri-grant-followup",
+    "correction-parent",
+    "correction-child",
   ],
   noticeIds: ["N-000001", "N-000002"],
 };
@@ -31,8 +27,14 @@ export const recorded: Case = {
   decisions: Object.values(
     historical.final_onchain_readback.decisions,
   ) as Decision[],
-  notices: [historical.final_onchain_readback.notice as Notice],
-  history: historical.final_onchain_readback.history.reassessments,
+  notices: historical.final_onchain_readback.notices as Notice[],
+  history: historical.final_onchain_readback.history,
+};
+export const recordedCorrection: Case = {
+  sources: historical.correction.sources as Source[],
+  decisions: historical.correction.decisions as Decision[],
+  notices: historical.correction.notices as Notice[],
+  history: historical.correction.history,
 };
 export const recordedTransactions = historical.transactions;
 export const noticeReference = recorded.notices[0].references[0];
@@ -43,6 +45,9 @@ export const labels: Record<string, string> = {
   "D:decision-a": "Evidence review",
   "D:decision-b": "Downstream authorization",
   "D:decision-c": "Independent review",
+  "S:correction-study": "Genetic testing study",
+  "D:correction-parent": "Correction evidence review",
+  "D:correction-child": "Correction downstream authorization",
   "S:grant-study-20261004": "Grant study fixture",
   "D:grant-policy-review": "Grant policy review",
   "D:grant-release-review": "Grant downstream review",
@@ -56,6 +61,9 @@ export const descriptions: Record<string, string> = {
   "D:decision-a": "Synthetic research grant fixture",
   "D:decision-b": "Depends on the evidence review",
   "D:decision-c": "Separate evidence branch",
+  "S:correction-study": "PMID 28664264 · reported percentages corrected",
+  "D:correction-parent": "Relies on lifestyle and dietary percentages",
+  "D:correction-child": "Depends on the correction evidence review",
 };
 export function rehearsalCase(): Case {
   const data = structuredClone(recorded);

@@ -1,0 +1,150 @@
+{
+  "ctor": {
+    "params": [],
+    "kwparams": {}
+  },
+  "methods": {
+    "get_decision": {
+      "params": [
+        [
+          "decision_id",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": true,
+      "ret": "dict"
+    },
+    "get_dependents": {
+      "params": [
+        [
+          "parent_kind",
+          "string"
+        ],
+        [
+          "parent_id",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": true,
+      "ret": "dict"
+    },
+    "get_history": {
+      "params": [],
+      "kwparams": {},
+      "readonly": true,
+      "ret": "dict"
+    },
+    "get_notice": {
+      "params": [
+        [
+          "notice_id",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": true,
+      "ret": "dict"
+    },
+    "get_source": {
+      "params": [
+        [
+          "source_id",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": true,
+      "ret": "dict"
+    },
+    "reassess_decision": {
+      "params": [
+        [
+          "decision_id",
+          "string"
+        ],
+        [
+          "expected_version",
+          "int"
+        ],
+        [
+          "source_ids_json",
+          "string"
+        ],
+        [
+          "decision_ids_json",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": false,
+      "ret": "dict",
+      "payable": false
+    },
+    "register_decision": {
+      "params": [
+        [
+          "decision_id",
+          "string"
+        ],
+        [
+          "purpose",
+          "string"
+        ],
+        [
+          "source_ids_json",
+          "string"
+        ],
+        [
+          "decision_ids_json",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": false,
+      "ret": "dict",
+      "payable": false
+    },
+    "register_source": {
+      "params": [
+        [
+          "source_id",
+          "string"
+        ],
+        [
+          "source_url",
+          "string"
+        ],
+        [
+          "publisher_label",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": false,
+      "ret": "dict",
+      "payable": false
+    },
+    "submit_notice": {
+      "params": [
+        [
+          "source_id",
+          "string"
+        ],
+        [
+          "base_version",
+          "int"
+        ],
+        [
+          "notice_refs_json",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": false,
+      "ret": "dict",
+      "payable": false
+    }
+  }
+}

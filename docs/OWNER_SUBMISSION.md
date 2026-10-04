@@ -1,35 +1,21 @@
 # Owner submission handoff
 
-Submission-ready for owner review. The browser-wallet release record confirms `flow_complete: true`: all five writes finalized and matched actual registry state.
+Prepared for owner review. Nothing was submitted to the Portal.
 
-Use the current **Projects** category after checking its form. Recall has not been submitted automatically.
+Use [portal-fields.json](submission/portal-fields.json) for the exact form text and public links. Choose the primary tag from the form's own list, clear reCAPTCHA and submit manually.
 
-| Field | Prepared value |
-|---|---|
-| Name | Recall — evidence changes, decisions follow |
-| Application | https://recall-genlayer.vercel.app |
-| Repository | https://github.com/JWattjr/evidence-retraction-registry |
-| Contract | `0x432960e720542c0EAB68f76a4274fBf972A19a31` |
-| Network | StudioNet, chain 61999, hosted development simulator |
+Application: https://recall-genlayer.vercel.app
+Repository: https://github.com/JWattjr/evidence-retraction-registry
+Contract: `0x91C663Df0D7103614485283D3A1E49Cf525f5fda` on StudioNet 61999, hosted development simulator.
 
-## Description to paste
+## Description
 
-Recall answers: “This evidence was corrected or withdrawn. Which decisions now need reviewing?” Users register publications and synthetic research grant authorizations with explicit dependencies. GenLayer independently reads the evidence and judges a correction or retraction. Deterministic contract code versions changed evidence and atomically disables reachable future authorizations, preserving unrelated branches. The decision owner explicitly reassesses against current evidence; recovering a parent leaves its children blocked.
+Recall answers: this evidence was corrected or withdrawn, so which decisions need reviewing? Users register publications and decisions, such as synthetic research grant approvals, as an explicit dependency graph. GenLayer validators read the original and notice and judge the relationship. Contract code versions changed evidence and disables every reachable downstream decision while unrelated branches stay active. Both paths are proven live on StudioNet: a real PubMed retraction and a real numerical erratum each advanced its source to v2 and blocked its dependent parent and child. Owner reassessment restored the retraction parent to ACTIVE v2, SUPPORTED against current COPE guidance; its child stayed blocked. The app includes both recorded cases, live finalized reads, wallet forms, and receipt/state proof. StudioNet is a hosted simulator. Recall does not certify scientific truth, publisher identity or institutional authority.
 
-The deployed Next.js workspace includes recorded exploration without a wallet, live finalized-state reads, a dependency diagram and accessible mobile list, wallet registration/notice/reassessment forms, publication preflight, proof/history, transaction tracking and state readback. Local rehearsal is clearly labeled and produces no fake transaction IDs. The contract has finite bounds and no global listing API, so the app uses an explicit case manifest.
+## Expected outcome
 
-Fresh finalized proof demonstrates a real-publication retraction, dependent authorization blocking, successful owner recovery and a child that remains blocked. The deployed app completed all five writes through Chrome/Rabby with user-approved signatures, then verified finalized receipts and state. The repository includes source/ABI alignment, transaction records, reproducible setup, architecture, a tutorial and a two-minute demo. 22 mocked contract tests and 16 frontend tests pass, alongside lint, strict TypeScript and production builds.
+Recorded case offers Retraction and Material correction: each shows source v2, both dependent authorizations blocked, and an independent active branch. Proof & history shows FINALIZED / SUCCESS receipts, citations and digests for both notices. Live network shows the retraction parent ACTIVE v2 after owner reassessment; its child and both correction decisions remain blocked. The network check verifies every new receipt, deployed source/ABI and final state of both cases.
 
-StudioNet is hosted simulation; production blockchain operation is untested. Live material-correction propagation remains unproven: authentic correction attempts returned UNCERTAIN leader results without a stored notice. Recall does not certify scientific truth, publisher identity or institutional authority, and cannot reverse completed payments.
+Field lengths: one-liner 158/180; description 938/1000; expected outcome 473/500.
 
-## Supporting links
-
-- [Proof manifest](PROOF_MANIFEST.md)
-- [Browser-wallet release record](../deployments/recall-browser-wallet-2026-10-04.json)
-- [Complete submission draft](../SUBMISSION_DRAFT.md)
-- [Two-minute demo](DEMO.md)
-- [Tutorial](TUTORIAL.md)
-- [Verification and boundaries](RELEASE_VERIFICATION.md)
-- [Portal criteria checked 4 October](PORTAL_RULES.md)
-
-Before pressing Submit, check the current form/category, paste the public links and description, and retain the correction/simulator limitations. Use genuine proof for any attachment the form requests. Acceptance and points remain subject to steward review; no additive tutorial award is promised.
+[Proof](PROOF_MANIFEST.md), [full release](../deployments/recall-v2-release.json), [verification](RELEASE_VERIFICATION.md), [demo](DEMO.md), and [tutorial](TUTORIAL.md) support review. The video field remains empty; no URL is invented. V1 proofs and documents remain archived.

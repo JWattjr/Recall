@@ -21,12 +21,16 @@ Historical 28 September direct mode passed 10 parameter-expanded tests. Those re
 
 The demonstration ran on chain 61999 from the pinned runner. All 8 submitted transactions finalized: deployment, two source registrations, three decision registrations, one RETRACTION notice, and one expected stale-replay rollback. The source moved from version 1 ACTIVE to version 2 RETRACTED; decision-a and decision-b became BLOCKED_REASSESSMENT with authorization disabled; decision-c and its unrelated source remained ACTIVE. The on-chain source blob matched the Git source. The release file records all public views and transaction details.
 
-That historical run exercised RETRACTION and guarded replay only. The original record is deployments/studionet-release-2026-09-28.json.
+That historical run exercised RETRACTION and guarded replay only. The original record is deployments/v1/studionet-release-2026-09-28.json.
 
 ## Fresh 4 October verification
 
-22 direct cases pass: existing propagation, correction, malformed judgments, fetch failures and validator tamper checks, plus tests/test_shipping.py for no-change/uncertainty semantics, SUPPORTED/UNSUPPORTED/UNCERTAIN reassessment, owner/stale checks, missing/invented/duplicate citations and source/decision/notice/version bounds. These use mocked web/model I/O.
+26 direct cases pass: existing propagation, correction, malformed judgments, fetch failures and validator tamper checks, plus tests/test_shipping.py for no-change/uncertainty semantics, SUPPORTED/UNSUPPORTED/UNCERTAIN reassessment, owner/stale checks, missing/invented/duplicate citations and source/decision/notice/version bounds. These use mocked web/model I/O.
 
 16 frontend tests pass: reachability, provisional/finalized/rollback/UNDETERMINED mapping, dependency/URL validation, missing wallet, add/switch, rejected switch, false switch success, signer changes and decoded NOT_FOUND handling. Network tests use a mocked provider. Targeted-read planning and partial-merge tests ensure fresh checks retain target/parent validation without reloading unrelated records or losing existing branches.
 
-3 GenVM lint checks, SDK method validation, ABI extraction, strict TypeScript and production build pass. Fresh retraction and successful owner recovery have finalized receipts and state readback. Authentic correction attempts were made but did not establish stored material correction. Chrome/Rabby completed all five deployed writes with user-approved signatures, finalized receipts and state readback; the local credential-backed EIP-1193 harness is separate evidence. See RELEASE_VERIFICATION.md and PROOF_MANIFEST.md.
+3 GenVM lint checks, SDK method validation, ABI extraction, strict TypeScript and production build pass. Fresh retraction and successful owner recovery have finalized receipts and state readback. The new instance proved authentic material correction and retraction with source v2 and blocked direct/transitive dependents; v1 inconclusive attempts remain archived. Chrome/Rabby completed all five deployed writes with user-approved signatures, finalized receipts and state readback; the local credential-backed EIP-1193 harness is separate evidence. See RELEASE_VERIFICATION.md and PROOF_MANIFEST.md.
+
+## V2 definition and citation agreement
+
+Four additional direct cases cover presentation-only erratum storage without blocking, numerical material-correction propagation with an unrelated active branch, notice citation-order agreement, and reassessment citation-order agreement. Changed findings/validity remain rejected; duplicate/invented citations and all digest/version bindings keep their existing checks. Total: 26 contract tests.

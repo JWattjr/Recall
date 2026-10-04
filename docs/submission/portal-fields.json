@@ -1,0 +1,40 @@
+{
+  "contributionType": "Projects",
+  "projectName": "Recall",
+  "primaryTagSuggestion": "Pick the closest of the form's tags, e.g. governance, compliance or outcome resolution",
+  "oneLiner": "When evidence is corrected or retracted, GenLayer validators judge the notice and Recall blocks every decision that depended on it until its owner reviews it.",
+  "description": "Recall answers: this evidence was corrected or withdrawn, so which decisions need reviewing? Users register publications and decisions, such as synthetic research grant approvals, as an explicit dependency graph. GenLayer validators read the original and notice and judge the relationship. Contract code versions changed evidence and disables every reachable downstream decision while unrelated branches stay active. Both paths are proven live on StudioNet: a real PubMed retraction and a real numerical erratum each advanced its source to v2 and blocked its dependent parent and child. Owner reassessment restored the retraction parent to ACTIVE v2, SUPPORTED against current COPE guidance; its child stayed blocked. The app includes both recorded cases, live finalized reads, wallet forms, and receipt/state proof. StudioNet is a hosted simulator. Recall does not certify scientific truth, publisher identity or institutional authority.",
+  "howTo": [
+    {
+      "heading": "Explore both recorded cases",
+      "instruction": "Open Recorded case. Use Retraction and Material correction to inspect the clinical study and genetic testing study. Each snapshot shows direct and downstream authorizations blocked while the independent branch stays active. No wallet is needed."
+    },
+    {
+      "heading": "Inspect the proof",
+      "instruction": "Open Proof & history. Check RETRACTION and MATERIAL_CORRECTION findings, exact publication URLs, evidence digests, source v1 to v2, and finalized transaction IDs."
+    },
+    {
+      "heading": "Check live state",
+      "instruction": "Switch to Live network. Evidence review (decision-a) is ACTIVE v2, SUPPORTED after owner reassessment. Downstream authorization (decision-b) and both correction decisions remain blocked at v1."
+    },
+    {
+      "heading": "Verify or try it yourself",
+      "instruction": "Follow the repository README: npm run verify:network re-checks the finalized receipts and state read-only. Optionally connect a StudioNet wallet in Evidence workspace to register a source, run preflight and submit a notice."
+    }
+  ],
+  "expectedOutcome": "Recorded case offers Retraction and Material correction: each shows source v2, both dependent authorizations blocked, and an independent active branch. Proof & history shows FINALIZED / SUCCESS receipts, citations and digests for both notices. Live network shows the retraction parent ACTIVE v2 after owner reassessment; its child and both correction decisions remain blocked. The network check verifies every new receipt, deployed source/ABI and final state of both cases.",
+  "website": "https://recall-genlayer.vercel.app",
+  "github": "https://github.com/JWattjr/evidence-retraction-registry",
+  "contractLinks": [
+    "https://explorer-studio.genlayer.com/address/0x91C663Df0D7103614485283D3A1E49Cf525f5fda"
+  ],
+  "demoVideo": "",
+  "evidence": [
+    "https://github.com/JWattjr/evidence-retraction-registry",
+    "https://github.com/JWattjr/evidence-retraction-registry/blob/main/docs/PROOF_MANIFEST.md",
+    "https://github.com/JWattjr/evidence-retraction-registry/blob/main/deployments/recall-v2-release.json",
+    "https://github.com/JWattjr/evidence-retraction-registry/blob/main/docs/RELEASE_VERIFICATION.md",
+    "https://github.com/JWattjr/evidence-retraction-registry/blob/main/docs/TUTORIAL.md",
+    "https://github.com/JWattjr/evidence-retraction-registry/blob/main/docs/DEMO.md"
+  ]
+}

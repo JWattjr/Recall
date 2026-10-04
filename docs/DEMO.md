@@ -1,15 +1,13 @@
 # Two-minute Recall demo
 
-**0:00–0:20:** Open Recorded case. “This study was withdrawn. Which research grant authorizations need review?” Name the historical snapshot, authentic publication and synthetic grants.
+**0:00-0:25:** Open Recorded case, Retraction. Select Clinical study. Its real retraction advanced source v2 and blocked Evidence review and Downstream authorization. Independent review stayed active. Authorizations are synthetic fixtures.
 
-**0:20–0:45:** Select Clinical study. Evidence review is direct; Downstream authorization is transitive. Both require review. Independent review's separate branch remains active. Mobile has the same relationship labels in a list.
+**0:25-0:55:** Select Material correction. The real genetic-testing erratum says two reported percentages were incorrect. Show CORRECTED v2, direct/transitive authorizations blocked, and the independent active branch.
 
-**0:45–1:05:** Open Proof & history. Show RETRACTION, citations, digests, source v1→v2 and transaction ID. Acceptance is provisional; the stale replay finalized with rollback.
+**0:55-1:20:** Open Proof & history. Show both findings, publication links, evidence/input digests and FINALIZED / SUCCESS hashes. These are dated snapshots.
 
-**1:05–1:35:** Switch to Live network and Evidence workspace. Grant policy review is ACTIVE v2, SUPPORTED against COPE guidance with a frozen purpose. Grant downstream review remains blocked v1. If reads fail, show the dated owner-recovery snapshot in Proof & history and identify it as recorded evidence.
+**1:20-1:45:** Switch to Live network. decision-a is ACTIVE v2 / SUPPORTED against current COPE guidance. decision-b remains blocked v1; both correction decisions remain blocked. Recovering a parent never silently restores children.
 
-**1:35–1:50:** Open Reassess decisions. Explain owner signing, current evidence and expected version. Each child needs its own review. Optional local rehearsal is scripted and produces no network transaction.
+**1:45-2:00:** Explain owner signing, fixed purpose and expected version. Name StudioNet hosted simulation, finite graph/evidence bounds and publisher-authenticity limitations. End with repository and tutorial.
 
-**1:50–2:00:** “Recall versions evidence, disables reachable future authorizations and requires explicit recovery.” Name StudioNet hosted simulation, finite bounds, publisher-authenticity limitations and the unproven material-correction scenario. End with repository and tutorial.
-
-Do not replay the already-withdrawn historical source to produce a new demo. For a signed retraction, register a unique copy of the original study and dependent synthetic decisions, preflight, submit once, retain its ID, wait for finality and inspect actual state. Registry capacity is finite.
+Do not resubmit already-applied notices. For a fresh signed flow, register unique IDs, preflight, submit once, retain the hash, resume polling until finality, and inspect finalized state separately. Local rehearsal creates no network transaction.

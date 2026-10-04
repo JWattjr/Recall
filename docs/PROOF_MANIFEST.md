@@ -1,52 +1,48 @@
-# Proof manifest — 4 October 2026
+# Proof manifest - v2, 4 October 2026
 
-StudioNet 61999 is hosted development simulation. Contract: `0x432960e720542c0EAB68f76a4274fBf972A19a31`. Runner remains pinned. [Source/ABI and receipt revalidation](../deployments/recall-network-verification-2026-10-04.json) matches source commit `c0d00fc83477c6eaa69bcf001c5378212e7ac52a` and normalized SHA-256 `4310a5cb4b5dfb4e326a0c41a1c946d905e1d537fedd37b0c60116a8e87168f2`.
+Contract `0x91C663Df0D7103614485283D3A1E49Cf525f5fda` on StudioNet 61999, a hosted development simulator. Normalized LF / trimmed-end source SHA-256: `218f011d2e26bc6d35033f9781b406e39ab8598af0f91fa118c85b5a930c5804`. Runner stays pinned to `py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6`.
 
-## Historical retraction, revalidated
+[Release receipts and finalized reads](../deployments/recall-v2-release.json) | [Read-only revalidation](../deployments/recall-v2-network-verification.json).
 
-[Original release](../deployments/studionet-release-2026-09-28.json) remains unchanged. Eight receipts were checked again: seven finalized successful executions and one finalized stale-replay rollback. report-a is RETRACTED v2, decision-a and decision-b are blocked, decision-c remains active.
+## Transactions
 
-Retraction: `0x903df09915835536652632d327bde8cb1cd963cf6621fe74d27ecbcb917329a5`
-Rollback: `0x33d50ddd035e95b92480cddb6065a8a210eb92c92349ba034f90aace90dedc0c`
+| Operation | Hash | Result |
+|---|---|---|
+| deploy | `0x745ef64260fd2dcde7d95c10c6e46b6d36856621a54f9e1f839dbeb897fcd5f6` | FINALIZED / SUCCESS |
+| register_source:report-a | `0x3822f460be7a25a1524d2e22aade51f0c9658b5dffc576c6686ed4a1841a45f1` | FINALIZED / SUCCESS |
+| register_source:report-unrelated | `0x976bea58b7d4d2f509a80ae375c41a7e5cb927c9b0f2590be8042e77f4ac5d5a` | FINALIZED / SUCCESS |
+| register_decision:decision-a | `0xa2b3959c92631d264df92224c9130db5edc2d4b072a08da2025ec60c4d3d00fb` | FINALIZED / SUCCESS |
+| register_decision:decision-b | `0x46b936baee552b2f37da53bf04247f09659fc0e03e887f135e554054cd606894` | FINALIZED / SUCCESS |
+| register_decision:decision-c | `0x4d41b6001478fe196a5495cc4cb4eca54d7c09b7142e1bc535c1332c009f2425` | FINALIZED / SUCCESS |
+| submit_notice:report-a | `0x45b2cf330bf9d9b25ed161ee9fa7a30bf401126a34de817c9949e29d3477abd4` | FINALIZED / SUCCESS |
+| reassess_decision:decision-a | `0x28a7d05c198264b254347625e0e36208b8292447cb1104b16dfa8dfba4ff3e3a` | FINALIZED / SUCCESS |
+| register_source:correction-study | `0x5697b7a752c498d73598216a5104f8c6d5063c3453fcb83e7ec1bc553936b84a` | FINALIZED / SUCCESS |
+| register_decision:correction-parent | `0x88aa221a00229c88fea5fba0a6a5dc6ffea7b9ca5c518aa83e593e7efd19f063` | FINALIZED / SUCCESS |
+| register_decision:correction-child | `0xcb3f712d0f0a470a41652ac75c594cf737cb181917ec17a1ab64c030e1c4546d` | FINALIZED / SUCCESS |
+| submit_notice:correction-study | `0x59fd7d86db99f5410c0df682d9167213e6fe34d64d54fa344f2add62b09d014f` | FINALIZED / SUCCESS |
 
-## Fresh explicit owner recovery
+Every hash was saved before polling. A timeout resumes the same hash without resubmission. All registration readbacks matched ACTIVE v1. State reads use LATEST_FINAL.
 
-[New release and state reads](../deployments/recall-live-release-2026-10-04.json). All five operations FINALIZED, execution SUCCESS, result return:
+## Retraction and owner recovery
 
-| Operation | Transaction ID |
-|---|---|
-| Register grant source | `0x56c85abcaefab1ce4db629004760f7fc960a578e1210b9d4140b79d8812938fe` |
-| Register parent | `0xd5148110de35d3a870cfd1f42ae009bb2cf546e24f32f43d645664bee996cb5d` |
-| Register child | `0x7f3d1324ce9f7cb6696c7b96a32301c3d242b1db0ecab9799a91f4249978395a` |
-| Retraction N-000002 | `0xf7a05011ddbd9ddb8df6b4aad85b53b193f97cbce96e5457daec14dde1718e5e` |
-| Owner reassessment | `0xe3e27c3a95520e1dc264da7a4965eaf09aa0d8d975b9a1838f7bca576512a0fe` |
+Original: [Crossref DOI 10.11607/prd.476](https://api.crossref.org/v1/works?filter=doi:10.11607/prd.476&rows=1&select=DOI,title,publisher,issued,type). Notice: [PubMed PMID 29940049](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29940049&rettype=abstract&retmode=text). N-000001 returned RETRACTION, report-a became RETRACTED v2, and decision-a and decision-b were blocked. Independent decision-c stayed ACTIVE v1.
 
-Owner: `0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92`. Published retraction made grant-study-20261004 RETRACTED v2 and blocked its two synthetic decisions. Reassessing the parent's frozen COPE evidence-governance purpose against report-unrelated returned SUPPORTED. grant-policy-review is ACTIVE v2; grant-release-review remains BLOCKED_REASSESSMENT v1. decision-c stays active. Stored citations and digests appear in the release and app proof view.
+Owner `0xdB433ff614bDD1ecE21Aa97221C3E0a7ecf79c92` reassessed decision-a against report-unrelated, [COPE PMID 20017220](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=20017220&rettype=abstract&retmode=text). Its frozen purpose concerns COPE retraction governance. SUPPORTED restored decision-a to ACTIVE v2; decision-b remained BLOCKED_REASSESSMENT v1. Recovery does not validate the withdrawn clinical finding.
 
-## Interactive browser-wallet release
+## Real material erratum
 
-[Completed Chrome/Rabby flow](../deployments/recall-browser-wallet-2026-10-04.json). User-approved signatures through the deployed app produced five FINALIZED / SUCCESS receipts, all followed by actual state readback:
+Original PMID **28664264**, DOI `10.1007/s12687-017-0310-z`: [https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=28664264&rettype=abstract&retmode=text](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=28664264&rettype=abstract&retmode=text). HTTP 200, **3559 bytes**.
 
-| Operation | Transaction ID |
-|---|---|
-| Register browser grant source | `0x0e276d4e400d6195dc49c70eb77f28cc5acad6d94d205a1b0eb66aca72642a2d` |
-| Register parent | `0x0b311924683d6db118a6ea55f78e3bcbe372dcbc6fb8ad4d9f42c88799549f08` |
-| Register child | `0x4092ea021892b2f7bfab2232bc34bc30b29326f792f9ee3c339bd76c1044b6e2` |
-| Retraction N-000003 | `0x2a576c2f501f169a69d7526da15f77cf049c1678c990ae9f9a4e6b1463cc9d2d` |
-| Owner reassessment | `0xe5d75665e93270de9b6d0e68c5b0ad27b7d0575efd1c88495db187b4d57bdf83` |
+Erratum PMID **29294252**, DOI `10.1007/s12687-017-0353-1`: [https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29294252&rettype=abstract&retmode=text](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29294252&rettype=abstract&retmode=text). HTTP 200, **1597 bytes**. The title identifies the original article; its Erratum-for block gives the original DOI.
 
-Owner: `0x1ee3b827907429e5df3db7282446b6e065ff6199`. browser-grant-study-20261004 became RETRACTED v2 and both dependent authorizations were blocked v1. Owner reassessment against current COPE guidance returned SUPPORTED: browser-grant-policy-review became ACTIVE v2; browser-grant-release-review remained BLOCKED_REASSESSMENT v1. decision-c stayed active. The app preserved transaction tracking across reload and displayed notice citations/digests and recovery history. To inspect this additional branch in another browser, add its known source and two decision IDs to the bounded manifest.
+Exact material sentence (NCBI line wrapping joined with spaces; words and punctuation unchanged):
 
-The initial repeated whole-case check encountered the 30-request-per-minute RPC limit before signing. The app now checks the target and declared parents, then reads actual affected records after finality. Three regression tests and the remaining browser writes verify the reduced-read path. Full refresh and concurrent public traffic can still meet the upstream quota.
+> The percentages for 'any positive lifestyle change' and 'improved dietary practices' have unintentionally been incorrectly reported.
 
-## Correction gap
+N-000002 returned MATERIAL_CORRECTION. correction-study became CORRECTED v2 with the erratum reference. correction-parent and correction-child became BLOCKED_REASSESSMENT v1. Independent decision-c stayed ACTIVE. Exact source/version bindings, citations and all digests remain in the release record. Both publication bodies were strict UTF-8 and below 5,000 bytes before use.
 
-Authentic original MRI publication PMID 30904949 / DOI `10.1007/s00234-019-02198-w` and correction PMID 31011771 / DOI `10.1007/s00234-019-02214-z` returned HTTP 200, 2,918 / 1,255 bytes, strict UTF-8 in [off-chain preflight](../deployments/recall-correction-preflight-2026-10-04.json). This does not establish validator availability.
+## V1 archive and boundaries
 
-[First run](../deployments/recall-correction-release-2026-10-04.json) registered the source/decisions, then notice `0xc441e7df8ee15ab7af0ffdb83e230937c34710776a4a915d4e0e915688845163` finalized with an UNCERTAIN leader return. Finalized reads showed source v1 and no N-000003.
+[Old proof files](../deployments/v1) and [old documents](archive-v1) remain preserved. Eleven original JSON proofs were checked unchanged against the prior Git revision. Old contract: `0x432960e720542c0EAB68f76a4274fBf972A19a31`. Its MRI attempts remain UNCERTAIN; this instance uses an explicit numerical erratum and the requested materiality definition. V1 Chrome/Rabby signatures belong to v1. New-instance writes used the authorized local operator; credentials stayed in the OS keychain/process memory.
 
-[Version-guarded retry through the app wallet helper](../deployments/recall-wallet-transport-2026-10-04.json): `0x6d8fbeceb4755810a68e3d0503411080d53b1cf012a5107e43fed0bb0904ef84` also FINALIZED; material correction remained unproven and N-000003 absent. It used a credential-backed local EIP-1193 adapter, not a browser extension. No publication or consensus result was fabricated.
-
-Those missing-notice observations were made before the later browser retraction. N-000003 is now a RETRACTION against browser-grant-study-20261004; it does not establish correction of the MRI source.
-
-Explorer routing was not verified; copy IDs to the CLI or use the app's transaction route. New RPC records omit credentials and simulator configuration/state dumps. Historical proof remains preserved.
+The grants are synthetic fixtures. Publisher identity and institutional authority are not authenticated. Receipt success and state propagation were checked separately; production-chain operation is untested.

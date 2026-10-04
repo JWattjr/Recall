@@ -11,12 +11,10 @@ This working read example uses the pinned SDK and needs no wallet. Run from `fro
 ```javascript
 import { createClient } from 'genlayer-js';
 import { studionet } from 'genlayer-js/chains';
-import { TransactionHashVariant } from 'genlayer-js/types';
 const client = createClient({ chain: studionet });
 console.log(await client.readContract({
-  address: '0x91C663Df0D7103614485283D3A1E49Cf525f5fda',
-  functionName: 'get_decision', args: ['decision-a'], jsonSafeReturn: true,
-  transactionHashVariant: TransactionHashVariant.LATEST_FINAL,
+  address: '0x432960e720542c0EAB68f76a4274fBf972A19a31',
+  functionName: 'get_decision', args: ['grant-policy-review'], jsonSafeReturn: true,
 }));
 ```
 
@@ -24,9 +22,9 @@ Save as `read-example.mjs`, then `node read-example.mjs`. Wallet signing uses `s
 
 ## Judge independently
 
-`submit_notice` supplies source, expected base version and up to three notice references. Validators independently fetch current/new publications under the 5,000-byte strict UTF-8 bound. The notice prompt explicitly distinguishes changed results/numbers/doses/conclusions from presentation-only fixes. It constrains four findings; validators compare sorted, deduplicated citation sets and bind frozen input, evidence and judgment digests. Source text is untrusted input.
+`submit_notice` supplies source, expected base version and up to three notice references. Validators independently fetch current/new publications under the 5,000-byte strict UTF-8 bound. The prompt constrains four findings; validators check exact citations and bind frozen input, evidence and judgment digests. Source text is untrusted input.
 
-Preflight measures availability only. It never supplies a server summary as validator evidence. The real retraction example uses small Crossref and NCBI text records. A browser fetch cannot guarantee validator retrieval. This new instance separately proved the real retraction and PMID 29294252 material correction with finalized state reads. V1 MRI attempts remain archived.
+Preflight measures availability only. It never supplies a server summary as validator evidence. The real retraction example uses small Crossref and NCBI text records. A browser fetch cannot guarantee validator retrieval: the MRI correction attempts illustrate that boundary.
 
 ## Apply deterministic consequences
 
@@ -42,6 +40,6 @@ The live parent's purpose concerned COPE retraction governance, so current COPE 
 
 ## Check receipt and state separately
 
-Persist the returned ID before polling. ACCEPTED is provisional; finalized rollback is failure. This StudioNet deployment can pass through UNDETERMINED before finalization, so checks are bounded and resumable. After successful finality, read and compare intended state. Both new notices finalized successfully; finalized reads confirmed source v2 and blocked dependents. The network check rechecks all 12 receipts and both final cases.
+Persist the returned ID before polling. ACCEPTED is provisional; finalized rollback is failure. This StudioNet deployment can pass through UNDETERMINED before finalization, so checks are bounded and resumable. After successful finality, read and compare intended state. Correction receipts alone did not prove persistence, and the proof record says so.
 
 Run `npm test` for graph/finality/wallet handling and project-root `python -m pytest` for contract invariants. Direct tests mock external evidence/model output; [live records](PROOF_MANIFEST.md) are separate proof. No library was extracted because current helpers are tied to this ABI and case boundary; the tutorial and read example are reusable without delaying the release.

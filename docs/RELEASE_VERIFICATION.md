@@ -1,43 +1,36 @@
-# Shipping verification — 4 October 2026
+# V2 release verification - 4 October 2026
 
-New records contain source/ABI alignment, historical receipt revalidation, fresh owner recovery, correction attempts and off-chain evidence availability. [Proof manifest](PROOF_MANIFEST.md) links them. The historical release stays unchanged.
+New instance: `0x91C663Df0D7103614485283D3A1E49Cf525f5fda`, StudioNet 61999. Both notice paths and owner recovery passed, independently checked through finalized state reads. [Proof manifest](PROOF_MANIFEST.md) links the records.
 
-## Executed commands
-
-Project root, using the existing parent-directory virtual environment:
+## Contract checks
 
 ```powershell
-& '..\.venv\Scripts\python.exe' -m pytest -q -p no:cacheprovider --basetemp=.pytest-tmp
 & '..\.venv\Scripts\genvm-lint.exe' check contracts/evidence_retraction_registry.py --json
-& '..\.venv\Scripts\genvm-lint.exe' schema contracts/evidence_retraction_registry.py --output deployments/abi-check-2026-10-04.json
+& '..\.venv\Scripts\genvm-lint.exe' schema contracts/evidence_retraction_registry.py --output deployments/abi-v2.json
+& '..\.venv\Scripts\python.exe' -m pytest -q
 ```
 
-22 parameter-expanded direct tests pass; 3 lint checks pass; SDK validation reports 9 methods, 5 views / 4 writes; ABI extraction succeeds. The newer available runner was not adopted.
+26 contract tests pass. Three GenVM lint checks pass; SDK validation reports 9 methods (5 views, 4 writes). ABI extraction succeeds and matches the deployed ABI. The pinned runner is unchanged. Direct tests mock web/model I/O; actual network evidence is separate.
 
-Frontend:
+## Frontend and network checks
 
 ```powershell
 npm run typecheck
 npm test
 npm run build
-npm audit --omit=dev
 npm run verify:network
-node scripts/live-release.mjs
-node scripts/live-release.mjs --correction
-npx tsx scripts/wallet-write-check.ts
+node scripts/release-v2.mjs
 vercel --prod --yes --scope wattxs-projects
 ```
 
-Strict TypeScript and production build pass. 16 frontend tests pass. Production dependency audit reports zero vulnerabilities. Retraction/recovery network calls succeeded and were read back. Correction operations finalized, but the first script's missing-notice read failed; the retry explicitly records that material correction was not proven.
+Strict TypeScript, all 16 frontend tests and the production build pass. The read-only network check revalidated all 12 new receipts as FINALIZED / SUCCESS, matched deployed source and ABI, matched every final source/decision/notice and history row, and checked both paths and recovery. [Network record](../deployments/recall-v2-network-verification.json).
 
-Browser checks cover recorded exploration, direct/transitive selection, unrelated branch, mobile list, local withdrawal/recovery, missing-wallet error, notice preflight, proof/history and current live manifest. Final deployed checks, exact commands and commit are saved in `deployments/recall-shipping-2026-10-04.json`.
+Recorded retraction captures propagation before recovery. Recorded material correction captures CORRECTED source v2 and both blocked dependents. Live network reads the new instance, including recovered decision-a v2 and decision-b still blocked. Browser records are scoped to the contract address; v1 saved records remain under their previous storage keys.
+
+Production deployment and browser results are recorded in [shipping verification](../deployments/recall-v2-shipping.json).
 
 ## Boundaries
 
-- Chrome/Rabby completed all five deployed writes with user-approved extension prompts. Registration, published retraction and owner reassessment finalized successfully, with actual state readback. Reload preserved the submitted source ID and verified transaction history. The parent became ACTIVE v2 / SUPPORTED, its child stayed blocked v1, and decision-c stayed active. [Browser release](../deployments/recall-browser-wallet-2026-10-04.json) saves sanitized receipts. The local credential-backed harness and mocked wallet-error tests are separate evidence.
-- Live material correction is not proven: two authentic NCBI attempts returned UNCERTAIN leader results and N-000003 was absent in finalized reads. Source and MRI decisions remain active v1. Receipt success does not prove propagation or persistence.
-- NO_MATERIAL_CHANGE, unsupported reassessment and capacity failures are direct-test coverage, not separate live demonstrations.
-- StudioNet is hosted simulation. Production chain, publisher authenticity and institutional authority are unverified; no guaranteed confirmation time exists.
-- Authenticated Projects criteria and current account slot availability were inspected in Chrome. Final form/category review and submission remain the owner's action. Nothing was submitted and no award is promised.
+StudioNet is hosted simulation. Production-chain operation, publisher authentication and institutional authority are unverified. NO_MATERIAL_CHANGE and unsupported reassessment remain mocked test coverage rather than separate live demonstrations. New-instance writes used the authorized local operator. The earlier Chrome/Rabby flow and UNCERTAIN MRI attempts remain preserved under deployments/v1 and docs/archive-v1; those receipts belong to the old contract.
 
-The final browser run exposed StudioNet's 30-request-per-minute limit during a repeated whole-manifest check. Pre-sign validation now freshly reads only the target and declared parents; finalized readback reads the target and actual affected decisions. Full graph refresh remains explicit. Three regression tests verify bounded read planning and preservation of unrelated records during partial merges. Known manifest counts are advisory; contract capacity checks remain authoritative.
+No Portal form was submitted. The owner chooses the primary tag from the form, clears reCAPTCHA and submits manually.

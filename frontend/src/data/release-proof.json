@@ -1,22 +1,22 @@
 {
-  "checkedAt": "2026-10-04T01:29:18.614Z",
-  "network": "StudioNet 61999 · hosted development simulator",
+  "checkedAt": "2026-10-04T18:42:47.577Z",
+  "network": "StudioNet 61999 - hosted development simulator",
   "ownerRecovery": true,
   "childStaysBlocked": true,
   "parent": {
     "authorization_enabled": true,
-    "blocked_by_notice": "N-000002",
-    "blocked_by_source": "grant-study-20261004",
-    "decision_id": "grant-policy-review",
+    "blocked_by_notice": "N-000001",
+    "blocked_by_source": "report-a",
+    "decision_id": "decision-a",
     "dependencies": [
       "S:report-unrelated"
     ],
     "last_citations": [
       "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=20017220&rettype=abstract&retmode=text"
     ],
-    "last_evidence_digest": "sha256:e85ed2f8eeb741c2cfbef0b52b2eb243ea8afde3eba0a6f8b9d7a68e488a8f35",
-    "last_input_snapshot_digest": "sha256:d7497b7e2f2e5a20a6160d8df4ae31e9ee646c5b9b246d72083ea705ee084844",
-    "last_snapshot_digest": "sha256:54d5849d563f63d28f04e9ce97f5eac15e2b9a2310de7bcc4cf26764f2df3100",
+    "last_evidence_digest": "sha256:6b48ca0d4937aa84f499ea333f9babc1db85f51e912b44728c99c21ace5ceb85",
+    "last_input_snapshot_digest": "sha256:8cc7412989c31f82262c99e6875a3ce30a717fa8dca8ad58f51bfc8cf22aec55",
+    "last_snapshot_digest": "sha256:bf8e0daf9265ade013391005728e4bd7cf4ffacf0b640a35b0a0390388c0362d",
     "last_supporting_decisions": [],
     "last_validity": "SUPPORTED",
     "owner": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
@@ -27,73 +27,146 @@
       }
     ],
     "purpose": "Synthetic research grant authorization to use COPE retraction guidelines for reviewing published evidence and deciding when evidence should be retracted.",
-    "sequence": 3,
+    "sequence": 0,
     "status": "ACTIVE",
     "version": 2
   },
   "child": {
     "authorization_enabled": false,
-    "blocked_by_notice": "N-000002",
-    "blocked_by_source": "grant-study-20261004",
-    "decision_id": "grant-release-review",
+    "blocked_by_notice": "N-000001",
+    "blocked_by_source": "report-a",
+    "decision_id": "decision-b",
     "dependencies": [
-      "D:grant-policy-review"
+      "D:decision-a"
     ],
     "last_snapshot_digest": "",
     "last_validity": "REGISTERED_BY_AUTHORIZED_CALLER",
     "owner": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
     "parent_versions": [
       {
-        "parent_key": "D:grant-policy-review",
+        "parent_key": "D:decision-a",
         "version": 1
       }
     ],
-    "purpose": "Synthetic research grant authorization for further evidence governance review, dependent on grant-policy-review remaining active.",
-    "sequence": 4,
+    "purpose": "Synthetic downstream authorization dependent on decision-a remaining active.",
+    "sequence": 1,
     "status": "BLOCKED_REASSESSMENT",
     "version": 1
   },
   "transactions": [
     {
+      "operation": "deploy",
+      "method": "deploy",
+      "hash": "0x745ef64260fd2dcde7d95c10c6e46b6d36856621a54f9e1f839dbeb897fcd5f6",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "result": "return",
+      "expected_failure": false
+    },
+    {
+      "operation": "register_source:report-a",
       "method": "register_source",
-      "hash": "0x56c85abcaefab1ce4db629004760f7fc960a578e1210b9d4140b79d8812938fe",
+      "hash": "0x3822f460be7a25a1524d2e22aade51f0c9658b5dffc576c6686ed4a1841a45f1",
       "status": "FINALIZED",
       "execution": "SUCCESS",
-      "result": "return"
+      "result": "return",
+      "expected_failure": false
     },
     {
+      "operation": "register_source:report-unrelated",
+      "method": "register_source",
+      "hash": "0x976bea58b7d4d2f509a80ae375c41a7e5cb927c9b0f2590be8042e77f4ac5d5a",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "result": "return",
+      "expected_failure": false
+    },
+    {
+      "operation": "register_decision:decision-a",
       "method": "register_decision",
-      "hash": "0xd5148110de35d3a870cfd1f42ae009bb2cf546e24f32f43d645664bee996cb5d",
+      "hash": "0xa2b3959c92631d264df92224c9130db5edc2d4b072a08da2025ec60c4d3d00fb",
       "status": "FINALIZED",
       "execution": "SUCCESS",
-      "result": "return"
+      "result": "return",
+      "expected_failure": false
     },
     {
+      "operation": "register_decision:decision-b",
       "method": "register_decision",
-      "hash": "0x7f3d1324ce9f7cb6696c7b96a32301c3d242b1db0ecab9799a91f4249978395a",
+      "hash": "0x46b936baee552b2f37da53bf04247f09659fc0e03e887f135e554054cd606894",
       "status": "FINALIZED",
       "execution": "SUCCESS",
-      "result": "return"
+      "result": "return",
+      "expected_failure": false
     },
     {
+      "operation": "register_decision:decision-c",
+      "method": "register_decision",
+      "hash": "0x4d41b6001478fe196a5495cc4cb4eca54d7c09b7142e1bc535c1332c009f2425",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "result": "return",
+      "expected_failure": false
+    },
+    {
+      "operation": "submit_notice:report-a",
       "method": "submit_notice",
-      "hash": "0xf7a05011ddbd9ddb8df6b4aad85b53b193f97cbce96e5457daec14dde1718e5e",
+      "hash": "0x45b2cf330bf9d9b25ed161ee9fa7a30bf401126a34de817c9949e29d3477abd4",
       "status": "FINALIZED",
       "execution": "SUCCESS",
-      "result": "return"
+      "result": "return",
+      "expected_failure": false
     },
     {
+      "operation": "reassess_decision:decision-a",
       "method": "reassess_decision",
-      "hash": "0xe3e27c3a95520e1dc264da7a4965eaf09aa0d8d975b9a1838f7bca576512a0fe",
+      "hash": "0x28a7d05c198264b254347625e0e36208b8292447cb1104b16dfa8dfba4ff3e3a",
       "status": "FINALIZED",
       "execution": "SUCCESS",
-      "result": "return"
+      "result": "return",
+      "expected_failure": false
+    },
+    {
+      "operation": "register_source:correction-study",
+      "method": "register_source",
+      "hash": "0x5697b7a752c498d73598216a5104f8c6d5063c3453fcb83e7ec1bc553936b84a",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "result": "return",
+      "expected_failure": false
+    },
+    {
+      "operation": "register_decision:correction-parent",
+      "method": "register_decision",
+      "hash": "0x88aa221a00229c88fea5fba0a6a5dc6ffea7b9ca5c518aa83e593e7efd19f063",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "result": "return",
+      "expected_failure": false
+    },
+    {
+      "operation": "register_decision:correction-child",
+      "method": "register_decision",
+      "hash": "0xcb3f712d0f0a470a41652ac75c594cf737cb181917ec17a1ab64c030e1c4546d",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "result": "return",
+      "expected_failure": false
+    },
+    {
+      "operation": "submit_notice:correction-study",
+      "method": "submit_notice",
+      "hash": "0x59fd7d86db99f5410c0df682d9167213e6fe34d64d54fa344f2add62b09d014f",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "result": "return",
+      "expected_failure": false
     }
   ],
   "correction": {
-    "materialCorrectionProven": false,
-    "hash": "0x6d8fbeceb4755810a68e3d0503411080d53b1cf012a5107e43fed0bb0904ef84",
+    "materialCorrectionProven": true,
+    "hash": "0x59fd7d86db99f5410c0df682d9167213e6fe34d64d54fa344f2add62b09d014f",
     "status": "FINALIZED",
-    "finding": "The earlier MRI correction retry returned UNCERTAIN, and no corresponding notice was found in that attempt's finalized readback. MRI source remained v1. Live material correction is not claimed; later retractions against other sources are separate proof."
+    "finding": "MATERIAL_CORRECTION: source v2; parent and child blocked; independent branch active."
   }
 }

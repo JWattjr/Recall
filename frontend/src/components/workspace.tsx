@@ -30,6 +30,7 @@ import {
   REPOSITORY,
   caseManifest,
   recorded,
+  recordedCorrection,
   recordedTransactions,
   labels,
   noticeReference,
@@ -73,6 +74,8 @@ const terminal = (t: Tx) => ["success", "error", "rollback"].includes(t.phase);
 const short = (s: string) => s.slice(0, 6) + "…" + s.slice(-4);
 const timestamp = (s: string) =>
   new Date(s).toLocaleString("en-GB", { timeZone: "Africa/Lagos" });
+const transactionsStorageKey = "recall-transactions-" + CONTRACT.toLowerCase();
+const manifestStorageKey = "recall-manifest-" + CONTRACT.toLowerCase();
 function CopyId({ value }: { value: string }) {
   const [copied, setCopied] = useState(false);
   return (
@@ -97,6 +100,7 @@ function CopyId({ value }: { value: string }) {
 }
 export function Workspace() {
   const [mode, setMode] = useState<Mode>("recorded"),
+    [recordedKind, setRecordedKind] = useState<"retraction" | "correction">("retraction"),
     [data, setData] = useState<Case>(recorded),
     [selected, setSelected] = useState("S:report-a"),
     [section, setSection] = useState<
@@ -153,11 +157,13 @@ export function Workspace() {
     setError("");
     setMessage("");
     if (value === "recorded") {
-      setData(recorded);
+      setData(recordedKind === "correction" ? recordedCorrection : recorded);
+      setSelected(recordedKind === "correction" ? "S:correction-study" : "S:report-a");
       setCheckedAt("");
     }
     if (value === "rehearsal") {
       setData(rehearsalCase());
+      setSelected("S:report-a");
       setCheckedAt("");
     }
     if (value === "live") {
@@ -193,11 +199,11 @@ export function Workspace() {
     mounted.current = true;
     try {
       const stored = JSON.parse(
-        localStorage.getItem("recall-transactions-v1") ?? "[]",
+        localStorage.getItem(transactionsStorageKey) ?? "[]",
       ) as Tx[];
       setTxs(stored.filter((t) => /^0x[0-9a-f]{64}$/i.test(t.hash)).slice(-20));
       const t = JSON.parse(
-        localStorage.getItem("recall-manifest-v1") ?? "null",
+        localStorage.getItem(manifestStorageKey) ?? "null",
       );
       if (t?.sources && t?.decisions) setTracked(t);
     } catch {
@@ -222,7 +228,7 @@ export function Workspace() {
   useEffect(() => {
     if (mounted.current) {
       try {
-        localStorage.setItem("recall-transactions-v1", JSON.stringify(txs));
+        localStorage.setItem(transactionsStorageKey, JSON.stringify(txs));
       } catch {
         setError(
           "Browser storage is unavailable. Copy submitted transaction IDs before leaving this page.",
@@ -233,7 +239,7 @@ export function Workspace() {
   useEffect(() => {
     if (mounted.current) {
       try {
-        localStorage.setItem("recall-manifest-v1", JSON.stringify(tracked));
+        localStorage.setItem(manifestStorageKey, JSON.stringify(tracked));
       } catch {
         /* The manifest remains in memory. */
       }
@@ -449,7 +455,7 @@ export function Workspace() {
       const next = [...txRef.current, tx].slice(-20);
       setTxs(next);
       try {
-        localStorage.setItem("recall-transactions-v1", JSON.stringify(next));
+        localStorage.setItem(transactionsStorageKey, JSON.stringify(next));
       } catch {
         setError(
           "Submitted successfully, but browser storage is unavailable. Copy this transaction ID now: " +
@@ -761,7 +767,7 @@ export function Workspace() {
             </div>
             <span className="provenance">
               {mode === "recorded"
-                ? "Snapshot · 28 Sep 2026"
+                ? "Finalized snapshot · 4 Oct 2026"
                 : mode === "rehearsal"
                   ? "In this browser · no consensus"
                   : checkedAt
@@ -781,6 +787,18 @@ export function Workspace() {
               </button>
             )}
           </div>
+          {mode === "recorded" && (
+            <div className="mode-bar">
+              <div className="segmented" aria-label="Recorded publication case">
+                {(["retraction", "correction"] as const).map(kind => (
+                  <button key={kind} aria-pressed={recordedKind === kind} className={recordedKind === kind ? "selected" : ""}
+                    onClick={() => { setRecordedKind(kind); setData(kind === "correction" ? recordedCorrection : recorded); setSelected(kind === "correction" ? "S:correction-study" : "S:report-a"); setError(""); setMessage(""); }}>
+                    {kind === "retraction" ? "Retraction" : "Material correction"}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
           {mode === "rehearsal" && (
             <div className="notice-strip neutral">
               <Info size={18} />
@@ -817,22 +835,24 @@ export function Workspace() {
               <section className="case-intro">
                 <div>
                   <h2>
-                    A withdrawn study.
+                    {mode === "recorded" && recordedKind === "correction" ? "A corrected result." : "A withdrawn study."}
                     <br />
                     <em>A visible chain of consequences.</em>
                   </h2>
                   <p>
                     {mode === "recorded"
-                      ? "A real PubMed retraction was linked to the registered clinical study. Two synthetic authorizations were blocked; the independent review stayed active."
+                      ? recordedKind === "correction"
+                        ? "A real PubMed erratum explicitly corrected reported percentages. MATERIAL_CORRECTION advanced the source to v2 and blocked both dependent authorizations; the independent review stayed active."
+                        : "A real PubMed retraction was linked to the registered clinical study. Two synthetic authorizations were blocked; the independent review stayed active."
                       : mode === "rehearsal"
                         ? "Try a scripted retraction, trace its effects, then explicitly recover a parent. The child requires its own review."
-                        : "Current finalized registry state for this bounded case manifest. The original case and the new synthetic grant branch can be inspected independently."}
+                        : "Current finalized registry state for both publication cases. The recovered retraction parent is active v2; its child and both correction decisions remain blocked."}
                   </p>
                 </div>
                 {mode !== "rehearsal" && (
                   <div className="case-facts">
                     <span>
-                      <ShieldOff size={16} /> Retraction recorded
+                      <ShieldOff size={16} /> {mode === "recorded" && recordedKind === "correction" ? "Material correction recorded" : "Retraction recorded"}
                     </span>
                     <span>
                       <GitBranch size={16} /> Direct + transitive propagation
@@ -1770,7 +1790,7 @@ function Proof({
           <dt>Displayed state</dt>
           <dd>
             {mode === "recorded"
-              ? "Historical finalized snapshot · 28 September 2026"
+              ? "Finalized release snapshot · 4 October 2026"
               : mode === "live"
                 ? checkedAt
                   ? "Last full case read · " +
@@ -1866,7 +1886,7 @@ function Proof({
         ))
       ) : (
         <p>
-          The recorded 28 September case contains no reassessment. Live reads
+          These case snapshots capture notice propagation before recovery. Live reads
           show the contract’s current reassessment history.
         </p>
       )}
@@ -1874,8 +1894,8 @@ function Proof({
       <article className="finding">
         <h3>Owner recovery · verified 4 October 2026</h3>
         <p>
-          Recorded release proof: grant-policy-review recovered to active v2;
-          grant-release-review stayed blocked at v1. This snapshot is separate
+          Recorded release proof: decision-a recovered to active v2;
+          decision-b stayed blocked at v1. This snapshot is separate
           from live reads.
         </p>
         <p>
@@ -1892,22 +1912,21 @@ function Proof({
             <p>Execution result: {t.result}</p>
           </details>
         ))}
-        <h4>Material correction gap</h4>
+        <h4>Material correction · finalized proof</h4>
         <p>{releaseProof.correction.finding}</p>
         <CopyId value={releaseProof.correction.hash} />
         <p>
-          Browser-wallet flow verified on 4 October 2026: five user-approved
-          Chrome/Rabby writes finalized successfully. The parent recovered to
-          active v2 with a SUPPORTED judgment; its child remained blocked v1.
+          This new instance was proved with the authorized local operator. The earlier
+          five-write Chrome/Rabby flow is preserved under v1; its receipts belong to the old contract.
         </p>
-        <a className="source-link" href={REPOSITORY + "/blob/main/deployments/recall-browser-wallet-2026-10-04.json"} target="_blank" rel="noreferrer">
-          Browser-wallet proof <ExternalLink size={13} />
+        <a className="source-link" href={REPOSITORY + "/blob/main/deployments/v1/recall-browser-wallet-2026-10-04.json"} target="_blank" rel="noreferrer">
+          Archived v1 browser-wallet proof <ExternalLink size={13} />
         </a>
         <a
           className="source-link"
           href={
             REPOSITORY +
-            "/blob/main/deployments/recall-live-release-2026-10-04.json"
+            "/blob/main/deployments/recall-v2-release.json"
           }
           target="_blank"
           rel="noreferrer"
@@ -1917,8 +1936,8 @@ function Proof({
         </a>
       </article>
       <p>
-        Historical release evidence, 28 September 2026. These values are not
-        fresh receipt reads. Explorer routing is not verified; copy an ID to
+        Finalized release evidence, 4 October 2026. These values are recorded snapshots,
+        rather than fresh receipt reads. Copy an ID to
         inspect it with the GenLayer CLI.
       </p>
       <div className="proof-transactions">
@@ -1941,7 +1960,7 @@ function Proof({
         <a
           href={
             REPOSITORY +
-            "/blob/main/deployments/recall-network-verification-2026-10-04.json"
+            "/blob/main/deployments/recall-v2-network-verification.json"
           }
           target="_blank"
           rel="noreferrer"

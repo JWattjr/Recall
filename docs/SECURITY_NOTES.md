@@ -25,4 +25,4 @@
 - Preflight uses two fixed URLs, no redirect following, strict UTF-8, streaming size cap and timeout. Contract URL syntax checks do not authenticate publishers, resolved DNS destinations or freshness. Off-chain checks do not strengthen on-chain guarantees.
 - The strict schema and bound citations constrain publication prompt injection but do not prove perfect resistance. Registration is declared support, not semantic validation.
 - Polling persists IDs, distinguishes provisional acceptance from finality/execution, and has a bounded automatic window. When browser storage is unavailable, users must copy IDs. Receipt success and persisted state are separate evidence.
-- Material-correction attempts yielded UNCERTAIN leader results and absent notice readback. This observed simulator discrepancy is documented, with no correction-propagation claim. See PROOF_MANIFEST.md and RELEASE_VERIFICATION.md.
+- V1 MRI attempts remain archived as UNCERTAIN. The new instance separately proved real retraction and an explicit numerical correction with successful finalized receipts and state reads. See PROOF_MANIFEST.md and RELEASE_VERIFICATION.md.
