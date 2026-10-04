@@ -27,6 +27,6 @@ That historical run exercised RETRACTION and guarded replay only. The original r
 
 22 direct cases pass: existing propagation, correction, malformed judgments, fetch failures and validator tamper checks, plus tests/test_shipping.py for no-change/uncertainty semantics, SUPPORTED/UNSUPPORTED/UNCERTAIN reassessment, owner/stale checks, missing/invented/duplicate citations and source/decision/notice/version bounds. These use mocked web/model I/O.
 
-13 frontend tests pass: reachability, provisional/finalized/rollback/UNDETERMINED mapping, dependency/URL validation, missing wallet, add/switch, rejected switch, false switch success, signer changes and decoded NOT_FOUND handling. Network tests use a mocked provider.
+16 frontend tests pass: reachability, provisional/finalized/rollback/UNDETERMINED mapping, dependency/URL validation, missing wallet, add/switch, rejected switch, false switch success, signer changes and decoded NOT_FOUND handling. Network tests use a mocked provider.
 
 3 GenVM lint checks, SDK method validation, ABI extraction, strict TypeScript and production build pass. Fresh retraction and successful owner recovery have finalized receipts and state readback. Authentic correction attempts were made but did not establish stored material correction. A credential-backed EIP-1193 helper test submitted a real transaction; browser extension signing remains untested. See RELEASE_VERIFICATION.md and PROOF_MANIFEST.md.

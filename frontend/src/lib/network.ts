@@ -68,6 +68,18 @@ export async function pollTransaction(tx: Tx): Promise<Tx> {
   if (!r.ok) throw new Error(result.error);
   return { ...tx, ...result };
 }
+export async function fetchRecords(
+  sourceIds: string[], decisionIds: string[], notices = false, history = false,
+) {
+  const query = new URLSearchParams({
+    scope: "records", fresh: "1", sources: sourceIds.join(","),
+    decisions: decisionIds.join(","), notices: notices ? "1" : "0", history: history ? "1" : "0",
+  });
+  const response = await fetch("/api/case?" + query, { cache: "no-store" });
+  const result = await response.json();
+  if (!response.ok) throw new Error(result.error);
+  return result;
+}
 export type Provider = {
   request: (args: {
     method: string;

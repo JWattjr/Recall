@@ -152,7 +152,7 @@ export function humanError(error: unknown): string {
   if (/stale/i.test(raw))
     return "The record changed. Refresh live state and review the current version before submitting again.";
   if (/429|32429|rate.limit/i.test(raw))
-    return "StudioNet is rate limited. Wait, then resume checking the existing transaction.";
+    return "StudioNet is rate limited. Wait before retrying this read. If you have a transaction ID, check that existing ID instead of resubmitting.";
   if (/LIMIT|capacity|registry is full|history is full/i.test(raw))
     return "The bounded registry or version history is full. Use another independently deployed registry.";
   if (/rejected|denied|4001/i.test(raw))

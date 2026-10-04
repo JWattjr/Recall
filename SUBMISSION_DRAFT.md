@@ -11,7 +11,7 @@ The Next.js workspace opens on a recorded real-publication retraction, with a di
 
 On StudioNet 61999 at `0x432960e720542c0EAB68f76a4274fBf972A19a31`, original finalized receipts were revalidated against deployed source and ABI. Fresh grant-branch retraction and owner reassessment succeeded: `grant-policy-review` became ACTIVE v2, SUPPORTED against COPE guidance; `grant-release-review` remained blocked and independent decision-c stayed active. [Proof manifest](docs/PROOF_MANIFEST.md) contains hashes and full records.
 
-22 mocked contract tests and 13 frontend tests pass; GenVM lint, ABI extraction, strict TypeScript, production build and production dependency audit pass. Recorded exploration, mobile/keyboard controls, preflight, proof/history and live alignment were browser checked. A credential-backed local EIP-1193 harness submitted a real finalized transaction through the app helper; interactive extension-wallet signing was not available in the browser.
+22 mocked contract tests and 16 frontend tests pass; GenVM lint, ABI extraction, strict TypeScript, production build and production dependency audit pass. Recorded exploration, mobile/keyboard controls, preflight, proof/history and live alignment were browser checked. A credential-backed local EIP-1193 harness submitted a real finalized transaction through the app helper; interactive extension-wallet signing was not available in the browser.
 
 Authentic published material-correction evidence was fetched off-chain, but two live attempts returned UNCERTAIN leader results and no corresponding notice persisted in finalized reads. Live material-correction propagation is not claimed. StudioNet is hosted simulation; production blockchain operation is untested.
 

@@ -28,7 +28,7 @@ npx tsx scripts/wallet-write-check.ts
 vercel --prod --yes --scope wattxs-projects
 ```
 
-Strict TypeScript and production build pass. 13 frontend tests pass. Production dependency audit reports zero vulnerabilities. Retraction/recovery network calls succeeded and were read back. Correction operations finalized, but the first script's missing-notice read failed; the retry explicitly records that material correction was not proven.
+Strict TypeScript and production build pass. 16 frontend tests pass. Production dependency audit reports zero vulnerabilities. Retraction/recovery network calls succeeded and were read back. Correction operations finalized, but the first script's missing-notice read failed; the retry explicitly records that material correction was not proven.
 
 Browser checks cover recorded exploration, direct/transitive selection, unrelated branch, mobile list, local withdrawal/recovery, missing-wallet error, notice preflight, proof/history and current live manifest. Final deployed checks, exact commands and commit are saved in `deployments/recall-shipping-2026-10-04.json`.
 
@@ -39,3 +39,5 @@ Browser checks cover recorded exploration, direct/transitive selection, unrelate
 - NO_MATERIAL_CHANGE, unsupported reassessment and capacity failures are direct-test coverage, not separate live demonstrations.
 - StudioNet is hosted simulation. Production chain, publisher authenticity and institutional authority are unverified; no guaranteed confirmation time exists.
 - Authenticated Projects criteria and current account slot availability were inspected in Chrome. Final form/category review and submission remain the owner's action. Nothing was submitted and no award is promised.
+
+The final browser run exposed StudioNet's 30-request-per-minute limit during a repeated whole-manifest check. Pre-sign validation now freshly reads only the target and declared parents; finalized readback reads the target and actual affected decisions. Full graph refresh remains explicit. Three regression tests verify bounded read planning and preservation of unrelated records during partial merges. Known manifest counts are advisory; contract capacity checks remain authoritative.

@@ -39,9 +39,11 @@ import {
 import {
   connectWallet,
   fetchLive,
+  fetchRecords,
   pollTransaction,
   submitWrite,
 } from "@/lib/network";
+import { mergeRecords, writeReadIds } from "@/lib/records";
 import {
   descendants,
   humanError,
@@ -123,6 +125,19 @@ export function Workspace() {
   modeRef.current = mode;
   trackedRef.current = tracked;
   const [pollRun, setPollRun] = useState(0);
+  async function readback(tx: Tx) {
+    const sourceTarget = tx.method === "register_source" || tx.method === "submit_notice";
+    const live = await fetchRecords(sourceTarget ? [tx.recordId] : [], sourceTarget ? [] : [tx.recordId], tx.method === "submit_notice", tx.method === "reassess_decision");
+    if (tx.method === "submit_notice") {
+      const notice = (live.data as Case).notices.find(n => n.notice_id === tx.expectedNoticeId);
+      if (notice?.affected_decisions.length) {
+        const affected = await fetchRecords([], notice.affected_decisions);
+        if (affected.errors.length) throw new Error("Affected decisions could not be read. Check this transaction again; do not resubmit.");
+        live.data = mergeRecords(live.data, affected.data);
+      }
+    }
+    return live;
+  }
   const currentKey = selected.startsWith("S:");
   const record = currentKey
     ? data.sources.find((s) => "S:" + s.source_id === selected)
@@ -235,11 +250,7 @@ export function Workspace() {
         try {
           let result = await pollTransaction(tx);
           if (result.phase === "success") {
-            const live = await fetchLive(
-              trackedRef.current.sources,
-              trackedRef.current.decisions,
-              true,
-            );
+            const live = await readback(result);
             const rows =
               result.method === "register_source"
                 ? live.data.sources
@@ -257,8 +268,7 @@ export function Workspace() {
               ? undefined
               : "Execution finalized successfully, but the expected record transition was not observed. Check this ID again; do not resubmit.";
             if (modeRef.current === "live") {
-              setData(live.data);
-              setCheckedAt(live.checkedAt);
+              setData(old => mergeRecords(old, live.data));
             }
           }
           if (!canceled)
@@ -337,20 +347,18 @@ export function Workspace() {
         return;
       }
       if (!wallet) throw new Error("Connect your wallet before submitting.");
-      const fresh = await fetchLive(
-        trackedRef.current.sources,
-        trackedRef.current.decisions,
-        true,
-      );
+      const plan = writeReadIds(method, args);
+      const fresh = await fetchRecords(plan.sources, plan.decisions, plan.notices);
       const d = fresh.data as Case;
-      if (fresh.errors.length)
+      const registering = method === "register_source" || method === "register_decision";
+      if (fresh.errors.some((e: { id: string; error: string }) => !(registering && e.id === recordId && /\[NOT_FOUND\]/.test(e.error))))
         throw new Error(
           "Some manifest records could not be read. Resolve the live read errors before signing.",
         );
       if (
         method === "register_source" &&
         (d.sources.some((s) => s.source_id === recordId) ||
-          d.sources.length >= 12)
+          data.sources.length >= 12)
       )
         throw new Error(
           "Source ID exists or the known registry is full. Choose another unique ID.",
@@ -358,7 +366,7 @@ export function Workspace() {
       if (
         method === "register_decision" &&
         (d.decisions.some((p) => p.decision_id === recordId) ||
-          d.decisions.length >= 24)
+          data.decisions.length >= 24)
       )
         throw new Error(
           "Decision ID exists or the known registry is full. Choose another unique ID.",
@@ -396,8 +404,7 @@ export function Workspace() {
             previous.version !== current.version ||
             previous.status !== current.status
           ) {
-            setData(d);
-            setCheckedAt(fresh.checkedAt);
+            setData(old => mergeRecords(old, d));
             throw new Error(
               "An upstream dependency changed. Review the refreshed current evidence before signing.",
             );
@@ -597,15 +604,14 @@ export function Workspace() {
     setBusy(true);
     setError("");
     try {
-      const live = await fetchLive(next.sources, next.decisions, true);
+      const live = await fetchRecords(inspectKind === "source" ? [inspectId] : [], inspectKind === "decision" ? [inspectId] : []);
       if (live.errors.some((e: { id: string }) => e.id === inspectId))
         throw new Error(
           "That record was not readable. It was not saved to the manifest. Check its ID and try again.",
         );
       setTracked(next);
       trackedRef.current = next;
-      setData(live.data);
-      setCheckedAt(live.checkedAt);
+      setData(old => mergeRecords(old, live.data));
       setSelected((inspectKind === "source" ? "S:" : "D:") + inspectId);
     } catch (e) {
       setError(humanError(e));
@@ -1182,11 +1188,7 @@ export function Workspace() {
                           try {
                             const result = await pollTransaction(t);
                             if (result.phase === "success") {
-                              const live = await fetchLive(
-                                tracked.sources,
-                                tracked.decisions,
-                                true,
-                              );
+                              const live = await readback(result);
                               result.readback = live.data;
                               result.readbackVerified = verifyWriteReadback(
                                 result,
@@ -1196,8 +1198,7 @@ export function Workspace() {
                                 ? undefined
                                 : "Execution finalized, but the expected state transition is not verified. Do not resubmit this transaction.";
                               if (mode === "live") {
-                                setData(live.data);
-                                setCheckedAt(live.checkedAt);
+                                setData(old => mergeRecords(old, live.data));
                               }
                             }
                             setTxs((old) =>

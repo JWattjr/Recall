@@ -21,17 +21,20 @@ function ids(value: string | null, defaults: string[], max: number) {
 }
 export async function GET(request: NextRequest) {
   try {
+    const partial = request.nextUrl.searchParams.get("scope") === "records";
+    const includeNotices = !partial || request.nextUrl.searchParams.get("notices") === "1";
+    const includeHistory = !partial || request.nextUrl.searchParams.get("history") === "1";
     const sources = ids(
         request.nextUrl.searchParams.get("sources"),
-        caseManifest.sourceIds,
+        partial ? [] : caseManifest.sourceIds,
         12,
       ),
       decisions = ids(
         request.nextUrl.searchParams.get("decisions"),
-        caseManifest.decisionIds,
+        partial ? [] : caseManifest.decisionIds,
         24,
       );
-    const key = JSON.stringify([sources, decisions]);
+    const key = JSON.stringify([sources, decisions, partial, includeNotices, includeHistory]);
     if (
       request.nextUrl.searchParams.get("fresh") !== "1" &&
       cache?.key === key &&
@@ -79,7 +82,7 @@ export async function GET(request: NextRequest) {
       }
     }
     const notices = [];
-    for (let index = 1; index <= 16; index++) {
+    for (let index = 1; includeNotices && index <= 16; index++) {
       try {
         notices.push(
           await read("get_notice", ["N-" + String(index).padStart(6, "0")]),
@@ -89,13 +92,14 @@ export async function GET(request: NextRequest) {
         throw e;
       }
     }
-    const history = (await read("get_history", [])) as {
+    const history = (includeHistory ? await read("get_history", []) : { reassessments: [] }) as {
       reassessments: unknown[];
     };
     const result = {
       checkedAt: new Date().toISOString(),
       contract: CONTRACT,
       chainId: 61999,
+      partial,
       boundary:
         "Explicit case manifest and locally tracked IDs; no global enumeration. Notice IDs are sequential and bounded; this read scans them until the first missing ID.",
       data: {
@@ -106,7 +110,7 @@ export async function GET(request: NextRequest) {
       },
       errors,
     };
-    if (!sourceRows.length || !decisionRows.length)
+    if (!partial && (!sourceRows.length || !decisionRows.length))
       throw new Error("The case could not be read from StudioNet.");
     cache = { key, expires: Date.now() + 30000, result };
     return NextResponse.json(result, {
