@@ -34,7 +34,7 @@ Browser checks cover recorded exploration, direct/transitive selection, unrelate
 
 ## Boundaries
 
-- Chrome opened a Rabby connection prompt, but browser security policy blocks extension approval URLs. User completion of the wallet prompts is pending, so interactive extension signing is unverified. The actual app helper was checked with a local credential-backed EIP-1193 provider and a real finalized transaction. Mocked switch/add/reject/account-change tests are separate evidence.
+- Chrome/Rabby completed all five deployed writes with user-approved extension prompts. Registration, published retraction and owner reassessment finalized successfully, with actual state readback. Reload preserved the submitted source ID and verified transaction history. The parent became ACTIVE v2 / SUPPORTED, its child stayed blocked v1, and decision-c stayed active. [Browser release](../deployments/recall-browser-wallet-2026-10-04.json) saves sanitized receipts. The local credential-backed harness and mocked wallet-error tests are separate evidence.
 - Live material correction is not proven: two authentic NCBI attempts returned UNCERTAIN leader results and N-000003 was absent in finalized reads. Source and MRI decisions remain active v1. Receipt success does not prove propagation or persistence.
 - NO_MATERIAL_CHANGE, unsupported reassessment and capacity failures are direct-test coverage, not separate live demonstrations.
 - StudioNet is hosted simulation. Production chain, publisher authenticity and institutional authority are unverified; no guaranteed confirmation time exists.

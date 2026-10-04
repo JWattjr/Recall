@@ -765,7 +765,7 @@ export function Workspace() {
                 : mode === "rehearsal"
                   ? "In this browser · no consensus"
                   : checkedAt
-                    ? "Read " + timestamp(checkedAt) + " WAT"
+                    ? "Full case read " + timestamp(checkedAt) + " WAT"
                     : busy
                       ? "Fetching finalized state… · recorded snapshot shown"
                       : "Live read unavailable · recorded snapshot shown"}
@@ -1773,12 +1773,15 @@ function Proof({
               ? "Historical finalized snapshot · 28 September 2026"
               : mode === "live"
                 ? checkedAt
-                  ? "Fresh finalized-state read · " +
+                  ? "Last full case read · " +
                     timestamp(checkedAt) +
                     " WAT"
                   : "Historical snapshot shown; live state has not been loaded."
                 : "Scripted local rehearsal · no consensus or transaction"}
           </dd>
+          {mode === "live" && checkedAt && (
+            <dd>Individual records also refresh after finalized writes and known-ID reads. Their newer values are merged into this case.</dd>
+          )}
           <dt>Discovery boundary</dt>
           <dd>
             An explicit manifest of the original case and fresh grant fixtures,
@@ -1892,6 +1895,14 @@ function Proof({
         <h4>Material correction gap</h4>
         <p>{releaseProof.correction.finding}</p>
         <CopyId value={releaseProof.correction.hash} />
+        <p>
+          Browser-wallet flow verified on 4 October 2026: five user-approved
+          Chrome/Rabby writes finalized successfully. The parent recovered to
+          active v2 with a SUPPORTED judgment; its child remained blocked v1.
+        </p>
+        <a className="source-link" href={REPOSITORY + "/blob/main/deployments/recall-browser-wallet-2026-10-04.json"} target="_blank" rel="noreferrer">
+          Browser-wallet proof <ExternalLink size={13} />
+        </a>
         <a
           className="source-link"
           href={

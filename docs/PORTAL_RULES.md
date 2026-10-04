@@ -6,8 +6,8 @@ The owner's existing Chrome session was subsequently inspected at [Builder contr
 
 The current Projects quality bar asks for a real trust problem, authoritative/live evidence where factual outcomes depend on it, complete source and accurate usage documentation, genuine frontend contract calls with the full transaction lifecycle, and meaningful differentiation with continued-use potential. The account showed unused Project slots in the current week; limits reset Monday at 00:00 UTC. This observation does not reserve a slot or guarantee future availability or acceptance.
 
-Recall matches the described application mechanism, but the pending browser-wallet check and live material-correction gap must remain in its submission notes. Public marketing statistics are not treated as acceptance probabilities; app/tutorial awards are not assumed additive. The tutorial is supporting material, not a promised second award.
+Recall matches the described application mechanism. The browser-wallet flow is now verified; the live material-correction gap must remain in its submission notes. Public marketing statistics are not treated as acceptance probabilities; app/tutorial awards are not assumed additive. The tutorial is supporting material, not a promised second award.
 
-The owner should review the current Projects form, ensure its GitHub requirements are met, and submit manually with genuine proof and stated gaps after the wallet verification. No Portal form was submitted, and no acceptance or score is promised.
+The owner should review the current Projects form, ensure its GitHub requirements are met, and submit manually with genuine proof and stated gaps. The wallet verification is complete. No Portal form was submitted, and no acceptance or score is promised.
 
 Current review guidance distinguishes requests for more information (update the existing submission without using a new slot), rejection followed by fixes/new evidence (a new submission uses a slot), and appeal of the original decision on the originally submitted work (no new slot). These rules were observed on 4 October and should be checked again before acting.

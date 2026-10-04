@@ -94,6 +94,6 @@
     "materialCorrectionProven": false,
     "hash": "0x6d8fbeceb4755810a68e3d0503411080d53b1cf012a5107e43fed0bb0904ef84",
     "status": "FINALIZED",
-    "finding": "Leader returned UNCERTAIN; N-000003 absent from finalized readback; source remains v1. No material correction claimed."
+    "finding": "The earlier MRI correction retry returned UNCERTAIN, and no corresponding notice was found in that attempt's finalized readback. MRI source remained v1. Live material correction is not claimed; later retractions against other sources are separate proof."
   }
 }

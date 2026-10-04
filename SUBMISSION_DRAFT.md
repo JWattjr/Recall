@@ -1,6 +1,6 @@
 # Recall — Portal submission draft
 
-**Status:** deployed application and review package; not submitted. Review the verification gaps before claiming readiness for a specific Portal task.
+**Status:** submission-ready application and owner review package; not submitted. The correction and simulator limitations below remain explicit.
 
 **Application:** https://recall-genlayer.vercel.app
 **Repository:** https://github.com/JWattjr/evidence-retraction-registry
@@ -11,7 +11,7 @@ The Next.js workspace opens on a recorded real-publication retraction, with a di
 
 On StudioNet 61999 at `0x432960e720542c0EAB68f76a4274fBf972A19a31`, original finalized receipts were revalidated against deployed source and ABI. Fresh grant-branch retraction and owner reassessment succeeded: `grant-policy-review` became ACTIVE v2, SUPPORTED against COPE guidance; `grant-release-review` remained blocked and independent decision-c stayed active. [Proof manifest](docs/PROOF_MANIFEST.md) contains hashes and full records.
 
-22 mocked contract tests and 16 frontend tests pass; GenVM lint, ABI extraction, strict TypeScript, production build and production dependency audit pass. Recorded exploration, mobile/keyboard controls, preflight, proof/history and live alignment were browser checked. A credential-backed local EIP-1193 harness submitted a real finalized transaction through the app helper; interactive extension-wallet signing was not available in the browser.
+22 mocked contract tests and 16 frontend tests pass; GenVM lint, ABI extraction, strict TypeScript, production build and production dependency audit pass. Recorded exploration, mobile/keyboard controls, preflight, proof/history and live alignment were browser checked. All five deployed registration/retraction/reassessment writes were completed in Chrome through Rabby with user-approved signatures, finalized successfully, and matched actual state. The parent recovered to ACTIVE v2, SUPPORTED; its child remained blocked v1. [Browser-wallet proof](deployments/recall-browser-wallet-2026-10-04.json) records the full flow and sanitized receipts.
 
 Authentic published material-correction evidence was fetched off-chain, but two live attempts returned UNCERTAIN leader results and no corresponding notice persisted in finalized reads. Live material-correction propagation is not claimed. StudioNet is hosted simulation; production blockchain operation is untested.
 

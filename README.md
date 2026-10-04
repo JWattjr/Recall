@@ -2,7 +2,7 @@
 
 **Evidence changes. Decisions follow.** Recall asks: “This evidence was corrected or withdrawn. Which decisions now need reviewing?”
 
-[Open Recall](https://recall-genlayer.vercel.app) · [Proof](docs/PROOF_MANIFEST.md) · [Demo](docs/DEMO.md) · [Tutorial](docs/TUTORIAL.md) · [Submission draft](SUBMISSION_DRAFT.md)
+[Open Recall](https://recall-genlayer.vercel.app) · [Proof](docs/PROOF_MANIFEST.md) · [Demo](docs/DEMO.md) · [Tutorial](docs/TUTORIAL.md) · [Submission handoff](docs/OWNER_SUBMISSION.md)
 
 GenLayer independently reads a registered publication and a notice. A material correction or retraction versions changed evidence and atomically disables every reachable future authorization in a bounded dependency graph. Unrelated branches remain active. Owners explicitly reassess blocked decisions against current evidence; recovering a parent never recovers its children.
 
