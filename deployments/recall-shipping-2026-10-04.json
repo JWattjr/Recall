@@ -19,7 +19,7 @@
       "command": "npm run typecheck"
     },
     {
-      "result": "13 passed; mocked wallet error cases plus graph, finality and state readback",
+      "result": "16 passed; wallet errors, graph/finality/readback, targeted RPC planning and partial merge preservation",
       "command": "npm test"
     },
     {
@@ -71,26 +71,25 @@
     "rpc": "https://studio.genlayer.com/api"
   },
   "release_date": "2026-10-04",
-  "app_code_commit": "cf6cadb0472b6061cbac00f58a5d2c1215f7a965",
+  "app_code_commit": "f4ae41b886515cc286ecfb8bc00d34103b11b12e",
   "schema_version": "1.0",
-  "checked_at": "2026-10-04T10:42:43.0325397Z",
+  "checked_at": "2026-10-04T16:27:50.8870969Z",
   "remaining": [
-    "Interactive extension signing pending user Rabby prompts; local helper real transaction separately verified",
-    "Live material-correction propagation not proven",
-    "Owner must review final Portal form and manually submit under current Projects criteria",
-    "Production blockchain operation untested"
+    "Owner must review the current Projects form and manually submit",
+    "Live material-correction propagation not proven; explicitly disclosed",
+    "Production blockchain operation untested; StudioNet hosted simulation"
   ],
   "contract_source_commit": "c0d00fc83477c6eaa69bcf001c5378212e7ac52a",
   "browser": {
     "local_retraction_recovery": "parent recovered v2 and child remains blocked",
     "preflight": "public deployment ready; study 445 bytes and notice 580 bytes",
     "capture_metadata": "local .impeccable/review/capture-metadata.json; actual public captures 1280 desktop and 626 mobile breakpoint; earlier local 390 test passed",
-    "live_manifest": "4 sources, 7 decisions, 2 notices, no read errors",
+    "live_manifest": "Browser fixture manifest: 5 sources, 9 decisions; 3 notices verified through finalized reads. Default public manifest remains bounded to the original and earlier grant/MRI cases.",
     "dependency_selection": "direct/transitive highlight and unrelated branch passed",
     "design_review": "ship disposition after fixing mobile highlighting, redundant toggle, and contrast",
     "keyboard": "Tab moves source ID to publication URL; labeled native controls and visible focus",
     "missing_record": "Unknown source rejected without saving; subsequent refresh succeeded with 4 sources / 7 decisions",
-    "extension_wallet": "Rabby connection opened; browser security blocks extension approval URLs; awaiting user prompts",
+    "extension_wallet": "Chrome/Rabby: five user-approved writes FINALIZED SUCCESS, expected state verified; parent ACTIVE v2 SUPPORTED, child blocked v1, independent branch active",
     "local_registration": "source and decision passed; explicitly scripted",
     "public_recorded_case": "passed",
     "proof_history": "citations, digests, versions, dated recovery and historical rollback present",
@@ -105,7 +104,8 @@
     "recall-correction-release-2026-10-04.json",
     "recall-wallet-transport-2026-10-04.json",
     "recall-deployed-check-2026-10-04.json",
-    "recall-error-check-2026-10-04.json"
+    "recall-error-check-2026-10-04.json",
+    "recall-browser-wallet-2026-10-04.json"
   ],
   "runner": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6",
   "portal_submitted": false,
@@ -114,8 +114,8 @@
     "project": "wattxs-projects/recall-genlayer",
     "url": "https://recall-genlayer.vercel.app",
     "status": "READY",
-    "id": "dpl_7RkxhwpHvo41NtxiVu6BfPPEkDzT",
-    "immutable_url": "https://recall-genlayer-ja2inovtr-wattxs-projects.vercel.app",
+    "id": "dpl_6F37xrar5GTLJogUWbaFe7VSSWW1",
+    "immutable_url": "https://recall-genlayer-6clgmlzy8-wattxs-projects.vercel.app",
     "frontend_root": "frontend"
   },
   "scenario_outcomes": {
@@ -146,5 +146,26 @@
       "https://portal.genlayer.foundation/builders/contributions",
       "https://portal.genlayer.foundation/contribution-type/41"
     ]
+  },
+  "targeted_reads": "Pre-sign checks freshly read target and selected parents; finalized reads fetch actual affected decisions. Known graph counts are advisory; contract enforces capacity. Full graph refresh stays explicit.",
+  "submission_ready": true,
+  "submission_handoff": "docs/OWNER_SUBMISSION.md",
+  "public_handoff_verified": {
+    "handoff_http_status": 200,
+    "public_browser_proof_complete": true,
+    "finalized_operations": 5,
+    "wallet_flow_commit": "592a372cf7b012585d3cc6aee5878a099159cf36",
+    "final_proof_ui_commit": "f4ae41b886515cc286ecfb8bc00d34103b11b12e"
+  },
+  "final_browser_check": {
+    "full_case_read": "04/10/2026, 17:26:05 WAT",
+    "corrected_timestamp_labels": true,
+    "partial_record_updates_explained": true,
+    "browser_retraction_stored": true,
+    "supported_recovery_history_present": true,
+    "five_transactions_restored_after_reload": true,
+    "rate_limit_error": false,
+    "live_unavailable": false,
+    "public_browser_proof_link": true
   }
 }
