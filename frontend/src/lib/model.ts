@@ -2,6 +2,11 @@ export type Source = {
   source_id: string;
   publisher_label: string;
   registered_by: string;
+  source_identifier?: string;
+  notice_hosts?: string[];
+  reporters?: string[];
+  uncertain_count?: number;
+  notice_ids?: string[];
   version: number;
   status: string;
   current_refs: string[];
@@ -41,6 +46,12 @@ export type Notice = {
   snapshot_digest: string;
   input_snapshot_digest: string;
   submitted_by: string;
+  status?: string;
+  contest_until?: number;
+  contest?: { finding: string; contested_at: number; restored_decisions: string[] };
+  source_identifier?: string;
+  authorized_hosts?: string[];
+  identifier_match?: boolean;
 };
 export type Case = {
   sources: Source[];
@@ -53,7 +64,11 @@ export type WriteMethod =
   | "register_source"
   | "register_decision"
   | "submit_notice"
-  | "reassess_decision";
+  | "reassess_decision"
+  | "authorize_reporter"
+  | "revoke_reporter"
+  | "reset_uncertain_counter"
+  | "contest_notice";
 export type Tx = {
   hash: string;
   method: WriteMethod;
@@ -72,10 +87,18 @@ export type Tx = {
   readback?: unknown;
   expectedVersion?: number;
   expectedNoticeId?: string;
+  expectedReporter?: string;
   readbackVerified?: boolean;
   error?: string;
 };
 export function verifyWriteReadback(tx: Tx, data: Case): boolean {
+  if (tx.method === "contest_notice") return data.notices.some(n => n.notice_id === tx.expectedNoticeId && !!n.contest);
+  if (tx.method === "authorize_reporter" || tx.method === "revoke_reporter") {
+    const source = data.sources.find(s => s.source_id === tx.recordId);
+    if (!source || !tx.expectedReporter) return false;
+    return (source.reporters ?? []).includes(tx.expectedReporter.toLowerCase()) === (tx.method === "authorize_reporter");
+  }
+  if (tx.method === "reset_uncertain_counter") return data.sources.some(s => s.source_id === tx.recordId && s.uncertain_count === 0);
   if (tx.method === "register_source")
     return data.sources.some((s) => s.source_id === tx.recordId);
   if (tx.method === "register_decision")
@@ -112,10 +135,12 @@ export function descendants(data: Case, key: string): string[] {
 export function transactionPhase(
   status: string,
   execution: string,
+  consensus?: string | number,
 ): Tx["phase"] {
   const s = status.toUpperCase(),
     e = execution.toUpperCase();
   if (s === "FINALIZED") {
+    if (consensus != null && !["6", "MAJORITY_AGREE", "SUCCESS"].includes(String(consensus))) return "error";
     if (e === "SUCCESS") return "success";
     if (e === "ROLLBACK") return "rollback";
     return "error";

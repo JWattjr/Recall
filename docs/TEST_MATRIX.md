@@ -1,36 +1,33 @@
-# Test matrix
+# Test matrix — steward protections
 
-Run `python -m pytest` from the repository root. Tests mock web/model I/O in direct mode and do not establish live network consensus.
+Direct mode mocks external documents/model judgment. Selected cases explicitly rerun captured validators; this is not full network consensus. Existing fixtures now supply the required identifier/hosts and source-history bounds are expanded for append-only contests. The prior 26 invariants remain covered.
 
-| Invariant or behavior | Test |
+| Steward requirement | Direct tests in tests/test_steward_protections.py |
 |---|---|
-| Retraction increments source version, blocks direct and transitive dependents, preserves unrelated authorization, and reassessing a parent does not restore its child | `test_retraction_blocks_only_transitive_dependents_and_reassessment_versions_do_not_restore_children` |
-| Material correction advances the version, updates current references, blocks dependents, and rejects a stale notice | `test_material_correction_versions_source_and_stale_notice_cannot_invalidate_again` |
-| Unavailable current or notice source yields uncertainty and does not block decisions | `test_unavailable_notice_evidence_stays_uncertain_and_does_not_block` |
-| Validator rejects changed finding, altered digest, and added leader fields | `test_validator_rejects_changed_notice_finding_stale_snapshot_and_extra_fields` |
-| Malformed consensus output fails without changing source version | `test_malformed_notice_output_fails_closed_without_source_version_change` |
-| Forward/cyclic decision edges are rejected by requiring registered earlier parent decisions | `test_forward_and_cyclic_decision_dependencies_are_rejected` |
+| Registrant quotas isolate a second address; >16 uncertain results across sources do not exhaust a shared notice cap | test_quota_isolation |
+| Two uncertain results stop all further notices before consensus; registrant can reset | test_third_uncertain_preconsensus_and_registrant_reset |
+| Unauthorized caller, authorization, revocation and registrant-only management | test_reporter_access |
+| Canonical IDs prevent reporter/reset phantom source keys | test_management_uses_canonical_source_key |
+| Foreign, look-alike and trailing-dot host rejected before consensus | test_host_gate (3) |
+| Invalid DOI/PMID and invalid/duplicate/oversized host lists | test_invalid_identifier_rejected (6), test_invalid_notice_host_list_rejected (4) |
+| Missing DOI/PMID and injection cannot force correction/retraction | test_identifier_gate (4) |
+| Error contest restores append-only source version and sole-blocked decisions; dishonest validator finding rejected | test_contest_restore |
+| Later owner review preserved; changed upstream basis prevents child restoration | test_overturn_does_not_undo_separate_owner_reassessment |
+| Another notice remains a blocker and newer evidence survives an older overturn | test_second_notice_remains_blocker_and_older_overturn_preserves_new_evidence |
+| Contest owner/window/once/host gates; uncertainty leaves blocks | test_contest_guards |
+| Confirmed retraction only accepts a matching publisher reversal | test_confirmed_retraction_only_publisher_reversal_path |
+| Default NCBI host and matching PMID permit material correction; owner recovers parent, child stays blocked | test_recovery_children |
 
-| Every model-returned judgment field is validated and compared or bound to frozen input | `test_every_returned_judgment_field_is_compared_or_snapshot_bound` |
-| HTTP error, empty body, oversized body, and invalid UTF-8 produce an uncertain notice without blocking decisions | `test_unavailable_notice_evidence_stays_uncertain_and_does_not_block` (four response cases) |
-| Notice validator rejects a forged evidence digest while finding and cited URL remain unchanged | `test_validator_rejects_changed_notice_finding_stale_snapshot_and_extra_fields` |
+Total: 70 direct cases (26 earlier cases, 44 new parameter-expanded cases). GenVM lint: 3 checks; SDK schema: 13 methods (5 views, 8 writes). Frontend: 21 tests, including source-target planning and matching contest/reporter/reset readbacks, plus the prior graph/finality/wallet/partial-merge checks. Strict TypeScript, build and independent live verification are required before handoff; results are recorded in RELEASE_VERIFICATION.md.
 
-Historical 28 September direct mode passed 10 parameter-expanded tests. Those results are preserved below; fresh verification follows.
+Live proof is separate: a new source/ABI-aligned StudioNet instance, real PubMed retraction and numerical correction, blocked direct/transitive dependents, independent branch active, owner recovery with child blocked, and two deliberate deterministic rejected transactions. Contest overturn/reversal remains direct-test-only because no authentic publisher counter-notice was supplied.
 
-## Live StudioNet result
+`finalized majority disagreement never reports transaction success` checks a successful leader proposal with rejected consensus, successful agreement, and expected rollback classification.
 
-The demonstration ran on chain 61999 from the pinned runner. All 8 submitted transactions finalized: deployment, two source registrations, three decision registrations, one RETRACTION notice, and one expected stale-replay rollback. The source moved from version 1 ACTIVE to version 2 RETRACTED; decision-a and decision-b became BLOCKED_REASSESSMENT with authorization disabled; decision-c and its unrelated source remained ACTIVE. The on-chain source blob matched the Git source. The release file records all public views and transaction details.
+`test_doi_sentence_punctuation_preserves_exact_identifier_gate` adds five cases: uppercase original DOI with a terminal period/end or terminal period/newline is accepted; `.extra`, `-extra` and `/extra` extensions are rejected. Both leader and independently rerun validator are checked.
 
-That historical run exercised RETRACTION and guarded replay only. The original record is deployments/v1/studionet-release-2026-09-28.json.
+`test_validator_diagnostics_preserve_rejection_and_omit_document_content` checks that a disagreeing independent assessment stays rejected while diagnostics disclose only comparison metadata, not document text or reference URLs.
 
-## Fresh 4 October verification
+`test_fetch_diagnostics_identify_unavailable_evidence_without_approving_it` adds three validator cases: HTTP 429, oversized response and empty text. Each remains UNCERTAIN, rejects the leader retraction, and logs only request slot/status/type/size/reason without response text or URLs.
 
-26 direct cases pass: existing propagation, correction, malformed judgments, fetch failures and validator tamper checks, plus tests/test_shipping.py for no-change/uncertainty semantics, SUPPORTED/UNSUPPORTED/UNCERTAIN reassessment, owner/stale checks, missing/invented/duplicate citations and source/decision/notice/version bounds. These use mocked web/model I/O.
-
-16 frontend tests pass: reachability, provisional/finalized/rollback/UNDETERMINED mapping, dependency/URL validation, missing wallet, add/switch, rejected switch, false switch success, signer changes and decoded NOT_FOUND handling. Network tests use a mocked provider. Targeted-read planning and partial-merge tests ensure fresh checks retain target/parent validation without reloading unrelated records or losing existing branches.
-
-3 GenVM lint checks, SDK method validation, ABI extraction, strict TypeScript and production build pass. Fresh retraction and successful owner recovery have finalized receipts and state readback. The new instance proved authentic material correction and retraction with source v2 and blocked direct/transitive dependents; v1 inconclusive attempts remain archived. Chrome/Rabby completed all five deployed writes with user-approved signatures, finalized receipts and state readback; the local credential-backed EIP-1193 harness is separate evidence. See RELEASE_VERIFICATION.md and PROOF_MANIFEST.md.
-
-## V2 definition and citation agreement
-
-Four additional direct cases cover presentation-only erratum storage without blocking, numerical material-correction propagation with an unrelated active branch, notice citation-order agreement, and reassessment citation-order agreement. Changed findings/validity remain rejected; duplicate/invented citations and all digest/version bindings keep their existing checks. Total: 26 contract tests.
+Europe PMC cases in tests/test_europe_pmc.py: test_real_europe_pmc_fixtures_match_original_identifier (2); test_europe_pmc_byte_layout_and_volatile_metadata_do_not_change_digest; test_transient_fetch_retries_once_and_then_succeeds (429/503, 2); test_europe_pmc_wrong_record_binding_is_unavailable; test_europe_pmc_substantive_change_still_rejects_validator; test_europe_pmc_structured_pmid_is_exact. Fixtures are authentic REST core responses for PMIDs 29641633, 29940049, 20017220, 28664264 and 29294252.

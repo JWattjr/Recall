@@ -1,0 +1,69 @@
+{
+  "checked_at": "2026-10-04T20:45:34.802Z",
+  "contract_address": "0x91C663Df0D7103614485283D3A1E49Cf525f5fda",
+  "source_sha256": "218f011d2e26bc6d35033f9781b406e39ab8598af0f91fa118c85b5a930c5804",
+  "contract_tests": {
+    "passed": 26,
+    "kind": "mocked direct mode"
+  },
+  "genvm_lint": {
+    "passed": 3,
+    "methods": 9,
+    "views": 5,
+    "writes": 4
+  },
+  "abi_extraction": true,
+  "frontend_tests": {
+    "passed": 16
+  },
+  "strict_typescript": true,
+  "production_build": true,
+  "network_verification": "recall-v2-network-verification.json",
+  "network_receipts": {
+    "count": 12,
+    "all_finalized_success": true
+  },
+  "vercel": {
+    "deployment_id": "dpl_DU7GfNqDnjEDPYPsQivUYe4qWQ7Y",
+    "url": "https://recall-genlayer-2n23yhd7z-wattxs-projects.vercel.app",
+    "alias": "https://recall-genlayer.vercel.app",
+    "ready_state": "READY"
+  },
+  "portal_fields_lengths": {
+    "oneLiner": 158,
+    "description": 938,
+    "expectedOutcome": 473
+  },
+  "portal_submitted": false,
+  "browser_checks": {
+    "recorded_retraction": true,
+    "recorded_material_correction": true,
+    "correction_proof_new_address": true,
+    "live_api": {
+      "status": 200,
+      "contract": "0x91C663Df0D7103614485283D3A1E49Cf525f5fda",
+      "errors": [],
+      "both_findings": true,
+      "parent_active_v2": true,
+      "child_blocked_v1": true,
+      "correction_dependents_blocked": true
+    },
+    "live_ui": {
+      "full_case_read": true,
+      "new_contract": true,
+      "both_notices": true,
+      "parent_active_v2": true,
+      "child_blocked_v1": true,
+      "correction_dependents_blocked": true
+    }
+  },
+  "source_commit": "1b7d16c7922fc0dc436993093e839e990d234449",
+  "browser_evidence": [
+    "recall-v2-browser-correction.txt",
+    "recall-v2-browser-live.txt",
+    "recall-v2-browser-workspace.txt"
+  ],
+  "portal_links_check": "../docs/submission/link-check.json",
+  "portal_links_http_200": true,
+  "portal_unique_links": 8
+}

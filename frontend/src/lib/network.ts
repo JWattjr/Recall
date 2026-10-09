@@ -29,14 +29,18 @@ export async function readTransaction(hash: `0x${string}`) {
       : execution === "FINISHED_WITH_RETURN"
         ? "SUCCESS"
         : execution;
+  const readable = (leader?.result as unknown as { payload?: { readable?: string } })?.payload?.readable;
+  const noticeId = result?.status === "return" ? readable?.match(/"notice_id":"([^"]+)"/)?.[1] : undefined;
   return {
+    ...(noticeId ? { expectedNoticeId: noticeId } : {}),
     status,
     execution,
-    phase: transactionPhase(status, normalized),
+    phase: transactionPhase(status, normalized, receipt.resultName ?? receipt.result),
     receipt: {
       hash: receipt.hash,
       status,
       execution,
+      consensus: receipt.resultName ?? receipt.result,
       leader: leader
         ? {
             vote: leader.vote,

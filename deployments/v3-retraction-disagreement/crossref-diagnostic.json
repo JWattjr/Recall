@@ -1,0 +1,38 @@
+[
+  {
+    "raw_sha256": "6b30053618943d3f0f2c3aaa360a8987c745fc23f356d7b1e3b776a591bcf50e",
+    "canonical_json_sha256": "ef2e81a38a99b4bbaa14d178ef767ab96a162ac5a6823dc57020fe09a6210414",
+    "bytes": 445,
+    "item_keys": [
+      "DOI",
+      "title",
+      "publisher",
+      "issued",
+      "type"
+    ]
+  },
+  {
+    "raw_sha256": "6b30053618943d3f0f2c3aaa360a8987c745fc23f356d7b1e3b776a591bcf50e",
+    "canonical_json_sha256": "ef2e81a38a99b4bbaa14d178ef767ab96a162ac5a6823dc57020fe09a6210414",
+    "bytes": 445,
+    "item_keys": [
+      "DOI",
+      "title",
+      "publisher",
+      "issued",
+      "type"
+    ]
+  },
+  {
+    "raw_sha256": "6b30053618943d3f0f2c3aaa360a8987c745fc23f356d7b1e3b776a591bcf50e",
+    "canonical_json_sha256": "ef2e81a38a99b4bbaa14d178ef767ab96a162ac5a6823dc57020fe09a6210414",
+    "bytes": 445,
+    "item_keys": [
+      "DOI",
+      "title",
+      "publisher",
+      "issued",
+      "type"
+    ]
+  }
+]

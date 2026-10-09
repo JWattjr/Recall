@@ -1,0 +1,25 @@
+{
+  "checked_at": "2026-10-09T11:10:34.371405+00:00",
+  "contract_direct_tests": {
+    "passed": 70,
+    "external_io": "mocked",
+    "duration_seconds": 11.89,
+    "fetch_diagnostic_cases": 3
+  },
+  "genvm_lint": {
+    "passed": 3,
+    "methods": 13,
+    "views": 5,
+    "writes": 8,
+    "runner": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6"
+  },
+  "abi_extraction": true,
+  "frontend_tests": {
+    "passed": 21,
+    "duration_seconds": 5.857
+  },
+  "strict_typescript": true,
+  "production_build": "PASS Next.js 16.3.8",
+  "network_verification": "PASS 28 checks; 14 majority-agreed receipts; source/ABI/state/history",
+  "local_source_sha256": "fd2d74310d6b59fe58b0a05c8139b143c54436e7dbe98772636855d38590676c"
+}

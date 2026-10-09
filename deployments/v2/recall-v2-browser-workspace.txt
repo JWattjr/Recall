@@ -1,0 +1,132 @@
+- link "Skip to workspace":
+  - /url: "#main"
+- complementary:
+  - link "Recall home":
+    - /url: /
+    - text: Recall
+    - generic: .
+  - paragraph:
+    - text: Evidence changes.
+    - text: Decisions follow.
+  - navigation "Workspace navigation":
+    - button "Evidence workspace" [active]:
+      - text: Evidence workspace
+    - button "Register & connect":
+      - text: Register & connect
+    - button "Submit a notice":
+      - text: Submit a notice
+    - button "Reassess decisions":
+      - text: Reassess decisions
+    - button "Proof & history":
+      - text: Proof & history
+    - button "How Recall works":
+      - text: How Recall works
+  - text: StudioNet
+  - generic: Hosted development · 61999
+  - link "View the implementation":
+    - /url: https://github.com/JWattjr/evidence-retraction-registry
+    - text: View the implementation
+- banner:
+  - text: Research grants
+  - text: Case 001
+  - button "Connect wallet":
+    - text: Connect wallet
+- main:
+  - heading "When evidence changes." [level=1]
+  - paragraph: Trace what needs reviewing, and what can keep moving.
+  - button "Download proof manifest":
+  - generic "Data provenance":
+    - button "Recorded case"
+    - button "Live network" [pressed]
+    - button "Local rehearsal"
+  - generic: Full case read 04/10/2026, 21:45:18 WAT
+  - button "Refresh":
+    - text: Refresh
+  - heading "A withdrawn study. A visible chain of consequences." [level=2]:
+    - text: A withdrawn study.
+    - emphasis: A visible chain of consequences.
+  - paragraph: Current finalized registry state for both publication cases. The recovered retraction parent is active v2; its child and both correction decisions remain blocked.
+  - text: Retraction recorded
+  - text: Direct + transitive propagation
+  - text: Independent branch preserved
+  - heading "Evidence & dependencies" [level=2]
+  - paragraph: Select a record to trace its dependents.
+  - button "Diagram view" [pressed]:
+  - button "List view":
+  - button "Evidence source v2 Clinical study retracted":
+    - text: Evidence source
+    - generic: v2
+    - strong: Clinical study
+    - text: retracted
+  - button "Evidence source v1 Retraction guidelines active":
+    - text: Evidence source
+    - generic: v1
+    - strong: Retraction guidelines
+    - text: active
+  - button "Evidence source v2 Genetic testing study corrected" [pressed]:
+    - text: Evidence source
+    - generic: v2
+    - strong: Genetic testing study
+    - text: corrected
+  - button "Authorization v2 Evidence review active":
+    - text: Authorization
+    - generic: v2
+    - strong: Evidence review
+    - text: active
+  - button "Authorization v1 Downstream authorization Review required":
+    - text: Authorization
+    - generic: v1
+    - strong: Downstream authorization
+    - text: Review required
+  - button "Authorization v1 Independent review active":
+    - text: Authorization
+    - generic: v1
+    - strong: Independent review
+    - text: active
+  - button "Authorization v1 Correction evidence review Review required":
+    - text: Authorization
+    - generic: v1
+    - strong: Correction evidence review
+    - text: Review required
+  - button "Authorization v1 Correction downstream authorization Review required":
+    - text: Authorization
+    - generic: v1
+    - strong: Correction downstream authorization
+    - text: Review required
+  - generic: Published evidence
+  - generic: Direct decisions
+  - generic: Dependent decisions
+  - generic: Changed or review required
+  - generic: Active registry state
+  - complementary "Selected record":
+    - generic: corrected
+    - heading "Genetic testing study" [level=3]
+    - paragraph: correction-study · version 2
+    - paragraph: Published genetic testing meta-analysis; synthetic fixture
+    - heading "Publication references" [level=4]
+    - link "eutils.ncbi.nlm.nih.gov":
+      - /url: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29294252&rettype=abstract&retmode=text
+      - text: eutils.ncbi.nlm.nih.gov
+    - heading "2 dependent decisions" [level=4]
+    - list:
+      - button "Correction evidence review Direct":
+        - text: Correction evidence review
+        - generic: Direct
+      - button "Correction downstream authorization Transitive":
+        - text: Correction downstream authorization
+        - generic: Transitive
+    - paragraph: Labels describe registry state. They do not certify publication authenticity or scientific truth.
+  - paragraph:
+    - text: "Bounded case: 3 sources and 5 decisions. The contract has no global listing endpoint."
+  - button "Inspect the proof":
+    - text: Inspect the proof
+  - generic: Add a known record to this browser’s manifest
+  - combobox "Record kind":
+    - option "Source" [selected]
+    - option "Decision"
+  - textbox "Add a known record to this browser’s manifest":
+    - /placeholder: Known record ID
+  - button "Read record"
+  - generic: Recall · evidence-dependent authorizations
+  - generic: GenLayer StudioNet · synthetic decisions, published evidence
+- alert

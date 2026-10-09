@@ -23,6 +23,7 @@ import {
   Wallet,
   X,
 } from "lucide-react";
+import { NoticeControls } from "./notice-controls";
 import { Graph } from "./graph";
 import {
   CONTRACT,
@@ -130,9 +131,9 @@ export function Workspace() {
   trackedRef.current = tracked;
   const [pollRun, setPollRun] = useState(0);
   async function readback(tx: Tx) {
-    const sourceTarget = tx.method === "register_source" || tx.method === "submit_notice";
-    const live = await fetchRecords(sourceTarget ? [tx.recordId] : [], sourceTarget ? [] : [tx.recordId], tx.method === "submit_notice", tx.method === "reassess_decision");
-    if (tx.method === "submit_notice") {
+    const sourceTarget = tx.method !== "register_decision" && tx.method !== "reassess_decision";
+    const live = await fetchRecords(sourceTarget ? [tx.recordId] : [], sourceTarget ? [] : [tx.recordId], (tx.method === "submit_notice" || tx.method === "contest_notice"), (tx.method === "reassess_decision" || tx.method === "contest_notice"));
+    if (tx.method === "submit_notice" || tx.method === "contest_notice") {
       const notice = (live.data as Case).notices.find(n => n.notice_id === tx.expectedNoticeId);
       if (notice?.affected_decisions.length) {
         const affected = await fetchRecords([], notice.affected_decisions);
@@ -158,7 +159,7 @@ export function Workspace() {
     setMessage("");
     if (value === "recorded") {
       setData(recordedKind === "correction" ? recordedCorrection : recorded);
-      setSelected(recordedKind === "correction" ? "S:correction-study" : "S:report-a");
+      setSelected(recordedKind === "correction" ? "S:correction-study-doi" : "S:report-a");
       setCheckedAt("");
     }
     if (value === "rehearsal") {
@@ -353,7 +354,7 @@ export function Workspace() {
         return;
       }
       if (!wallet) throw new Error("Connect your wallet before submitting.");
-      const plan = writeReadIds(method, args);
+      const plan = writeReadIds(method, args, recordId);
       const fresh = await fetchRecords(plan.sources, plan.decisions, plan.notices);
       const d = fresh.data as Case;
       const registering = method === "register_source" || method === "register_decision";
@@ -364,7 +365,7 @@ export function Workspace() {
       if (
         method === "register_source" &&
         (d.sources.some((s) => s.source_id === recordId) ||
-          data.sources.length >= 12)
+          data.sources.filter(s => s.registered_by.toLowerCase() === wallet.toLowerCase()).length >= 12)
       )
         throw new Error(
           "Source ID exists or the known registry is full. Choose another unique ID.",
@@ -372,12 +373,12 @@ export function Workspace() {
       if (
         method === "register_decision" &&
         (d.decisions.some((p) => p.decision_id === recordId) ||
-          data.decisions.length >= 24)
+          data.decisions.filter(d => d.owner.toLowerCase() === wallet.toLowerCase()).length >= 24)
       )
         throw new Error(
           "Decision ID exists or the known registry is full. Choose another unique ID.",
         );
-      if (method === "submit_notice" && d.notices.length >= 16)
+      if (method === "submit_notice" && (d.sources.find(s => s.source_id === recordId)?.notice_ids?.length ?? 0) >= 16)
         throw new Error("Notice registry is full.");
       if (
         method === "reassess_decision" &&
@@ -419,10 +420,21 @@ export function Workspace() {
       }
       if (method === "submit_notice") {
         const s = d.sources.find((s) => s.source_id === recordId);
-        if (!s || s.version !== args[1] || s.status === "RETRACTED")
+        if (!s || s.version !== args[1])
           throw new Error(
-            "The source is stale or retracted. Refresh and select its current version.",
+            "The source is stale. Refresh and select its current version.",
           );
+        if (s.registered_by.toLowerCase() !== wallet.toLowerCase() && !s.reporters?.includes(wallet.toLowerCase())) throw new Error("Only the source registrant or an authorized reporter may submit.");
+        if ((s.uncertain_count ?? 0) >= 2) throw new Error("Two uncertain notices were recorded on this version. The registrant must reset the counter or use a later version.");
+        for (const url of JSON.parse(String(args[2])) as string[]) if (!s.notice_hosts?.includes(new URL(url).hostname.toLowerCase())) throw new Error("Notice host is not authorized for this source.");
+      }
+      if (method === "authorize_reporter" || method === "revoke_reporter" || method === "reset_uncertain_counter" || method === "contest_notice") {
+        const managed = d.sources.find(s => s.source_id === recordId);
+        if (managed?.registered_by.toLowerCase() !== wallet.toLowerCase()) throw new Error("Only the source registrant may manage reporters, reset uncertainty or contest.");
+        if (method === "contest_notice") {
+          const notice = d.notices.find(n => n.notice_id === args[0]);
+          if (!notice || notice.source_id !== recordId || notice.contest || notice.status === "OVERTURNED" || (notice.contest_until ?? 0) <= Date.now() / 1000) throw new Error("The notice cannot be contested: its window closed or a contest was already recorded.");
+        }
       }
       if (method === "reassess_decision") {
         const decision = d.decisions.find((d) => d.decision_id === recordId);
@@ -447,10 +459,8 @@ export function Workspace() {
         execution: "UNKNOWN",
         phase: "submitted",
         expectedVersion: typeof args[1] === "number" ? args[1] : undefined,
-        expectedNoticeId:
-          method === "submit_notice"
-            ? "N-" + String(d.notices.length + 1).padStart(6, "0")
-            : undefined,
+        expectedNoticeId: method === "contest_notice" ? String(args[0]) : undefined,
+        expectedReporter: method === "authorize_reporter" || method === "revoke_reporter" ? String(args[1]) : undefined,
       };
       const next = [...txRef.current, tx].slice(-20);
       setTxs(next);
@@ -601,9 +611,9 @@ export function Workspace() {
         ]),
       ],
     };
-    if (next.sources.length > 12 || next.decisions.length > 24) {
+    if (next.sources.length > 48 || next.decisions.length > 96) {
       setError(
-        "This browser manifest reached its 12-source / 24-decision bound.",
+        "This browser manifest reached its 48-source / 96-decision browser bound.",
       );
       return;
     }
@@ -792,7 +802,7 @@ export function Workspace() {
               <div className="segmented" aria-label="Recorded publication case">
                 {(["retraction", "correction"] as const).map(kind => (
                   <button key={kind} aria-pressed={recordedKind === kind} className={recordedKind === kind ? "selected" : ""}
-                    onClick={() => { setRecordedKind(kind); setData(kind === "correction" ? recordedCorrection : recorded); setSelected(kind === "correction" ? "S:correction-study" : "S:report-a"); setError(""); setMessage(""); }}>
+                    onClick={() => { setRecordedKind(kind); setData(kind === "correction" ? recordedCorrection : recorded); setSelected(kind === "correction" ? "S:correction-study-doi" : "S:report-a"); setError(""); setMessage(""); }}>
                     {kind === "retraction" ? "Retraction" : "Material correction"}
                   </button>
                 ))}
@@ -842,8 +852,8 @@ export function Workspace() {
                   <p>
                     {mode === "recorded"
                       ? recordedKind === "correction"
-                        ? "A real PubMed erratum explicitly corrected reported percentages. MATERIAL_CORRECTION advanced the source to v2 and blocked both dependent authorizations; the independent review stayed active."
-                        : "A real PubMed retraction was linked to the registered clinical study. Two synthetic authorizations were blocked; the independent review stayed active."
+                        ? "A real Europe PMC erratum explicitly corrected reported percentages. MATERIAL_CORRECTION advanced the source to v2 and blocked both dependent authorizations; the independent review stayed active."
+                        : "A real Europe PMC retraction was linked to the registered clinical study. Two synthetic authorizations were blocked; the independent review stayed active."
                       : mode === "rehearsal"
                         ? "Try a scripted retraction, trace its effects, then explicitly recover a parent. The child requires its own review."
                         : "Current finalized registry state for both publication cases. The recovered retraction parent is active v2; its child and both correction decisions remain blocked."}
@@ -1135,9 +1145,9 @@ export function Workspace() {
               </p>
               <h2>Bounds and evidence limits</h2>
               <p>
-                12 sources, 24 decisions, 16 notices, four source plus four
+                12 sources and 24 decisions per registrant; 16 notices per source; four source plus four
                 decision parents, eight versions per record, three notice
-                references, and 5,000-byte UTF-8 fetched bodies. Redirects, DNS
+                references, and 20,000-byte UTF-8 fetched bodies. Redirects, DNS
                 resolution, identity, signatures, freshness, and continued
                 availability are not verified by the contract. This app’s
                 preflight measurements are off-chain observations.
@@ -1277,6 +1287,8 @@ function ActionForm({
     [id, setId] = useState(""),
     [url, setUrl] = useState(""),
     [publisher, setPublisher] = useState(""),
+    [identifier, setIdentifier] = useState(""),
+    [noticeHosts, setNoticeHosts] = useState(""),
     [purpose, setPurpose] = useState(""),
     [sourceIds, setSourceIds] = useState<string[]>([]),
     [decisionIds, setDecisionIds] = useState<string[]>([]),
@@ -1326,7 +1338,11 @@ function ActionForm({
             throw new Error(
               "Enter a publisher label of at most 120 characters.",
             );
-          await write("register_source", [id, url, publisher], id);
+          if (!/^(PMID:[1-9][0-9]{0,8}|10\.[0-9]{4,9}\/[a-zA-Z0-9][a-zA-Z0-9._;()/:-]*)$/.test(identifier) || identifier.length > 200) throw new Error("Enter a DOI or PMID:<digits> identifier.");
+          const hosts = noticeHosts.split(",").map(s => s.trim()).filter(Boolean);
+          if (hosts.length > 3 || new Set(hosts).size !== hosts.length) throw new Error("Choose at most three unique hostnames.");
+          for (const host of hosts) { validateReference("https://" + host + "/"); if (new URL("https://" + host).hostname !== host || host.endsWith(".")) throw new Error("Use exact lowercase hostnames only."); }
+          await write("register_source", [id, url, publisher, identifier, JSON.stringify(hosts)], id);
         } else {
           validateIds(sourceIds);
           validateIds(decisionIds);
@@ -1349,16 +1365,12 @@ function ActionForm({
         }
       }
       if (section === "notice") {
-        if (!s || s.status === "RETRACTED")
+        if (!s)
           throw new Error(
-            "Choose a current source that has not been retracted.",
+            "Choose a current source.",
           );
         validateReference(notice);
-        if (
-          mode === "live" &&
-          (!preflight?.ready ||
-            Date.now() - Date.parse(preflight.checkedAt) > 300000)
-        )
+        if (mode === "live" && notice === noticeReference && (!preflight?.ready || Date.now() - Date.parse(preflight.checkedAt) > 300000))
           throw new Error(
             "Run the example preflight again; it must be available and less than five minutes old.",
           );
@@ -1446,6 +1458,7 @@ function ActionForm({
   );
   return (
     <div className="action-layout">
+      <div>
       <form className="action-form" onSubmit={submit}>
         {readonly && (
           <div className="alert neutral">
@@ -1501,11 +1514,18 @@ function ActionForm({
                   type="button"
                   onClick={() => {
                     setUrl(originalReference);
-                    setPublisher("Crossref DOI metadata for 10.11607/prd.476");
+                    setPublisher("Europe PMC publication for 10.11607/prd.476");
+                    setIdentifier("10.11607/prd.476");
+                    setNoticeHosts("");
                   }}
                 >
                   Use the published study example
                 </button>
+                <label htmlFor="source-identifier">Source identifier</label>
+                <input id="source-identifier" value={identifier} onChange={e => setIdentifier(e.target.value)} maxLength={200} placeholder="10.11607/prd.476 or PMID:28664264" required />
+                <label htmlFor="notice-hosts">Allowed notice hosts</label>
+                <input id="notice-hosts" value={noticeHosts} onChange={e => setNoticeHosts(e.target.value)} placeholder="Comma-separated; leave blank for publication defaults" />
+                <p className="form-help">1–3 exact hostnames, frozen at registration. Defaults: eutils.ncbi.nlm.nih.gov, api.crossref.org and www.ebi.ac.uk (Europe PMC). Only your wallet and authorized reporters may submit notices.</p>
                 <label htmlFor="publisher">Publisher label</label>
                 <input
                   id="publisher"
@@ -1544,7 +1564,7 @@ function ActionForm({
           <>
             <h2>Published retraction example</h2>
             <p>
-              The PubMed notice concerns DOI 10.11607/prd.476. Select a newly
+              The Europe PMC notice concerns DOI 10.11607/prd.476. Select a newly
               registered copy of that study for another live demonstration. The
               original case source is already retracted.
             </p>
@@ -1560,7 +1580,7 @@ function ActionForm({
                 <option
                   key={s.source_id}
                   value={s.source_id}
-                  disabled={s.status === "RETRACTED"}
+                  disabled={false}
                 >
                   {s.source_id} · v{s.version} · {s.status.toLowerCase()}
                 </option>
@@ -1571,14 +1591,14 @@ function ActionForm({
               <strong>{s?.version ?? "Select a source"}</strong>
             </p>
             <label htmlFor="notice-url">Notice publication</label>
-            <input id="notice-url" value={notice} readOnly />
+            <input id="notice-url" value={notice} onChange={e => setNotice(e.target.value)} required />
             <a
               className="source-link"
               href={notice}
               target="_blank"
               rel="noreferrer"
             >
-              Open PubMed notice <ExternalLink size={13} />
+              Open Europe PMC notice <ExternalLink size={13} />
             </a>
             {s && !s.current_refs.includes(originalReference) && (
               <p className="alert neutral">
@@ -1688,9 +1708,7 @@ function ActionForm({
             (mode === "live" && !wallet) ||
             (section === "reassess" && (!d || !owned || d.version >= 8)) ||
             (section === "notice" &&
-              (!s ||
-                !s.current_refs.includes(originalReference) ||
-                (mode === "live" && !preflight?.ready)))
+              (!s || (mode === "live" && notice === noticeReference && !preflight?.ready)))
           }
         >
           {busy ? (
@@ -1715,6 +1733,8 @@ function ActionForm({
           </p>
         )}
       </form>
+      {section === "notice" && <NoticeControls data={data} mode={mode} wallet={wallet} busy={busy} write={write} />}
+      </div>
       <aside className="action-guide">
         <h2>
           {section === "register"
@@ -1751,7 +1771,7 @@ function ActionForm({
             </p>
             <p>
               {section === "register"
-                ? "The registry is bounded to 12 sources and 24 decisions. This case manifest does not enumerate the entire registry."
+                ? "Each registrant has 12 sources and 24 decisions; safety ceilings are 256 sources and 512 decisions. This manifest does not enumerate the entire registry."
                 : "Recover the parent first, then review each child. No automatic cascade restores authorization."}
             </p>
           </>
@@ -1790,7 +1810,7 @@ function Proof({
           <dt>Displayed state</dt>
           <dd>
             {mode === "recorded"
-              ? "Finalized release snapshot · 4 October 2026"
+              ? "Finalized release snapshot · 9 October 2026"
               : mode === "live"
                 ? checkedAt
                   ? "Last full case read · " +
@@ -1807,7 +1827,7 @@ function Proof({
             An explicit manifest of the original case and fresh grant fixtures,
             plus IDs registered or added in this browser. Source and decision
             records outside the manifest are not globally listed. Sequential
-            notice IDs are scanned up to the contract limit.
+            notices are read from each source’s bounded notice list.
           </dd>
         </dl>
       </div>
@@ -1821,6 +1841,9 @@ function Proof({
               {n.base_version}
             </span>
           </div>
+          <p>Status: {n.status ?? "Historical"}. {n.status === "OVERTURNED" && "OVERTURNED — history preserved."}</p>
+          <p>Identifier: {n.source_identifier ?? "Historical record"}. Authorized hosts: {n.authorized_hosts?.join(", ") ?? "Historical record"}. Identifier check: {n.identifier_match ? "matched" : "no consequential match"}.</p>
+          {n.contest && <pre>{JSON.stringify(n.contest, null, 2)}</pre>}
           <p>Affected decisions: {n.affected_decisions.join(", ") || "none"}</p>
           <h4>Citations</h4>
           {n.citations.map((url) => (
@@ -1892,7 +1915,7 @@ function Proof({
       )}
       <h2>Recorded finalized transactions</h2>
       <article className="finding">
-        <h3>Owner recovery · verified 4 October 2026</h3>
+        <h3>Owner recovery · verified 9 October 2026</h3>
         <p>
           Recorded release proof: decision-a recovered to active v2;
           decision-b stayed blocked at v1. This snapshot is separate
@@ -1926,7 +1949,7 @@ function Proof({
           className="source-link"
           href={
             REPOSITORY +
-            "/blob/main/deployments/recall-v2-release.json"
+            "/blob/main/deployments/recall-v3-release.json"
           }
           target="_blank"
           rel="noreferrer"
@@ -1936,7 +1959,7 @@ function Proof({
         </a>
       </article>
       <p>
-        Finalized release evidence, 4 October 2026. These values are recorded snapshots,
+        Finalized protected release evidence, 9 October 2026. These values are recorded snapshots,
         rather than fresh receipt reads. Copy an ID to
         inspect it with the GenLayer CLI.
       </p>
@@ -1946,9 +1969,9 @@ function Proof({
             <summary>
               <span>{t.operation.replaceAll("_", " ")}</span>
               <span
-                className={"state " + (t.expected_failure ? "changed" : "good")}
+                className={"state " + (t.expected_failure || ("proof_passed" in t && t.proof_passed === false) ? "changed" : "good")}
               >
-                {t.expected_failure ? "Expected rollback" : "Finalized success"}
+                {("proof_passed" in t && t.proof_passed === false) ? "Consensus rejected" : t.expected_failure ? "Expected rollback" : "Finalized success"}
               </span>
             </summary>
             <CopyId value={t.hash} />
@@ -1960,7 +1983,7 @@ function Proof({
         <a
           href={
             REPOSITORY +
-            "/blob/main/deployments/recall-v2-network-verification.json"
+            "/blob/main/deployments/recall-v3-network-verification.json"
           }
           target="_blank"
           rel="noreferrer"

@@ -8,8 +8,8 @@ from test_shipping import seed
 def test_presentation_only_erratum_stores_notice_without_blocking(direct_vm, direct_deploy, direct_owner):
     c = seed(direct_vm, direct_deploy, direct_owner)
     direct_vm.clear_mocks()
-    direct_vm.mock_web(r"report-v1$", {"status": 200, "body": "Registered study: response rate was 34%."})
-    direct_vm.mock_web(r"correction$", {"status": 200, "body": "Erratum to the registered study: the author affiliation was misspelled. All reported results are unchanged."})
+    direct_vm.mock_web(r"report-v1$", {"status": 200, "body": "Registered study: response rate was 34%. DOI: 10.1234/fixture"})
+    direct_vm.mock_web(r"correction$", {"status": 200, "body": "Erratum to the registered study: the author affiliation was misspelled. All reported results are unchanged. DOI: 10.1234/fixture"})
     direct_vm.mock_llm(r"EVIDENCE RETRACTION NOTICE REVIEW", llm({"finding": "NO_MATERIAL_CHANGE", "citations": [URL_B]}))
     notice = c.submit_notice("study", 1, json.dumps([URL_B]))
     assert notice["finding"] == "NO_MATERIAL_CHANGE"
@@ -25,8 +25,8 @@ def test_result_changing_erratum_blocks_reachable_but_not_independent(direct_vm,
     c = seed(direct_vm, direct_deploy, direct_owner)
     c.register_decision(*register("independent", ["other"], []))
     direct_vm.clear_mocks()
-    direct_vm.mock_web(r"report-v1$", {"status": 200, "body": "Registered study: response rate was 43%."})
-    direct_vm.mock_web(r"correction$", {"status": 200, "body": "Erratum to the registered study: the response rate should read 34%, not 43%."})
+    direct_vm.mock_web(r"report-v1$", {"status": 200, "body": "Registered study: response rate was 43%. DOI: 10.1234/fixture"})
+    direct_vm.mock_web(r"correction$", {"status": 200, "body": "Erratum to the registered study: the response rate should read 34%, not 43%. DOI: 10.1234/fixture"})
     direct_vm.mock_llm(r"EVIDENCE RETRACTION NOTICE REVIEW", llm({"finding": "MATERIAL_CORRECTION", "citations": [URL_A, URL_B]}))
     notice = c.submit_notice("study", 1, json.dumps([URL_B]))
     assert notice["finding"] == "MATERIAL_CORRECTION"
@@ -56,7 +56,7 @@ def test_reassessment_validator_agrees_on_citation_order_only(direct_vm, direct_
     direct_vm.mock_llm(r".*", llm({"finding": "MATERIAL_CORRECTION", "citations": [URL_B]}))
     c.submit_notice("study", 1, json.dumps([URL_B]))
     direct_vm.clear_mocks()
-    direct_vm.mock_web(r".*", {"status": 200, "body": "Current evidence supports the frozen review purpose."})
+    direct_vm.mock_web(r".*", {"status": 200, "body": "Current evidence supports the frozen review purpose. DOI: 10.1234/fixture"})
     direct_vm.mock_llm(r".*", llm({"validity": "SUPPORTED", "citations": [URL_B, URL_C], "supporting_decision_ids": []}))
     result = c.reassess_decision("parent", 1, '["study","other"]', "[]")
     leader = {"input_snapshot_digest": result["last_input_snapshot_digest"], "snapshot_digest": result["last_snapshot_digest"], "evidence_digest": result["last_evidence_digest"], "validity": "SUPPORTED", "citations": [URL_C, URL_B], "supporting_decision_ids": []}

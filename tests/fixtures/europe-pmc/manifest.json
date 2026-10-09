@@ -1,0 +1,36 @@
+{
+  "downloaded_date": "2026-10-09",
+  "format": "Europe PMC REST search resultType=core JSON; preserved response plus final newline",
+  "records": [
+    {
+      "pmid": "20017220",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:20017220%20AND%20SRC:MED&resultType=core&format=json",
+      "fixture_bytes": 3227,
+      "fixture_sha256": "10538f08ac2aefe9b5fabc5e3e19efd526dd4c9fdfeb06678cb84569a88fca36"
+    },
+    {
+      "pmid": "28664264",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:28664264%20AND%20SRC:MED&resultType=core&format=json",
+      "fixture_bytes": 6862,
+      "fixture_sha256": "5e9a5ce37aebfb6d1fea0c3d0c76925dd3cb3fdc16f212fde0da9fb008bc02b0"
+    },
+    {
+      "pmid": "29294252",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:29294252%20AND%20SRC:MED&resultType=core&format=json",
+      "fixture_bytes": 4957,
+      "fixture_sha256": "11fbf924e840cc4eecfe96748f641af5fc4fe96461dc8b1da948e63057d45c92"
+    },
+    {
+      "pmid": "29641633",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:29641633%20AND%20SRC:MED&resultType=core&format=json",
+      "fixture_bytes": 3058,
+      "fixture_sha256": "c9f6a2f0dd547c080e2c8140d8820fd7d3bca56db3d2b8352fed82744440f679"
+    },
+    {
+      "pmid": "29940049",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:29940049%20AND%20SRC:MED&resultType=core&format=json",
+      "fixture_bytes": 2048,
+      "fixture_sha256": "06876432e05f6c7c725a40c739c07e83633ecfa2c7f4f291c4de8a368af99db1"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "checked_at": "2026-10-09T10:08:52.427840+00:00",
+  "prior_commit": "6d4a28e03854dd8e0ffad53ebde15b9ed46063f5",
+  "checks": [
+    {
+      "archive": "deployments/v2/recall-v2-network-verification.json",
+      "same_bytes_as_original": true,
+      "sha256": "4ef9dcb3b8bba2d70c6daf74e25619bbbc3cdc4ec8e9def5351d92bcca7a3425"
+    },
+    {
+      "archive": "deployments/v2/recall-v2-release.json",
+      "same_bytes_as_original": true,
+      "sha256": "538e5dfe220d2e1a2dc6119e506dae4d4b290e390e313753823b52283b15f89b"
+    },
+    {
+      "archive": "deployments/v2/recall-v2-shipping.json",
+      "same_bytes_as_original": true,
+      "sha256": "05ab01df324abc8c88059a44209c7c4b6e801db72ed964c9b088e32f37d55ba0"
+    },
+    {
+      "archive": "deployments/v2/historical.json",
+      "same_as_prior_commit_normalized_lf": true
+    },
+    {
+      "archive": "deployments/v2/release-proof.json",
+      "same_as_prior_commit_normalized_lf": true
+    }
+  ],
+  "all_passed": true
+}

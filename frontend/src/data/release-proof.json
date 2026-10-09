@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-04T18:42:47.577Z",
+  "checkedAt": "2026-10-09T11:07:19.755Z",
   "network": "StudioNet 61999 - hosted development simulator",
   "ownerRecovery": true,
   "childStaysBlocked": true,
@@ -12,13 +12,14 @@
       "S:report-unrelated"
     ],
     "last_citations": [
-      "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=20017220&rettype=abstract&retmode=text"
+      "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:20017220%20AND%20SRC:MED&resultType=core&format=json"
     ],
-    "last_evidence_digest": "sha256:6b48ca0d4937aa84f499ea333f9babc1db85f51e912b44728c99c21ace5ceb85",
-    "last_input_snapshot_digest": "sha256:8cc7412989c31f82262c99e6875a3ce30a717fa8dca8ad58f51bfc8cf22aec55",
-    "last_snapshot_digest": "sha256:bf8e0daf9265ade013391005728e4bd7cf4ffacf0b640a35b0a0390388c0362d",
+    "last_evidence_digest": "sha256:d80e9f406cf312415e664a864995a5d625f345d82a357da929517888926ca2c1",
+    "last_input_snapshot_digest": "sha256:9bef698dde5f9df91ab90b29c2c11037db28052e37517bca4cf7ed8c4ef55816",
+    "last_snapshot_digest": "sha256:445e6e875e5cbcd9c1ad97d3b9a55d413f9d24103404baecf5255afcb3144b9d",
     "last_supporting_decisions": [],
     "last_validity": "SUPPORTED",
+    "notice_blockers": [],
     "owner": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
     "parent_versions": [
       {
@@ -26,6 +27,11 @@
         "version": 1
       }
     ],
+    "pre_block_state": {
+      "authorization_enabled": true,
+      "status": "ACTIVE"
+    },
+    "pre_block_version": 1,
     "purpose": "Synthetic research grant authorization to use COPE retraction guidelines for reviewing published evidence and deciding when evidence should be retracted.",
     "sequence": 0,
     "status": "ACTIVE",
@@ -41,6 +47,9 @@
     ],
     "last_snapshot_digest": "",
     "last_validity": "REGISTERED_BY_AUTHORIZED_CALLER",
+    "notice_blockers": [
+      "N-000001"
+    ],
     "owner": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
     "parent_versions": [
       {
@@ -48,6 +57,11 @@
         "version": 1
       }
     ],
+    "pre_block_state": {
+      "authorization_enabled": true,
+      "status": "ACTIVE"
+    },
+    "pre_block_version": 1,
     "purpose": "Synthetic downstream authorization dependent on decision-a remaining active.",
     "sequence": 1,
     "status": "BLOCKED_REASSESSMENT",
@@ -57,116 +71,162 @@
     {
       "operation": "deploy",
       "method": "deploy",
-      "hash": "0x745ef64260fd2dcde7d95c10c6e46b6d36856621a54f9e1f839dbeb897fcd5f6",
+      "hash": "0x5a72d4db3d800c1ec16fecf562e0b1be72c3b5b74373262391082b4ac20abc4f",
       "status": "FINALIZED",
       "execution": "SUCCESS",
       "result": "return",
-      "expected_failure": false
+      "consensus": "MAJORITY_AGREE",
+      "expected_failure": false,
+      "proof_passed": true
     },
     {
       "operation": "register_source:report-a",
       "method": "register_source",
-      "hash": "0x3822f460be7a25a1524d2e22aade51f0c9658b5dffc576c6686ed4a1841a45f1",
+      "hash": "0x14ce1d2a176d176bf7cfe70a2533fc90f528b6f29f04537bad8467f66f3aac9f",
       "status": "FINALIZED",
       "execution": "SUCCESS",
       "result": "return",
-      "expected_failure": false
+      "consensus": "MAJORITY_AGREE",
+      "expected_failure": false,
+      "proof_passed": true
     },
     {
       "operation": "register_source:report-unrelated",
       "method": "register_source",
-      "hash": "0x976bea58b7d4d2f509a80ae375c41a7e5cb927c9b0f2590be8042e77f4ac5d5a",
+      "hash": "0x5f15a32b7de7e5561824ce68a246f599a72e0dd9c5f49ef2f84a4299b8363b30",
       "status": "FINALIZED",
       "execution": "SUCCESS",
       "result": "return",
-      "expected_failure": false
+      "consensus": "MAJORITY_AGREE",
+      "expected_failure": false,
+      "proof_passed": true
     },
     {
       "operation": "register_decision:decision-a",
       "method": "register_decision",
-      "hash": "0xa2b3959c92631d264df92224c9130db5edc2d4b072a08da2025ec60c4d3d00fb",
+      "hash": "0x24ecdc5247161e2e26554be997ef3416806c3164c24db3c466106cb570c621cb",
       "status": "FINALIZED",
       "execution": "SUCCESS",
       "result": "return",
-      "expected_failure": false
+      "consensus": "MAJORITY_AGREE",
+      "expected_failure": false,
+      "proof_passed": true
     },
     {
       "operation": "register_decision:decision-b",
       "method": "register_decision",
-      "hash": "0x46b936baee552b2f37da53bf04247f09659fc0e03e887f135e554054cd606894",
+      "hash": "0x0d87d0350d367d46a44243662c63374d116300cd7fbf746a6adde38b43c2380c",
       "status": "FINALIZED",
       "execution": "SUCCESS",
       "result": "return",
-      "expected_failure": false
+      "consensus": "MAJORITY_AGREE",
+      "expected_failure": false,
+      "proof_passed": true
     },
     {
       "operation": "register_decision:decision-c",
       "method": "register_decision",
-      "hash": "0x4d41b6001478fe196a5495cc4cb4eca54d7c09b7142e1bc535c1332c009f2425",
+      "hash": "0x710b6a4d88d483176996f90da36758a09d54ffdc05a3a84c59a855a1076f6e1b",
       "status": "FINALIZED",
       "execution": "SUCCESS",
       "result": "return",
-      "expected_failure": false
+      "consensus": "MAJORITY_AGREE",
+      "expected_failure": false,
+      "proof_passed": true
+    },
+    {
+      "operation": "reject_host",
+      "method": "submit_notice",
+      "hash": "0xa30f80d2c4762f6e516360cfd334cdbcedd1f189dffa1373666edc531bf00e3b",
+      "status": "FINALIZED",
+      "execution": "ERROR",
+      "result": "rollback",
+      "consensus": "MAJORITY_AGREE",
+      "expected_failure": true,
+      "proof_passed": true
+    },
+    {
+      "operation": "reject_caller",
+      "method": "submit_notice",
+      "hash": "0x30befba27a70ff5e5e712eb22d86a62566b5c29ebe8be346bf7d0a2cc0bbd09f",
+      "status": "FINALIZED",
+      "execution": "ERROR",
+      "result": "rollback",
+      "consensus": "MAJORITY_AGREE",
+      "expected_failure": true,
+      "proof_passed": true
     },
     {
       "operation": "submit_notice:report-a",
       "method": "submit_notice",
-      "hash": "0x45b2cf330bf9d9b25ed161ee9fa7a30bf401126a34de817c9949e29d3477abd4",
+      "hash": "0xd1bf89c7f34a0e4585cea46d0ab7578ed1d74109d294a257940c5b979a558caf",
       "status": "FINALIZED",
       "execution": "SUCCESS",
       "result": "return",
-      "expected_failure": false
+      "consensus": "MAJORITY_AGREE",
+      "expected_failure": false,
+      "proof_passed": true
     },
     {
       "operation": "reassess_decision:decision-a",
       "method": "reassess_decision",
-      "hash": "0x28a7d05c198264b254347625e0e36208b8292447cb1104b16dfa8dfba4ff3e3a",
+      "hash": "0x8d2bbca3096b2f76cf09c8a5651d53b1db9b77c6191916079c8dc35400d17648",
       "status": "FINALIZED",
       "execution": "SUCCESS",
       "result": "return",
-      "expected_failure": false
+      "consensus": "MAJORITY_AGREE",
+      "expected_failure": false,
+      "proof_passed": true
     },
     {
-      "operation": "register_source:correction-study",
+      "operation": "register_source:correction-study-doi",
       "method": "register_source",
-      "hash": "0x5697b7a752c498d73598216a5104f8c6d5063c3453fcb83e7ec1bc553936b84a",
+      "hash": "0xdeb4b48847a38d069a79c730d831cd7d199d2a40ce03506a60ecf70b78664a02",
       "status": "FINALIZED",
       "execution": "SUCCESS",
       "result": "return",
-      "expected_failure": false
+      "consensus": "MAJORITY_AGREE",
+      "expected_failure": false,
+      "proof_passed": true
     },
     {
-      "operation": "register_decision:correction-parent",
+      "operation": "register_decision:correction-parent-doi",
       "method": "register_decision",
-      "hash": "0x88aa221a00229c88fea5fba0a6a5dc6ffea7b9ca5c518aa83e593e7efd19f063",
+      "hash": "0x8db2ea49df34d126c059ded1103225d03df430ac675d6977d9065a63051fcd2c",
       "status": "FINALIZED",
       "execution": "SUCCESS",
       "result": "return",
-      "expected_failure": false
+      "consensus": "MAJORITY_AGREE",
+      "expected_failure": false,
+      "proof_passed": true
     },
     {
-      "operation": "register_decision:correction-child",
+      "operation": "register_decision:correction-child-doi",
       "method": "register_decision",
-      "hash": "0xcb3f712d0f0a470a41652ac75c594cf737cb181917ec17a1ab64c030e1c4546d",
+      "hash": "0x5bbe4eb89455f50ebcb74109432e79dab7f917cec62ed985a4d0592ea1d12194",
       "status": "FINALIZED",
       "execution": "SUCCESS",
       "result": "return",
-      "expected_failure": false
+      "consensus": "MAJORITY_AGREE",
+      "expected_failure": false,
+      "proof_passed": true
     },
     {
-      "operation": "submit_notice:correction-study",
+      "operation": "submit_notice:correction-study-doi",
       "method": "submit_notice",
-      "hash": "0x59fd7d86db99f5410c0df682d9167213e6fe34d64d54fa344f2add62b09d014f",
+      "hash": "0xe3b1a9410728e859e8c1844727f2a178bfdcf68bd62bceee6ff2d01420757313",
       "status": "FINALIZED",
       "execution": "SUCCESS",
       "result": "return",
-      "expected_failure": false
+      "consensus": "MAJORITY_AGREE",
+      "expected_failure": false,
+      "proof_passed": true
     }
   ],
   "correction": {
     "materialCorrectionProven": true,
-    "hash": "0x59fd7d86db99f5410c0df682d9167213e6fe34d64d54fa344f2add62b09d014f",
+    "hash": "0xe3b1a9410728e859e8c1844727f2a178bfdcf68bd62bceee6ff2d01420757313",
     "status": "FINALIZED",
-    "finding": "MATERIAL_CORRECTION: source v2; parent and child blocked; independent branch active."
+    "finding": "MATERIAL_CORRECTION"
   }
 }

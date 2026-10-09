@@ -1,21 +1,21 @@
-# Owner submission handoff
+# Owner resubmission handoff
 
-Prepared for owner review. Nothing was submitted to the Portal.
+Update existing contribution **bd6c877a…**; do not create a replacement. The owner reviews and pastes the fields/response and clicks Resubmit manually. No Portal resubmission was performed.
 
-Use [portal-fields.json](submission/portal-fields.json) for the exact form text and public links. Choose the primary tag from the form's own list, clear reCAPTCHA and submit manually.
+[Application](https://recall-genlayer.vercel.app) | [Repository](https://github.com/JWattjr/Recall) | [Exact fields](submission/portal-fields.json) | [Steward response](submission/STEWARD_RESPONSE.md) | [Every current and archived hash](PROOF_MANIFEST.md)
 
-Application: https://recall-genlayer.vercel.app
-Repository: https://github.com/JWattjr/Recall
-Contract: `0x91C663Df0D7103614485283D3A1E49Cf525f5fda` on StudioNet 61999, hosted development simulator.
+Contract `0x790b3faD72076e1A5A3eA3C1FE84FfA09435aB05`, StudioNet 61999. Fourteen finalized, majority-agreed receipts: 12 successful writes and two expected rollbacks. Both authentic notices advanced the source to v2 and blocked parent/child while preserving the independent branch. Owner reassessment recovered the parent ACTIVE v2; the child stayed blocked.
 
 ## Description
 
-Recall builds on Evidence Retraction Registry, accepted as an Intelligent Contract on Sep 28. This Project adds an evidence workspace, wallet workflows, two recorded cases, live finalized reads and proof inspection. Users register publications and decisions in a dependency graph. GenLayer validators read the original and notice and judge their relationship; contract code versions changed evidence and blocks every reachable dependent decision while unrelated branches stay active. A real PubMed retraction and numerical erratum each finalized on a new StudioNet instance, advanced the source to v2 and blocked its parent and child. Owner reassessment restored the retraction parent to ACTIVE v2, SUPPORTED against current COPE guidance; its child stayed blocked. Receipts and state reads support both cases. StudioNet is a hosted simulator. Recall does not certify scientific truth, publisher identity or institutional authority.
+Recall extends the accepted Evidence Retraction Registry with an evidence workspace. GenLayer validators independently judge authentic corrections and retractions. Versioned evidence blocks dependent decisions while unrelated branches stay active. Per-registrant quotas (12 sources/24 decisions), global ceilings (256/512), authorized reporters, two UNCERTAIN results per version and 16 notices per source apply before consensus. Frozen exact hosts and DOI/PMID matches bind notices to sources. Europe PMC JSON is canonicalized; transient HTTP failures retry once. A 72-hour registrant contest preserves history; overturns remove only their blockers and preserve later owner reviews. Confirmed retractions accept only publisher reversal. Finalized StudioNet proofs cover correction/retraction, owner recovery and host/caller rejection. Contest/reversal is direct-test-only. StudioNet is simulation; host/identifier checks are not publisher signatures.
 
 ## Expected outcome
 
-Recorded case offers Retraction and Material correction: each shows source v2, both dependent authorizations blocked, and an independent active branch. Proof & history shows FINALIZED / SUCCESS receipts, citations and digests for both notices. Live network shows the retraction parent ACTIVE v2 after owner reassessment; its child and both correction decisions remain blocked. The network check verifies every new receipt, deployed source/ABI and final state of both cases.
+Recorded cases show retraction and material correction: each source advances to v2, both dependents block and the independent branch stays active. Live network shows owner recovery: parent ACTIVE v2, child blocked. Proof includes FINALIZED success and two expected host/caller rollbacks with unchanged state. Inspect source quotas, identifier, hosts, reporters and notice counts; registrants can manage reporters/reset uncertainty and contest within 72 hours. Overturn/reversal is direct-test-only.
 
-Field lengths: one-liner 158/180; description 932/1000; expected outcome 473/500.
+Field lengths: 158/180, 951/1000, 498/500. Steward reply: 874/900. Primary tag suggestion: Governance, if offered. Demo video stays empty at the owner's request.
 
-[Proof](PROOF_MANIFEST.md), [full release](../deployments/recall-v2-release.json), [verification](RELEASE_VERIFICATION.md), [demo](DEMO.md), and [tutorial](TUTORIAL.md) support review. The video field remains empty; no URL is invented. V1 proofs and documents remain archived.
+Contest/reversal is direct-test-only. Quota isolation and reporter/reset management are direct-tested. Host/identifier checks are not publisher signatures; StudioNet is simulation. The owner approved DOI registration after the NCBI text omitted the original PMID. Failed attempts remain archived; no failed hash was resubmitted.
+
+[Release verification](RELEASE_VERIFICATION.md) | [Test names](TEST_MATRIX.md) | [Demo](DEMO.md) | [Tutorial](TUTORIAL.md).

@@ -4,6 +4,38 @@
     "kwparams": {}
   },
   "methods": {
+    "authorize_reporter": {
+      "params": [
+        [
+          "source_id",
+          "string"
+        ],
+        [
+          "address",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": false,
+      "ret": "dict",
+      "payable": false
+    },
+    "contest_notice": {
+      "params": [
+        [
+          "notice_id",
+          "string"
+        ],
+        [
+          "counter_refs_json",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": false,
+      "ret": "dict",
+      "payable": false
+    },
     "get_decision": {
       "params": [
         [
@@ -118,6 +150,42 @@
         ],
         [
           "publisher_label",
+          "string"
+        ],
+        [
+          "source_identifier",
+          "string"
+        ],
+        [
+          "notice_hosts",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": false,
+      "ret": "dict",
+      "payable": false
+    },
+    "reset_uncertain_counter": {
+      "params": [
+        [
+          "source_id",
+          "string"
+        ]
+      ],
+      "kwparams": {},
+      "readonly": false,
+      "ret": "dict",
+      "payable": false
+    },
+    "revoke_reporter": {
+      "params": [
+        [
+          "source_id",
+          "string"
+        ],
+        [
+          "address",
           "string"
         ]
       ],

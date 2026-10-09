@@ -1,0 +1,73 @@
+{
+  "checked_at": "2026-10-09T10:15:54.417Z",
+  "contract_address": "0x5954c9F61dBEE9d1Fd90291acC3b331A34bcD5B3",
+  "records": [
+    {
+      "current_refs": [
+        "https://api.crossref.org/v1/works?filter=doi:10.11607/prd.476&rows=1&select=DOI,title,publisher,issued,type"
+      ],
+      "notice_hosts": [
+        "eutils.ncbi.nlm.nih.gov",
+        "api.crossref.org"
+      ],
+      "notice_ids": [],
+      "publisher_label": "Published clinical study; synthetic grant fixture",
+      "registered_by": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
+      "reporters": [],
+      "source_id": "report-a",
+      "source_identifier": "10.11607/prd.476",
+      "status": "ACTIVE",
+      "uncertain_count": 0,
+      "version": 1,
+      "versions": [
+        {
+          "references": [
+            "https://api.crossref.org/v1/works?filter=doi:10.11607/prd.476&rows=1&select=DOI,title,publisher,issued,type"
+          ],
+          "status": "ACTIVE",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "authorization_enabled": true,
+      "decision_id": "decision-a",
+      "dependencies": [
+        "S:report-a"
+      ],
+      "last_snapshot_digest": "",
+      "last_validity": "REGISTERED_BY_AUTHORIZED_CALLER",
+      "owner": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
+      "parent_versions": [
+        {
+          "parent_key": "S:report-a",
+          "version": 1
+        }
+      ],
+      "purpose": "Synthetic research grant authorization to use COPE retraction guidelines for reviewing published evidence and deciding when evidence should be retracted.",
+      "sequence": 0,
+      "status": "ACTIVE",
+      "version": 1
+    },
+    {
+      "authorization_enabled": true,
+      "decision_id": "decision-b",
+      "dependencies": [
+        "D:decision-a"
+      ],
+      "last_snapshot_digest": "",
+      "last_validity": "REGISTERED_BY_AUTHORIZED_CALLER",
+      "owner": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
+      "parent_versions": [
+        {
+          "parent_key": "D:decision-a",
+          "version": 1
+        }
+      ],
+      "purpose": "Synthetic downstream authorization dependent on decision-a remaining active.",
+      "sequence": 1,
+      "status": "ACTIVE",
+      "version": 1
+    }
+  ]
+}

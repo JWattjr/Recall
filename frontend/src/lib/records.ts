@@ -1,19 +1,19 @@
 import { type Case, type WriteMethod } from "./model";
 
 // Pre-sign checks need the target and declared parents, not the entire graph.
-export function writeReadIds(method: WriteMethod, args: (string | number)[]) {
-  const sourceTarget = method === "register_source" || method === "submit_notice";
+export function writeReadIds(method: WriteMethod, args: (string | number)[], recordId = String(args[0])) {
+  const sourceTarget = method !== "register_decision" && method !== "reassess_decision";
   const parents = method === "register_decision" || method === "reassess_decision";
   return {
     sources: [...new Set([
-      ...(sourceTarget ? [String(args[0])] : []),
+      ...(sourceTarget ? [recordId] : []),
       ...(parents ? JSON.parse(String(args[2])) as string[] : []),
     ])],
     decisions: [...new Set([
       ...(!sourceTarget ? [String(args[0])] : []),
       ...(parents ? JSON.parse(String(args[3])) as string[] : []),
     ])],
-    notices: method === "submit_notice",
+    notices: method === "submit_notice" || method === "contest_notice",
   };
 }
 

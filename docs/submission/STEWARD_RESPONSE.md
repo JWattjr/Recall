@@ -1,0 +1,5 @@
+C=contracts/evidence_retraction_registry.py; T=tests/test_steward_protections.py.
+1 Capacity/abuse: C:register_source/submit_notice; T:test_quota_isolation/test_reporter_access. Caller rejection: 0x30befba27a70ff5e5e712eb22d86a62566b5c29ebe8be346bf7d0a2cc0bbd09f
+2 Provenance: C:_assess_notice/_publication_text; T:test_host_gate/test_identifier_gate; tests/test_europe_pmc.py stability/retry. Host rejection: 0xa30f80d2c4762f6e516360cfd334cdbcedd1f189dffa1373666edc531bf00e3b
+3 Erroneous retractions: C:contest_notice/_overturn; T:test_contest_restore. Live window: 0xd1bf89c7f34a0e4585cea46d0ab7578ed1d74109d294a257940c5b979a558caf; overturn/reversal direct-test-only.
+4 Updates/recovery: C:reassess_decision; T:test_recovery_children. Parent ACTIVE v2, child blocked: 0x8d2bbca3096b2f76cf09c8a5651d53b1db9b77c6191916079c8dc35400d17648. 70 contract/21 frontend tests pass.

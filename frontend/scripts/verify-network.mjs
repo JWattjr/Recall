@@ -1,1 +1,1 @@
-import './verify-v2.mjs';
+import './verify-v3.mjs';

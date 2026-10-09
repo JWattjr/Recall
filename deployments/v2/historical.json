@@ -1,0 +1,392 @@
+{
+  "contract_address": "0x91C663Df0D7103614485283D3A1E49Cf525f5fda",
+  "project": {
+    "source_commit": "main"
+  },
+  "source_sha256": "218f011d2e26bc6d35033f9781b406e39ab8598af0f91fa118c85b5a930c5804",
+  "checked_at": "2026-10-04T18:42:47.577Z",
+  "transactions": [
+    {
+      "operation": "deploy",
+      "method": "deploy",
+      "hash": "0x745ef64260fd2dcde7d95c10c6e46b6d36856621a54f9e1f839dbeb897fcd5f6",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "result": "return",
+      "expected_failure": false
+    },
+    {
+      "operation": "register_source:report-a",
+      "method": "register_source",
+      "hash": "0x3822f460be7a25a1524d2e22aade51f0c9658b5dffc576c6686ed4a1841a45f1",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "result": "return",
+      "expected_failure": false
+    },
+    {
+      "operation": "register_source:report-unrelated",
+      "method": "register_source",
+      "hash": "0x976bea58b7d4d2f509a80ae375c41a7e5cb927c9b0f2590be8042e77f4ac5d5a",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "result": "return",
+      "expected_failure": false
+    },
+    {
+      "operation": "register_decision:decision-a",
+      "method": "register_decision",
+      "hash": "0xa2b3959c92631d264df92224c9130db5edc2d4b072a08da2025ec60c4d3d00fb",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "result": "return",
+      "expected_failure": false
+    },
+    {
+      "operation": "register_decision:decision-b",
+      "method": "register_decision",
+      "hash": "0x46b936baee552b2f37da53bf04247f09659fc0e03e887f135e554054cd606894",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "result": "return",
+      "expected_failure": false
+    },
+    {
+      "operation": "register_decision:decision-c",
+      "method": "register_decision",
+      "hash": "0x4d41b6001478fe196a5495cc4cb4eca54d7c09b7142e1bc535c1332c009f2425",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "result": "return",
+      "expected_failure": false
+    },
+    {
+      "operation": "submit_notice:report-a",
+      "method": "submit_notice",
+      "hash": "0x45b2cf330bf9d9b25ed161ee9fa7a30bf401126a34de817c9949e29d3477abd4",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "result": "return",
+      "expected_failure": false
+    },
+    {
+      "operation": "reassess_decision:decision-a",
+      "method": "reassess_decision",
+      "hash": "0x28a7d05c198264b254347625e0e36208b8292447cb1104b16dfa8dfba4ff3e3a",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "result": "return",
+      "expected_failure": false
+    },
+    {
+      "operation": "register_source:correction-study",
+      "method": "register_source",
+      "hash": "0x5697b7a752c498d73598216a5104f8c6d5063c3453fcb83e7ec1bc553936b84a",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "result": "return",
+      "expected_failure": false
+    },
+    {
+      "operation": "register_decision:correction-parent",
+      "method": "register_decision",
+      "hash": "0x88aa221a00229c88fea5fba0a6a5dc6ffea7b9ca5c518aa83e593e7efd19f063",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "result": "return",
+      "expected_failure": false
+    },
+    {
+      "operation": "register_decision:correction-child",
+      "method": "register_decision",
+      "hash": "0xcb3f712d0f0a470a41652ac75c594cf737cb181917ec17a1ab64c030e1c4546d",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "result": "return",
+      "expected_failure": false
+    },
+    {
+      "operation": "submit_notice:correction-study",
+      "method": "submit_notice",
+      "hash": "0x59fd7d86db99f5410c0df682d9167213e6fe34d64d54fa344f2add62b09d014f",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "result": "return",
+      "expected_failure": false
+    }
+  ],
+  "final_onchain_readback": {
+    "sources": [
+      {
+        "current_refs": [],
+        "publisher_label": "Published clinical study; synthetic grant fixture",
+        "registered_by": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
+        "source_id": "report-a",
+        "status": "RETRACTED",
+        "version": 2,
+        "versions": [
+          {
+            "references": [
+              "https://api.crossref.org/v1/works?filter=doi:10.11607/prd.476&rows=1&select=DOI,title,publisher,issued,type"
+            ],
+            "status": "ACTIVE",
+            "version": 1
+          },
+          {
+            "notice_id": "N-000001",
+            "references": [],
+            "status": "RETRACTED",
+            "version": 2
+          }
+        ]
+      },
+      {
+        "current_refs": [
+          "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=20017220&rettype=abstract&retmode=text"
+        ],
+        "publisher_label": "COPE retraction guidelines",
+        "registered_by": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
+        "source_id": "report-unrelated",
+        "status": "ACTIVE",
+        "version": 1,
+        "versions": [
+          {
+            "references": [
+              "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=20017220&rettype=abstract&retmode=text"
+            ],
+            "status": "ACTIVE",
+            "version": 1
+          }
+        ]
+      }
+    ],
+    "decisions": [
+      {
+        "authorization_enabled": false,
+        "blocked_by_notice": "N-000001",
+        "blocked_by_source": "report-a",
+        "decision_id": "decision-a",
+        "dependencies": [
+          "S:report-a"
+        ],
+        "last_snapshot_digest": "",
+        "last_validity": "REGISTERED_BY_AUTHORIZED_CALLER",
+        "owner": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
+        "parent_versions": [
+          {
+            "parent_key": "S:report-a",
+            "version": 1
+          }
+        ],
+        "purpose": "Synthetic research grant authorization to use COPE retraction guidelines for reviewing published evidence and deciding when evidence should be retracted.",
+        "sequence": 0,
+        "status": "BLOCKED_REASSESSMENT",
+        "version": 1
+      },
+      {
+        "authorization_enabled": false,
+        "blocked_by_notice": "N-000001",
+        "blocked_by_source": "report-a",
+        "decision_id": "decision-b",
+        "dependencies": [
+          "D:decision-a"
+        ],
+        "last_snapshot_digest": "",
+        "last_validity": "REGISTERED_BY_AUTHORIZED_CALLER",
+        "owner": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
+        "parent_versions": [
+          {
+            "parent_key": "D:decision-a",
+            "version": 1
+          }
+        ],
+        "purpose": "Synthetic downstream authorization dependent on decision-a remaining active.",
+        "sequence": 1,
+        "status": "BLOCKED_REASSESSMENT",
+        "version": 1
+      },
+      {
+        "authorization_enabled": true,
+        "decision_id": "decision-c",
+        "dependencies": [
+          "S:report-unrelated"
+        ],
+        "last_snapshot_digest": "",
+        "last_validity": "REGISTERED_BY_AUTHORIZED_CALLER",
+        "owner": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
+        "parent_versions": [
+          {
+            "parent_key": "S:report-unrelated",
+            "version": 1
+          }
+        ],
+        "purpose": "Independent synthetic COPE evidence governance authorization.",
+        "sequence": 2,
+        "status": "ACTIVE",
+        "version": 1
+      }
+    ],
+    "notices": [
+      {
+        "affected_decisions": [
+          "decision-a",
+          "decision-b"
+        ],
+        "base_version": 1,
+        "citations": [
+          "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29940049&rettype=abstract&retmode=text"
+        ],
+        "evidence_digest": "sha256:230ea6e3de7258a26f1043f89b9a64e8fd2d0d2c9252b9dc0936c91579014dc9",
+        "finding": "RETRACTION",
+        "input_snapshot_digest": "sha256:246d37dabea0844c6061efb5a6d04117ad51d27e9f10ae5ef51878c18620960c",
+        "notice_id": "N-000001",
+        "references": [
+          "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29940049&rettype=abstract&retmode=text"
+        ],
+        "snapshot_digest": "sha256:702176b97ae29831a2f07ff3d3143c12c68e30d3f160224109ef35129bf731ed",
+        "source_id": "report-a",
+        "submitted_by": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92"
+      }
+    ],
+    "history": []
+  },
+  "correction": {
+    "sources": [
+      {
+        "current_refs": [
+          "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29294252&rettype=abstract&retmode=text"
+        ],
+        "publisher_label": "Published genetic testing meta-analysis; synthetic fixture",
+        "registered_by": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
+        "source_id": "correction-study",
+        "status": "CORRECTED",
+        "version": 2,
+        "versions": [
+          {
+            "references": [
+              "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=28664264&rettype=abstract&retmode=text"
+            ],
+            "status": "ACTIVE",
+            "version": 1
+          },
+          {
+            "notice_id": "N-000002",
+            "references": [
+              "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29294252&rettype=abstract&retmode=text"
+            ],
+            "status": "CORRECTED",
+            "version": 2
+          }
+        ]
+      },
+      {
+        "current_refs": [
+          "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=20017220&rettype=abstract&retmode=text"
+        ],
+        "publisher_label": "COPE retraction guidelines",
+        "registered_by": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
+        "source_id": "report-unrelated",
+        "status": "ACTIVE",
+        "version": 1,
+        "versions": [
+          {
+            "references": [
+              "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=20017220&rettype=abstract&retmode=text"
+            ],
+            "status": "ACTIVE",
+            "version": 1
+          }
+        ]
+      }
+    ],
+    "decisions": [
+      {
+        "authorization_enabled": false,
+        "blocked_by_notice": "N-000002",
+        "blocked_by_source": "correction-study",
+        "decision_id": "correction-parent",
+        "dependencies": [
+          "S:correction-study"
+        ],
+        "last_snapshot_digest": "",
+        "last_validity": "REGISTERED_BY_AUTHORIZED_CALLER",
+        "owner": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
+        "parent_versions": [
+          {
+            "parent_key": "S:correction-study",
+            "version": 1
+          }
+        ],
+        "purpose": "Synthetic research authorization relying on the reported lifestyle-change and dietary-practice percentages in DOI 10.1007/s12687-017-0310-z.",
+        "sequence": 3,
+        "status": "BLOCKED_REASSESSMENT",
+        "version": 1
+      },
+      {
+        "authorization_enabled": false,
+        "blocked_by_notice": "N-000002",
+        "blocked_by_source": "correction-study",
+        "decision_id": "correction-child",
+        "dependencies": [
+          "D:correction-parent"
+        ],
+        "last_snapshot_digest": "",
+        "last_validity": "REGISTERED_BY_AUTHORIZED_CALLER",
+        "owner": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
+        "parent_versions": [
+          {
+            "parent_key": "D:correction-parent",
+            "version": 1
+          }
+        ],
+        "purpose": "Synthetic downstream authorization dependent on correction-parent remaining active.",
+        "sequence": 4,
+        "status": "BLOCKED_REASSESSMENT",
+        "version": 1
+      },
+      {
+        "authorization_enabled": true,
+        "decision_id": "decision-c",
+        "dependencies": [
+          "S:report-unrelated"
+        ],
+        "last_snapshot_digest": "",
+        "last_validity": "REGISTERED_BY_AUTHORIZED_CALLER",
+        "owner": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92",
+        "parent_versions": [
+          {
+            "parent_key": "S:report-unrelated",
+            "version": 1
+          }
+        ],
+        "purpose": "Independent synthetic COPE evidence governance authorization.",
+        "sequence": 2,
+        "status": "ACTIVE",
+        "version": 1
+      }
+    ],
+    "notices": [
+      {
+        "affected_decisions": [
+          "correction-parent",
+          "correction-child"
+        ],
+        "base_version": 1,
+        "citations": [
+          "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29294252&rettype=abstract&retmode=text"
+        ],
+        "evidence_digest": "sha256:2478ce45d44e36536b91122598bc7145709d2007e30921527a78651685ba73f7",
+        "finding": "MATERIAL_CORRECTION",
+        "input_snapshot_digest": "sha256:489c88622c8d720221239901516759204c3a69034ff495a29c9816582d509f92",
+        "notice_id": "N-000002",
+        "references": [
+          "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=29294252&rettype=abstract&retmode=text"
+        ],
+        "snapshot_digest": "sha256:b0eaa2b8295c1af39048068bb819fdb24f7b42ca78a13e579cfaf0ecdd8882b9",
+        "source_id": "correction-study",
+        "submitted_by": "0xdb433ff614bdd1ece21aa97221c3e0a7ecf79c92"
+      }
+    ],
+    "history": []
+  }
+}

@@ -27,12 +27,12 @@ export async function GET(request: NextRequest) {
     const sources = ids(
         request.nextUrl.searchParams.get("sources"),
         partial ? [] : caseManifest.sourceIds,
-        12,
+        48,
       ),
       decisions = ids(
         request.nextUrl.searchParams.get("decisions"),
         partial ? [] : caseManifest.decisionIds,
-        24,
+        96,
       );
     const key = JSON.stringify([sources, decisions, partial, includeNotices, includeHistory]);
     if (
@@ -82,18 +82,18 @@ export async function GET(request: NextRequest) {
       }
     }
     const notices = [];
-    for (let index = 1; includeNotices && index <= 16; index++) {
+    const noticeIds = includeNotices ? [...new Set(sourceRows.flatMap(row => (row as {notice_ids?: string[]}).notice_ids ?? []))] : [];
+    for (const noticeId of noticeIds) {
       try {
         notices.push(
-          await read("get_notice", ["N-" + String(index).padStart(6, "0")]),
+          await read("get_notice", [noticeId]),
         );
       } catch (e) {
-        if (/\[NOT_FOUND\]/.test(contractReadReason(e))) break;
         throw e;
       }
     }
     const history = (includeHistory ? await read("get_history", []) : { reassessments: [] }) as {
-      reassessments: unknown[];
+      reassessments: unknown[]; contests?: unknown[];
     };
     const result = {
       checkedAt: new Date().toISOString(),
@@ -101,12 +101,12 @@ export async function GET(request: NextRequest) {
       chainId: 61999,
       partial,
       boundary:
-        "Explicit case manifest and locally tracked IDs; no global enumeration. Notice IDs are sequential and bounded; this read scans them until the first missing ID.",
+        "Explicit case manifest and locally tracked IDs; notices are read from each source's bounded notice_ids list.",
       data: {
         sources: sourceRows,
         decisions: decisionRows,
         notices,
-        history: history.reassessments,
+        history: [...history.reassessments, ...(history.contests ?? [])],
       },
       errors,
     };

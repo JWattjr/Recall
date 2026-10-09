@@ -7,11 +7,16 @@ export async function GET() {
   const documents = [];
   for (const url of [originalReference, noticeReference]) {
     try {
-      const r = await fetch(url, {
+      const retrieve = () => fetch(url, {
         signal: AbortSignal.timeout(12000),
         redirect: "manual",
         cache: "no-store",
       });
+      let r = await retrieve();
+      if (r.status === 429 || (r.status >= 500 && r.status <= 599)) {
+        await r.body?.cancel();
+        r = await retrieve();
+      }
       if (r.status !== 200) {
         documents.push({
           url,
@@ -30,15 +35,15 @@ export async function GET() {
         const { done, value } = await reader.read();
         if (done) break;
         bytes += value.length;
-        if (bytes > 5000) {
+        if (bytes > 20000) {
           await reader.cancel();
           break;
         }
         chunks.push(value);
       }
-      if (bytes > 5000)
+      if (bytes > 20000)
         throw new Error(
-          "Publication exceeds the contract limit of 5,000 bytes.",
+          "Publication exceeds the contract limit of 20,000 bytes.",
         );
       const all = new Uint8Array(bytes);
       let offset = 0;

@@ -1,0 +1,17 @@
+{
+  "recorded_at": "2026-10-09T10:58:01.031235+00:00",
+  "reported_by": "owner",
+  "ncbi_unkeyed_concurrent_responses": [
+    200,
+    429,
+    200,
+    429,
+    429,
+    200
+  ],
+  "europe_pmc_concurrent_requests_reported": 8,
+  "europe_pmc_status_reported": 200,
+  "studio_diagnostics": "Both validators returned UNCERTAIN before any model call; independent evidence digests differed while input/source/version matched.",
+  "fix": "Europe PMC canonical six-field JSON, 20000-byte bound, one 429/5xx retry and exact contract helper preflight across three fetches.",
+  "live_attempt": "One fresh instance authorized; stop/report any live failure."
+}
