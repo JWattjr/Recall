@@ -1,0 +1,126 @@
+Browser tab: 3, Title: "Recall — evidence changes, decisions follow", URL: "https://recall-genlayer.vercel.app/".
+1 AXWebArea Recall — evidence changes, decisions follow, URL: recall-genlayer.vercel.app/
+	2 link Description: Skip to workspace, Value: recall-genlayer.vercel.app/#main
+	3 container
+		4 link Description: Recall home, Value: recall-genlayer.vercel.app/
+		5 text Evidence changes.
+		6 text Decisions follow.
+		7 container Workspace navigation
+			8 button Evidence workspace
+			9 button Register & connect
+			10 button Submit a notice
+			11 button Reassess decisions
+			12 button Proof & history
+			13 button How Recall works
+		14 text  StudioNet Hosted development · 61999
+		15 link Description: View the implementation, Value: github.com/JWattjr/Recall
+	16 container
+		17 text Research grants Case 001
+		18 button Connect wallet
+	19 container main
+		20 heading When evidence changes., Value: 1
+			21 text When evidence changes.
+		22 text Trace what needs reviewing, and what can keep moving.
+		23 button Download proof manifest
+		24 container Data provenance
+			25 checkbox Recorded case, Value: 0
+			26 checkbox Live network, Value: 1
+			27 checkbox Local rehearsal, Value: 0
+		28 text Full case read 09/10/2026, 12:17:09 WAT
+		102 button Refresh
+		32 container
+			33 heading A withdrawn study. A visible chain of consequences., Value: 2
+				34 text A withdrawn study.
+				35 text A visible chain of consequences.
+			36 text Current finalized registry state for both publication cases. The recovered retraction parent is active v2; its child and both correction decisions remain blocked. Retraction recorded Direct + transitive propagation Independent branch preserved
+		37 container
+			38 heading Evidence & dependencies, Value: 2
+				39 text Evidence & dependencies
+			40 text Select a record to trace its dependents.
+			41 checkbox Description: Diagram view, Value: 1
+			42 checkbox Description: List view, Value: 0
+			103 checkbox Evidence source v2 Clinical study Retracted, Value: 0
+				104 text Evidence source
+				105 text v
+				106 text 2
+				107 text Clinical study
+				108 text Retracted
+			49 checkbox Evidence source v1 Retraction guidelines Active, Value: 0
+				50 text Evidence source
+				51 text v
+				52 text 1
+				53 text Retraction guidelines
+				54 text Active
+			129 checkbox Evidence source v2 Genetic testing study Corrected, Value: 1
+				130 text Evidence source
+				131 text v
+				132 text 2
+				133 text Genetic testing study
+				134 text Corrected
+			109 checkbox Authorization v2 Evidence review Active, Value: 0
+				110 text Authorization
+				111 text v
+				112 text 2
+				113 text Evidence review
+				114 text Active
+			115 checkbox Authorization v1 Downstream authorization Review Required, Value: 0
+				116 text Authorization
+				117 text v
+				118 text 1
+				119 text Downstream authorization
+				120 text Review Required
+			67 checkbox Authorization v1 Independent review Active, Value: 0
+				68 text Authorization
+				69 text v
+				70 text 1
+				71 text Independent review
+				72 text Active
+			135 checkbox Authorization v1 Correction evidence review Review Required, Value: 0
+				136 text Authorization
+				137 text v
+				138 text 1
+				139 text Correction evidence review
+				140 text Review Required
+			141 checkbox Authorization v1 Correction downstream authorization Review Required, Value: 0
+				142 text Authorization
+				143 text v
+				144 text 1
+				145 text Correction downstream authorization
+				146 text Review Required
+			73 text Published evidence
+			74 text Direct decisions
+			75 text Dependent decisions
+			76 text Changed or review required Active registry state
+			77 container Selected record
+				78 text Corrected
+				79 heading Genetic testing study, Value: 3
+					80 text Genetic testing study
+				81 container
+					82 text correction-study-doi  · version  2
+				147 text Same authentic original study; DOI fixture authorized by owner after PMID proof failed
+				148 heading Publication references, Value: 4
+					149 text Publication references
+				150 link Description: www.ebi.ac.uk, Value: ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:29294252%20AND%20SRC:MED&resultType=core&format=json
+				88 heading 2 dependentdecisions, Value: 4
+					89 text 2  dependent decisions
+				151 content list
+					152 button Correction evidence review Direct
+						153 text Correction evidence review
+						154 text Direct
+					155 button Correction downstream authorization Transitive
+						156 text Correction downstream authorization
+						157 text Transitive
+				97 text Labels describe registry state. They do not certify publication authenticity or scientific truth.
+		98 text Bounded case:  3  sources and  5  decisions. The contract has no global listing endpoint.
+		99 button Inspect the proof
+		122 text Add a known record to this browser’s manifest
+		123 pop up button (collapsed, settable) Description: Record kind, Value: Source, Secondary Actions: Expand
+			124 menu
+				125 (selected) Source
+				126 Decision
+		127 text field (settable) Add a known record to this browser’s manifest, ID: inspect-id
+		128 button Read record
+		100 container
+			101 text Recall · evidence-dependent authorizations GenLayer StudioNet · synthetic decisions, published evidence
+
+The focused UI element is 1 AXWebArea Recall — evidence changes, decisions follow, URL: recall-genlayer.vercel.app/

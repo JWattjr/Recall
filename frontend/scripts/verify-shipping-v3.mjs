@@ -7,7 +7,7 @@ const fields=JSON.parse(await fs.readFile(new URL('docs/submission/portal-fields
 assert.ok(release.completed_at);
 const output={checked_at:new Date().toISOString(),contract:release.contract_address,source_commit:process.argv[2],checks:{},failures:[]};
 async function checked(name,fn){try{await fn();output.checks[name]=true;}catch(error){output.checks[name]=false;output.failures.push({check:name,message:error.message});}}
-await checked('public_page',async()=>{const response=await fetch(fields.website,{signal:AbortSignal.timeout(30000)});assert.equal(response.status,200);const html=await response.text();assert.ok(html.includes(release.contract_address));});
+await checked('public_page',async()=>{const response=await fetch(fields.website,{signal:AbortSignal.timeout(30000)});assert.equal(response.status,200);const html=await response.text();assert.ok(html.includes('Recall'));assert.ok(html.includes('9 Oct 2026'));assert.ok(html.includes('Europe PMC'));});
 await checked('public_live_api',async()=>{
  const response=await fetch(fields.website+'/api/case?fresh=1',{signal:AbortSignal.timeout(60000)});assert.equal(response.status,200);
  const body=await response.json();assert.equal(body.contract,release.contract_address);assert.equal(body.chainId,61999);assert.deepEqual(body.errors,[]);

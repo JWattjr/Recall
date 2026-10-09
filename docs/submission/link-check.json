@@ -1,10 +1,5 @@
 {
-  "checked_at": "2026-10-04T21:49:03.5900556Z",
-  "lengths": {
-    "oneLiner": 158,
-    "description": 932,
-    "expectedOutcome": 473
-  },
+  "checked_at": "2026-10-09T11:17:44.832Z",
   "links": [
     {
       "url": "https://recall-genlayer.vercel.app",
@@ -17,9 +12,9 @@
       "final_url": "https://github.com/JWattjr/Recall"
     },
     {
-      "url": "https://explorer-studio.genlayer.com/address/0x91C663Df0D7103614485283D3A1E49Cf525f5fda",
+      "url": "https://explorer-studio.genlayer.com/address/0x790b3faD72076e1A5A3eA3C1FE84FfA09435aB05",
       "status": 200,
-      "final_url": "https://explorer-studio.genlayer.com/address/0x91C663Df0D7103614485283D3A1E49Cf525f5fda"
+      "final_url": "https://explorer-studio.genlayer.com/address/0x790b3faD72076e1A5A3eA3C1FE84FfA09435aB05"
     },
     {
       "url": "https://github.com/JWattjr/Recall/blob/main/docs/PROOF_MANIFEST.md",
@@ -27,9 +22,9 @@
       "final_url": "https://github.com/JWattjr/Recall/blob/main/docs/PROOF_MANIFEST.md"
     },
     {
-      "url": "https://github.com/JWattjr/Recall/blob/main/deployments/recall-v2-release.json",
+      "url": "https://github.com/JWattjr/Recall/blob/main/deployments/recall-v3-release.json",
       "status": 200,
-      "final_url": "https://github.com/JWattjr/Recall/blob/main/deployments/recall-v2-release.json"
+      "final_url": "https://github.com/JWattjr/Recall/blob/main/deployments/recall-v3-release.json"
     },
     {
       "url": "https://github.com/JWattjr/Recall/blob/main/docs/RELEASE_VERIFICATION.md",
@@ -37,15 +32,20 @@
       "final_url": "https://github.com/JWattjr/Recall/blob/main/docs/RELEASE_VERIFICATION.md"
     },
     {
-      "url": "https://github.com/JWattjr/Recall/blob/main/docs/TUTORIAL.md",
+      "url": "https://github.com/JWattjr/Recall/blob/main/tests/test_steward_protections.py",
       "status": 200,
-      "final_url": "https://github.com/JWattjr/Recall/blob/main/docs/TUTORIAL.md"
+      "final_url": "https://github.com/JWattjr/Recall/blob/main/tests/test_steward_protections.py"
     },
     {
-      "url": "https://github.com/JWattjr/Recall/blob/main/docs/DEMO.md",
+      "url": "https://github.com/JWattjr/Recall/blob/main/docs/submission/STEWARD_RESPONSE.md",
       "status": 200,
-      "final_url": "https://github.com/JWattjr/Recall/blob/main/docs/DEMO.md"
+      "final_url": "https://github.com/JWattjr/Recall/blob/main/docs/submission/STEWARD_RESPONSE.md"
     }
   ],
-  "all_http_200": true
+  "field_lengths": {
+    "oneLiner": 158,
+    "description": 951,
+    "expectedOutcome": 498,
+    "stewardResponse": 874
+  }
 }

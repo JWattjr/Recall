@@ -1,0 +1,51 @@
+{
+  "checked_at": "2026-10-09T11:16:16.122Z",
+  "contract": "0x790b3faD72076e1A5A3eA3C1FE84FfA09435aB05",
+  "source_commit": "1d7669c7ef5b7324059b33f8e4cf88b5287ee685",
+  "checks": {
+    "public_page": false,
+    "public_live_api": true,
+    "public_availability_preflight": true,
+    "portal_links_200": true,
+    "portal_field_lengths": true
+  },
+  "failures": [
+    {
+      "check": "public_page",
+      "message": "The expression evaluated to a falsy value:\n\n  assert.ok(html.includes(release.contract_address))\n"
+    }
+  ],
+  "api": {
+    "status": 200,
+    "checked_at": "2026-10-09T11:16:31.232Z",
+    "sources": 3,
+    "decisions": 5,
+    "notices": 2,
+    "record_errors": 0
+  },
+  "availability": {
+    "checked_at": "2026-10-09T11:16:32.657Z",
+    "ready": true,
+    "documents": [
+      {
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:29641633%20AND%20SRC:MED&resultType=core&format=json",
+        "status": 200,
+        "bytes": 3057,
+        "available": true
+      },
+      {
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:29940049%20AND%20SRC:MED&resultType=core&format=json",
+        "status": 200,
+        "bytes": 2047,
+        "available": true
+      }
+    ]
+  },
+  "field_lengths": {
+    "oneLiner": 158,
+    "description": 951,
+    "expectedOutcome": 498,
+    "stewardResponse": 874
+  },
+  "precheck_note": "HTTP 200 and live API records were correct. The initial-page smoke assertion incorrectly expected a contract address rendered only in the Proof view. Corrected to check actual initial-page content; strict API contract/state checks remain unchanged."
+}

@@ -1,0 +1,100 @@
+Browser tab: 3, Title: "Recall — evidence changes, decisions follow", URL: "https://recall-genlayer.vercel.app/".
+1 AXWebArea Recall — evidence changes, decisions follow, URL: recall-genlayer.vercel.app/
+	2 link Description: Skip to workspace, Value: recall-genlayer.vercel.app/#main
+	3 container
+		4 link Description: Recall home, Value: recall-genlayer.vercel.app/
+		5 text Evidence changes.
+		6 text Decisions follow.
+		7 container Workspace navigation
+			8 button Evidence workspace
+			9 button Register & connect
+			10 button Submit a notice
+			11 button Reassess decisions
+			12 button Proof & history
+			13 button How Recall works
+		14 text  StudioNet Hosted development · 61999
+		15 link Description: View the implementation, Value: github.com/JWattjr/Recall
+	16 container
+		17 text Research grants Case 001
+		18 button Connect wallet
+	19 container main
+		20 heading Review a publication change., Value: 1
+			21 text Review a publication change.
+		22 text Independent validators read the publications. The registry applies the finding.
+		23 button Download proof manifest
+		24 container Data provenance
+			25 checkbox Recorded case, Value: 0
+			26 checkbox Live network, Value: 1
+			27 checkbox Local rehearsal, Value: 0
+		28 text Full case read 09/10/2026, 12:17:09 WAT
+		102 button Refresh
+		103 container
+			104 heading Published retraction example, Value: 2
+				105 text Published retraction example
+			106 text The Europe PMC notice concerns DOI 10.11607/prd.476. Select a newly registered copy of that study for another live demonstration. The original case source is already retracted. Target source
+			107 pop up button (collapsed, settable) Target source, Value: report-unrelated · v1 · active, ID: notice-source, Secondary Actions: Expand
+				108 menu
+					109 Select current source
+					110 report-a · v2 · retracted
+					111 (selected) report-unrelated · v1 · active
+					112 correction-study-doi · v2 · corrected
+			113 text Expected source version:
+			114 text 1
+			115 text Notice publication
+			116 text field (settable) Notice publication, ID: notice-url, Value: https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:29940049%20AND%20SRC:MED&resultType=core&format=json
+			117 link Description: Open Europe PMC notice, Value: ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:29940049%20AND%20SRC:MED&resultType=core&format=json
+			118 text This source does not use the example’s original study URL. A relationship is not established; choose the matching study for this preflighted example.
+			119 button Check publication availability
+			120 text Preflight is an availability measurement. Validators fetch independently. Unavailable evidence produces uncertainty; malformed results or disagreement can prevent consensus.
+			121 button (disabled) Sign notice submission
+			122 text StudioNet · chain 61999 · wallet signature required. Submission does not mean successful execution.
+		123 container
+			124 heading Reporter authorization, Value: 2
+				125 text Reporter authorization
+			126 text The source registrant controls who may report notices. Limits apply before validator work. Managed source
+			127 pop up button (collapsed, settable) Managed source, Value: report-a, ID: managed-source, Secondary Actions: Expand
+				128 menu
+					129 (selected) report-a
+					130 report-unrelated
+					131 correction-study-doi
+			132 text Identifier:  10.11607/prd.476 . Allowed hosts:  eutils.ncbi.nlm.nih.gov, api.crossref.org, www.ebi.ac.uk . Uncertain notices this version:  0 /2. Stored notices:  1 /16. Authorized reporters:  Registrant only . Reporter address
+			133 text field (settable) Reporter address, ID: reporter-address
+			134 button (disabled) Authorize reporter
+			135 button (disabled) Revoke reporter
+			136 button (disabled) Reset uncertainty counter
+			137 heading Contest notice, Value: 2
+				138 text Contest notice
+			139 text Blocks apply immediately. Within 72 hours the registrant may supply publisher counter-evidence once. Overturning preserves history and never overrides a later owner review or another notice. Consequential notice
+			140 pop up button (collapsed, settable) Consequential notice, Value: N-000001 · APPLIED · report-a, ID: contested-notice, Secondary Actions: Expand
+				141 menu
+					142 (selected) N-000001 · APPLIED · report-a
+					143 N-000002 · APPLIED · correction-study-doi
+			144 text 71h 41m 0s remaining Counter-evidence URLs
+			145 text entry area (settable) Counter-evidence URLs, ID: counter-evidence
+			146 button (disabled) Sign contest notice
+			147 text After the window, a retracted source accepts only a publisher reversal that passes the provenance checks through Submit notice. Host and identifier checks are not cryptographic publisher signatures. No live overturn is claimed; this path is covered by direct tests.
+		148 container
+			149 heading Four possible findings., Value: 2
+				150 text Four possible findings.
+			151 definition list
+				152 container Material correction
+					153 text Material correction
+				154 text Versions the source, replaces references, and blocks all reachable decisions.
+				155 container Retraction
+					156 text Retraction
+				157 text Versions the source, makes it unusable, and blocks its dependents.
+				158 container No material change
+					159 text No material change
+				160 text Stores the notice. Authorizations remain unchanged.
+				161 container Uncertain
+					162 text Uncertain
+				163 text Stores uncertainty. Source and authorization states remain unchanged.
+			164 heading Target registry, Value: 3
+				165 text Target registry
+			166 button 0x790b3faD72076e1A5A3eA3C1FE84FfA09435aB05, Help: Copy 0x790b3faD72076e1A5A3eA3C1FE84FfA09435aB05
+				167 text 0x790b3faD72076e1A5A3eA3C1FE84FfA09435aB05
+			168 text GenLayer StudioNet · hosted development
+		100 container
+			101 text Recall · evidence-dependent authorizations GenLayer StudioNet · synthetic decisions, published evidence
+
+The focused UI element is 10 button Submit a notice

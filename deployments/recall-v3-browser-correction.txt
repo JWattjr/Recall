@@ -1,0 +1,103 @@
+Browser tab: 3, Title: "Recall — evidence changes, decisions follow", URL: "https://recall-genlayer.vercel.app/".
+1 AXWebArea Recall — evidence changes, decisions follow, URL: recall-genlayer.vercel.app/
+	2 link Description: Skip to workspace, Value: recall-genlayer.vercel.app/#main
+	3 container
+		4 link Description: Recall home, Value: recall-genlayer.vercel.app/
+		5 text Evidence changes.
+		6 text Decisions follow.
+		7 container Workspace navigation
+			8 button Evidence workspace
+			9 button Register & connect
+			10 button Submit a notice
+			11 button Reassess decisions
+			12 button Proof & history
+			13 button How Recall works
+		14 text  StudioNet Hosted development · 61999
+		15 link Description: View the implementation, Value: github.com/JWattjr/Recall
+	16 container
+		17 text Research grants Case 001
+		18 button Connect wallet
+	19 container main
+		20 heading When evidence changes., Value: 1
+			21 text When evidence changes.
+		22 text Trace what needs reviewing, and what can keep moving.
+		23 button Download proof manifest
+		24 container Data provenance
+			25 checkbox Recorded case, Value: 1
+			26 checkbox Live network, Value: 0
+			27 checkbox Local rehearsal, Value: 0
+		28 text Finalized snapshot · 9 Oct 2026
+		29 container Recorded publication case
+			30 checkbox Retraction, Value: 0
+			31 checkbox Material correction, Value: 1
+		32 container
+			33 heading A corrected result. A visible chain of consequences., Value: 2
+				34 text A corrected result.
+				35 text A visible chain of consequences.
+			36 text A real Europe PMC erratum explicitly corrected reported percentages. MATERIAL_CORRECTION advanced the source to v2 and blocked both dependent authorizations; the independent review stayed active. Material correction recorded Direct + transitive propagation Independent branch preserved
+		37 container
+			38 heading Evidence & dependencies, Value: 2
+				39 text Evidence & dependencies
+			40 text Select a record to trace its dependents.
+			41 checkbox Description: Diagram view, Value: 1
+			42 checkbox Description: List view, Value: 0
+			102 checkbox Evidence source v2 Genetic testing study Corrected, Value: 1
+				103 text Evidence source
+				104 text v
+				105 text 2
+				106 text Genetic testing study
+				107 text Corrected
+			49 checkbox Evidence source v1 Retraction guidelines Active, Value: 0
+				50 text Evidence source
+				51 text v
+				52 text 1
+				53 text Retraction guidelines
+				54 text Active
+			108 checkbox Authorization v1 Correction evidence review Review Required, Value: 0
+				109 text Authorization
+				110 text v
+				111 text 1
+				112 text Correction evidence review
+				113 text Review Required
+			114 checkbox Authorization v1 Correction downstream authorization Review Required, Value: 0
+				115 text Authorization
+				116 text v
+				117 text 1
+				118 text Correction downstream authorization
+				119 text Review Required
+			67 checkbox Authorization v1 Independent review Active, Value: 0
+				68 text Authorization
+				69 text v
+				70 text 1
+				71 text Independent review
+				72 text Active
+			73 text Published evidence
+			74 text Direct decisions
+			75 text Dependent decisions
+			76 text Changed or review required Active registry state
+			77 container Selected record
+				78 text Corrected
+				79 heading Genetic testing study, Value: 3
+					80 text Genetic testing study
+				81 container
+					82 text correction-study-doi  · version  2
+				83 text Same authentic original study; DOI fixture authorized by owner after PMID proof failed
+				84 heading Publication references, Value: 4
+					85 text Publication references
+				120 link Description: www.ebi.ac.uk, Value: ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:29294252%20AND%20SRC:MED&resultType=core&format=json
+				88 heading 2 dependentdecisions, Value: 4
+					89 text 2  dependent decisions
+				90 content list
+					121 button Correction evidence review Direct
+						122 text Correction evidence review
+						123 text Direct
+					124 button Correction downstream authorization Transitive
+						125 text Correction downstream authorization
+						126 text Transitive
+				97 text Labels describe registry state. They do not certify publication authenticity or scientific truth.
+		98 text Bounded case:  2  sources and  3  decisions. The contract has no global listing endpoint.
+		99 button Inspect the proof
+		100 container
+			101 text Recall · evidence-dependent authorizations GenLayer StudioNet · synthetic decisions, published evidence
+
+The focused UI element is 31 checkbox Material correction, Value: 1

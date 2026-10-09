@@ -1,0 +1,60 @@
+Browser tab: 3, Title: "Recall — evidence changes, decisions follow", URL: "https://recall-genlayer.vercel.app/".
+1 AXWebArea Recall — evidence changes, decisions follow, URL: recall-genlayer.vercel.app/
+	2 link Description: Skip to workspace, Value: recall-genlayer.vercel.app/#main
+	3 container
+		4 link Description: Recall home, Value: recall-genlayer.vercel.app/
+		5 text Evidence changes.
+		6 text Decisions follow.
+		7 container Workspace navigation
+			8 button Evidence workspace
+			9 button Register & connect
+			10 button Submit a notice
+			11 button Reassess decisions
+			12 button Proof & history
+			13 button How Recall works
+		14 text  StudioNet Hosted development · 61999
+		15 link Description: View the implementation, Value: github.com/JWattjr/Recall
+	16 container
+		17 text Research grants Case 001
+		18 button Connect wallet
+	19 container main
+		20 heading Make the dependency explicit., Value: 1
+			21 text Make the dependency explicit.
+		22 text Register evidence, then freeze an authorization’s purpose and its parents.
+		23 button Download proof manifest
+		24 container Data provenance
+			25 checkbox Recorded case, Value: 0
+			26 checkbox Live network, Value: 1
+			27 checkbox Local rehearsal, Value: 0
+		28 text Full case read 09/10/2026, 12:17:09 WAT
+		102 button Refresh
+		103 container
+			104 button Evidence source
+			105 button Authorization decision
+			106 text Source  ID
+			107 text field (settable) Source ID, ID: record-id
+			108 text Publication URL
+			109 text field (settable) Publication URL, ID: source-url
+			110 button Use the published study example
+			111 text Source identifier
+			112 text field (settable) Source identifier, ID: source-identifier
+			113 text Allowed notice hosts
+			114 text field (settable) Allowed notice hosts, ID: notice-hosts
+			115 text 1–3 exact hostnames, frozen at registration. Defaults: eutils.ncbi.nlm.nih.gov, api.crossref.org and www.ebi.ac.uk (Europe PMC). Only your wallet and authorized reporters may submit notices. Publisher label
+			116 text field (settable) Publisher label, ID: publisher
+			117 text A descriptive label is not verified publisher identity. Anyone may register a source.
+			118 button (disabled) Sign source registration
+			119 text StudioNet · chain 61999 · wallet signature required. Submission does not mean successful execution.
+		120 container
+			121 heading Every edge has a purpose., Value: 2
+				122 text Every edge has a purpose.
+			123 text Decisions have explicit dependencies on evidence or earlier active decisions. Registration records your declaration; it does not certify that the evidence supports the purpose. Each registrant has 12 sources and 24 decisions; safety ceilings are 256 sources and 512 decisions. This manifest does not enumerate the entire registry.
+			124 heading Target registry, Value: 3
+				125 text Target registry
+			126 button 0x790b3faD72076e1A5A3eA3C1FE84FfA09435aB05, Help: Copy 0x790b3faD72076e1A5A3eA3C1FE84FfA09435aB05
+				127 text 0x790b3faD72076e1A5A3eA3C1FE84FfA09435aB05
+			128 text GenLayer StudioNet · hosted development
+		100 container
+			101 text Recall · evidence-dependent authorizations GenLayer StudioNet · synthetic decisions, published evidence
+
+The focused UI element is 9 button Register & connect

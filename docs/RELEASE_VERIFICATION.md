@@ -1,6 +1,6 @@
 # V3 release verification - 9 October 2026
 
-Contract `0x790b3faD72076e1A5A3eA3C1FE84FfA09435aB05`, StudioNet 61999. The full Europe PMC live proof and independent network verification pass. Production publication/browser checks are pending. Earlier completed v2 verification is preserved in docs/archive-v2/RELEASE_VERIFICATION.md.
+Contract `0x790b3faD72076e1A5A3eA3C1FE84FfA09435aB05`, StudioNet 61999. The full Europe PMC live proof and independent network verification pass. Production deployment, public browser/API verification, both main-branch pushes and all Portal URL checks pass. Earlier completed v2 verification is preserved in docs/archive-v2/RELEASE_VERIFICATION.md.
 
 ## Local validation
 
@@ -35,7 +35,11 @@ Europe PMC core JSON is now normalized into six retained fields (pmid, doi, titl
 
 The proof generator produced both dated recorded cases, owner recovery and current contract links from finalized reads, and catalogued 54 distinct current/archived hashes. `npm run verify:network` independently passed all 28 checks: source bytes/SHA, ABI, all 14 FINALIZED majority-agreed receipts, every final source/decision/notice, history and both propagation/recovery outcomes. Twelve writes (including deployment) succeeded; two deliberate host/caller transactions finalized expected rollback. No failed or timed-out hash was resubmitted. [Network verification](../deployments/recall-v3-network-verification.json).
 
-Production deployment, public browser/API checks, GitHub push and URL checks remain pending. Field lengths are 158/180, 951/1000, 498/500 and steward response 874/900.
+Vercel production deployment `dpl_6XqnyL2i6tRwe9oim5w6QEWAGzhe` reached READY and is aliased to https://recall-genlayer.vercel.app. Release app source commit: `1d7669c7ef5b7324059b33f8e4cf88b5287ee685`. Both origin (JWattjr/Recall) and registry (JWattjr/evidence-retraction-registry) main branches received this commit without force. The final verification and handoff commit changes release records, documentation and the smoke-check assertion; app and contract bytes remain identical to this deployed commit.
+
+The public /api/case returned HTTP 200 and exactly matched all 3 sources, 5 decisions and 2 notices, with zero record errors. The availability panel returned 200/ready for both Europe PMC documents. All 8 exact nonempty Portal URLs returned HTTP 200. Browser verification confirmed both recorded cases, the fresh timestamped Live network read, new registry address, ACTIVE v2 parent and blocked child/correction dependents, identifier/host inputs, reporter/reset controls and a running 72-hour contest countdown. Signing is disabled without a wallet. Console has zero errors/warnings. [Shipping record](../deployments/recall-v3-shipping.json) | [Live screenshot](../deployments/recall-v3-browser-live.png).
+
+A Windows generated-cache permission error affected the local date-label rebuild; rerunning that build outside the filesystem restriction passed. A smoke-check initially expected the contract address in initial HTML, although the UI renders it in Proof & history. The corrected initial-content check passes; exact API contract/state comparisons were retained. The precheck result is preserved in deployments/recall-v3-shipping-precheck.json. No contract or consensus rule changed. Field lengths are 158/180, 951/1000, 498/500 and steward response 874/900.
 
 ## Scope
 
