@@ -777,7 +777,7 @@ export function Workspace() {
             </div>
             <span className="provenance">
               {mode === "recorded"
-                ? "Finalized snapshot · 4 Oct 2026"
+                ? "Finalized snapshot · 9 Oct 2026"
                 : mode === "rehearsal"
                   ? "In this browser · no consensus"
                   : checkedAt
